@@ -6,10 +6,15 @@ export function Hero() {
   return (
     <section className="min-h-[100dvh] px-6 py-24">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-center text-center">
-        <Avatar className="h-16 w-16 border border-border">
-          <AvatarImage src="/profile.jpg" alt="Sosa Ulises Ezequiel" />
-          <AvatarFallback className="bg-muted text-muted-foreground">SUE</AvatarFallback>
-        </Avatar>
+       <Avatar className="h-56 w-56 ring-1 ring-border shadow-md">
+        <AvatarImage
+          src="/uliphoto.jpg"
+          alt="Sosa Ulises"
+          className="object-cover"
+        />
+        <AvatarFallback className="bg-muted text-muted-foreground">SUE</AvatarFallback>
+      </Avatar>
+
 
         <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-border bg-muted/30 px-3 py-1 text-xs text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
