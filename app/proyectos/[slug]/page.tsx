@@ -9,8 +9,14 @@ export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug)
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const project = projects.find((p) => p.slug === slug)
+
   if (!project) return { title: "Proyecto no encontrado" }
 
   return {
@@ -19,8 +25,14 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   }
 }
 
-export default function ProyectoPage({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug)
+export default async function ProyectoPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const project = projects.find((p) => p.slug === slug)
+
   if (!project) notFound()
 
   return (
@@ -59,9 +71,7 @@ export default function ProyectoPage({ params }: { params: { slug: string } }) {
 
       {project.highlights?.length ? (
         <section className="mt-12 rounded-lg border border-border/70 bg-muted/20 p-6 text-left">
-          <h2 className="text-sm font-semibold text-foreground">
-            Lo más relevante
-          </h2>
+          <h2 className="text-sm font-semibold text-foreground">Lo más relevante</h2>
           <ul className="mt-4 space-y-2 text-sm leading-6 text-muted-foreground">
             {project.highlights.map((item) => (
               <li key={item} className="flex gap-3">
@@ -83,13 +93,9 @@ export default function ProyectoPage({ params }: { params: { slug: string } }) {
           </Button>
         ) : null}
 
-        {(project as any).docsUrl ? (
+        {project.docsUrl ? (
           <Button asChild variant="secondary" className="gap-2">
-            <a
-              href={(project as any).docsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={project.docsUrl} target="_blank" rel="noopener noreferrer">
               <ExternalLink className="h-4 w-4" />
               Docs / Swagger
             </a>
