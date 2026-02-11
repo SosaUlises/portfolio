@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import { projects } from "@/lib/projects"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ExternalLink, Github } from "lucide-react"
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
@@ -24,12 +24,12 @@ export default function ProyectoPage({ params }: { params: { slug: string } }) {
   if (!project) notFound()
 
   return (
-    <main className="mx-auto max-w-xl px-6 py-24 lg:px-0">
+    <main className="mx-auto max-w-2xl px-6 py-24">
       <Button
         asChild
         variant="ghost"
         size="sm"
-        className="mb-12 h-8 px-0 text-primary hover:text-primary hover:bg-transparent"
+        className="mb-10 h-8 px-0 text-primary hover:text-primary hover:bg-transparent"
       >
         <Link href="/#proyectos">
           <ArrowLeft className="mr-1.5 h-3.5 w-3.5" />
@@ -57,11 +57,45 @@ export default function ProyectoPage({ params }: { params: { slug: string } }) {
         ))}
       </div>
 
-      <div className="mt-16 rounded-lg border border-dashed border-border px-6 py-12 text-center">
-        <p className="text-sm text-muted-foreground">
-          Contenido detallado del proyecto próximamente.
-        </p>
-      </div>
+      {project.highlights?.length ? (
+        <section className="mt-12 rounded-lg border border-border/70 bg-muted/20 p-6 text-left">
+          <h2 className="text-sm font-semibold text-foreground">
+            Lo más relevante
+          </h2>
+          <ul className="mt-4 space-y-2 text-sm leading-6 text-muted-foreground">
+            {project.highlights.map((item) => (
+              <li key={item} className="flex gap-3">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <section className="mt-10 flex flex-wrap gap-2">
+        {project.repoUrl ? (
+          <Button asChild variant="secondary" className="gap-2">
+            <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">
+              <Github className="h-4 w-4" />
+              Repositorio
+            </a>
+          </Button>
+        ) : null}
+
+        {(project as any).docsUrl ? (
+          <Button asChild variant="secondary" className="gap-2">
+            <a
+              href={(project as any).docsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Docs / Swagger
+            </a>
+          </Button>
+        ) : null}
+      </section>
     </main>
   )
 }
