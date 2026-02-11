@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { projects } from "@/components/portfolio/projects"
+import { projects } from "@/lib/projects"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
@@ -9,28 +9,18 @@ export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const { slug } = await params
-  const project = projects.find((p) => p.slug === slug)
+export function generateMetadata({ params }: { params: { slug: string } }) {
+  const project = projects.find((p) => p.slug === params.slug)
   if (!project) return { title: "Proyecto no encontrado" }
+
   return {
-    title: `${project.title} | Sosa Ulises Ezequiel`,
+    title: `${project.title} | Sosa Ulises`,
     description: project.description,
   }
 }
 
-export default async function ProyectoPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const { slug } = await params
-  const project = projects.find((p) => p.slug === slug)
-
+export default function ProyectoPage({ params }: { params: { slug: string } }) {
+  const project = projects.find((p) => p.slug === params.slug)
   if (!project) notFound()
 
   return (
@@ -41,7 +31,7 @@ export default async function ProyectoPage({
         size="sm"
         className="mb-12 h-8 px-0 text-primary hover:text-primary hover:bg-transparent"
       >
-        <Link href="/">
+        <Link href="/#proyectos">
           <ArrowLeft className="mr-1.5 h-3.5 w-3.5" />
           Volver al portfolio
         </Link>
@@ -69,7 +59,7 @@ export default async function ProyectoPage({
 
       <div className="mt-16 rounded-lg border border-dashed border-border px-6 py-12 text-center">
         <p className="text-sm text-muted-foreground">
-          Contenido detallado del proyecto proximamente.
+          Contenido detallado del proyecto próximamente.
         </p>
       </div>
     </main>

@@ -5,30 +5,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-
-export interface Project {
-  slug: string
-  title: string
-  description: string
-  tags: string[]
-}
-
-export const projects: Project[] = [
-  {
-    slug: "gym-api",
-    title: "Sosa Gym API",
-    description:
-      "Sistema de gestion de gimnasio: clientes, rutinas, ejercicios, cuotas y control de accesos. Integra OpenAI para generacion de rutinas.",
-    tags: [".NET 8", "Clean Architecture", "CQRS", "JWT", "PostgreSQL", "Swagger"],
-  },
-  {
-    slug: "veting",
-    title: "VetIng",
-    description:
-      "Sistema de gestion para veterinarias: clientes, mascotas, veterinarios, turnos, pagos con Mercado Pago y reportes.",
-    tags: ["ASP.NET Core", "MVC", "EF Core", "SQL Server", "Identity", "Razor Pages"],
-  },
-]
+import { projects } from "@/lib/projects"
 
 export function Projects() {
   return (
