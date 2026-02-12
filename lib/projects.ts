@@ -6,7 +6,8 @@ export interface Project {
   repoUrl?: string
   highlights?: string[]
   docsUrl?: string
-
+  liveUrl?: string
+  apiUrl?: string
 }
 
 export const projects: Project[] = [
@@ -14,32 +15,38 @@ export const projects: Project[] = [
     slug: "gym-api",
     title: "Sosa Gym API",
     description:
-      "API REST para la gestión integral de un gimnasio, desarrollada con .NET 8 aplicando Clean Architecture y CQRS. Implementa autenticación y autorización con JWT, control de acceso por roles y persistencia en PostgreSQL. Incluye integración con servicios de IA para la generación automatizada de rutinas de entrenamiento.",
+  "API REST desarrollada en .NET 8 para la gestión integral de un gimnasio, con enfoque en arquitectura limpia, seguridad por roles y modelado de dominio real. Implementa Clean Architecture + CQRS, autenticación con Identity + JWT y persistencia en PostgreSQL (Neon). Incluye integración con OpenAI para generación inteligente de rutinas como extensión desacoplada del dominio.",
     tags: [".NET 8", "Clean Architecture", "CQRS", "JWT", "PostgreSQL", "Swagger"],
     repoUrl: "https://github.com/SosaUlises/GymAPI",
-    highlights: [
-      "Arquitectura en capas con separación clara entre dominio, aplicación e infraestructura.",
-      "CQRS para aislar comandos/queries y mantener casos de uso explícitos.",
-      "Autenticación con JWT y control de acceso por roles.",
-      "Documentación de endpoints con Swagger/OpenAPI.",
-      "Integración de IA para generación automatizada de rutinas (servicio desacoplado).",
-    ],
-     docsUrl: "https://gymapi-yln2.onrender.com/index.html" 
+    docsUrl: "https://gymapi-yln2.onrender.com/index.html",
+   highlights: [
+      "Clean Architecture + CQRS para separar dominio, casos de uso y persistencia, facilitando mantenimiento y escalabilidad.",
+      "Seguridad con ASP.NET Core Identity + JWT y autorización por roles (Administrador / Entrenador / Cliente) en endpoints protegidos.",
+      "Modelo de negocio real: rutinas jerárquicas (Rutina → Días → Ejercicios) con asignación/desasignación a clientes.",
+      "Gestión de cuotas por período con estados (Pendiente/Pagada/Vencida), vencimiento automático y validación de acceso según estado.",
+      "Control de acceso por DNI con verificación de cliente + cuota y bloqueo automático si está vencida.",
+      "Módulo IA (preview) integrado con OpenAI para generar rutinas personalizadas con respuesta estricta en JSON, alineada al dominio.",
+      "Calidad de código: FluentValidation, AutoMapper y manejo global de excepciones; documentación en Swagger (Render).",
+    ]
   },
   {
     slug: "veting",
     title: "VetIng",
     description:
-      "Sistema de gestión para veterinarias construido con ASP.NET Core MVC siguiendo el patrón Repository y Service. Permite administrar clientes, mascotas, turnos y pagos (integración con Mercado Pago), con manejo de identidad y autorización mediante ASP.NET Identity y base de datos SQL Server.",
+  "Plataforma web integral para la gestión clínica y administrativa de una veterinaria moderna. Construida con ASP.NET Core MVC en arquitectura por capas (Controller–Service–Repository), integra pagos online (Mercado Pago), API externa gubernamental simulada y despliegue cloud en Render con PostgreSQL (Neon). Enfocada en seguridad, trazabilidad y toma de decisiones basada en datos.",
     tags: ["ASP.NET Core", "MVC", "EF Core", "SQL Server", "Identity", "Razor Pages"],
     repoUrl: "https://github.com/SosaUlises/SistemaVetIng",
+    liveUrl: "https://sistemaveting-dcpx.onrender.com/",
+    apiUrl: "https://perrospeligrososapi.onrender.com/swagger/index.html",
     highlights: [
-      "Arquitectura MVC con capas Repository/Service para aislar acceso a datos y reglas de negocio.",
-      "Persistencia con EF Core sobre SQL Server.",
-      "Autenticación y autorización con ASP.NET Identity.",
-      "Flujo de turnos y gestión de entidades principales (clientes/mascotas/veterinarios).",
-      "Integración de pagos (Mercado Pago) como servicio externo.",
-    ],
+  "Plataforma integral (web app + APIs) para operación clínica y administrativa: turnos, historias clínicas, pagos, reportes y auditoría.",
+  "ASP.NET Core MVC en capas (Controllers sin lógica, Services con reglas e integraciones, Repositories con EF Core).",
+  "Seguridad robusta: ASP.NET Core Identity + RBAC (roles/permisos) y recuperación de contraseña por email (SMTP).",
+  "Infraestructura cloud: Render + PostgreSQL en Neon; versión productiva lista (DB migrada/poblada, sin setup local).",
+  "Integraciones externas: Mercado Pago (pagos online) + API “Perros Peligrosos” protegida por API Key.",
+  "Auditoría y trazabilidad con registro de eventos para control y seguimiento de acciones del sistema.",
+  "Testing con xUnit (unitario e integración) y aplicación de patrones de diseño (Repository/Service, Observer, Decorator, Memento, Composite y Singleton).",
+],
   },
 ]
 

@@ -84,20 +84,46 @@ export default async function ProyectoPage({
       ) : null}
 
       <section className="mt-10 flex flex-wrap gap-2">
-        {project.repoUrl ? (
-          <Button asChild variant="secondary" className="gap-2">
-            <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-              <Github className="h-4 w-4" />
-              Repositorio
+        {"liveUrl" in project && (project as any).liveUrl ? (
+          <Button asChild className="gap-2">
+            <a
+              href={(project as any).liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Demo Web
             </a>
           </Button>
         ) : null}
 
-        {project.docsUrl ? (
+        {"docsUrl" in project && project.docsUrl ? (
           <Button asChild variant="secondary" className="gap-2">
             <a href={project.docsUrl} target="_blank" rel="noopener noreferrer">
               <ExternalLink className="h-4 w-4" />
-              Docs / Swagger
+              Swagger / Docs
+            </a>
+          </Button>
+        ) : null}
+
+        {"apiUrl" in project && (project as any).apiUrl ? (
+          <Button asChild variant="secondary" className="gap-2">
+            <a
+              href={(project as any).apiUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink className="h-4 w-4" />
+              API Externa
+            </a>
+          </Button>
+        ) : null}
+
+        {project.repoUrl ? (
+          <Button asChild variant="outline" className="gap-2">
+            <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">
+              <Github className="h-4 w-4" />
+              Repositorio
             </a>
           </Button>
         ) : null}
