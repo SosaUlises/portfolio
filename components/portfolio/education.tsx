@@ -4,51 +4,77 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 
 const education = [
   {
-    period: "Abril 2023 — Actualidad",
-    title: "Ingenieria en Sistemas Informaticos",
+    period: "Abr 2023 — Actualidad",
+    title: "Ingeniería en Sistemas Informáticos",
     institution: "UAI Rosario",
     description:
-      "Carrera en curso orientada al diseno, desarrollo y gestion de sistemas de informacion complejos.",
+      "Carrera en curso con foco en análisis, diseño y desarrollo de sistemas, arquitectura de software y gestión de proyectos.",
+    status: "In Progress",
   },
   {
-    period: "Abril 2023 — Diciembre 2025",
-    title: "Analista en Sistemas Informaticos",
+    period: "Abr 2023 — Dic 2025",
+    title: "Analista en Sistemas Informáticos",
     institution: "UAI Rosario",
     description:
-      "Titulo obtenido. Formacion en desarrollo de software, bases de datos, arquitectura de sistemas y metodologias agiles.",
+      "Formación en desarrollo de software, bases de datos, fundamentos de arquitectura y buenas prácticas de ingeniería.",
+    status: "Completed",
   },
   {
-    period: "Certificado",
-    title: "Ingles Upper Intermediate (B2)",
-    institution: "EF SET Certificate | Instituto Blossom (online)",
+    period: "Certificación",
+    title: "Inglés Upper Intermediate (B2)",
+    institution: "EF SET Certificate · Instituto Blossom (online)",
     description:
-      "Nivel B2 certificado, con capacidad de lectura tecnica, comunicacion escrita y comprension de documentacion en ingles.",
+    "Nivel B2. Lectura y análisis de documentación técnica en inglés; comunicación escrita efectiva y nivel intermedio en comprensión auditiva y expresión oral.",
   },
 ]
 
+
 export function Education() {
   return (
-    <ScrollReveal className="mt-20">
-      <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-        Educacion
+    <ScrollReveal className="mt-24">
+      <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+        Educación
       </h2>
-      <div className="mt-6">
+
+      <div className="mt-10">
         {education.map((item, index) => (
-          <div key={item.title} className="relative flex gap-6 pb-10 last:pb-0">
-            {/* Timeline line */}
+          <div key={item.title} className="relative flex gap-6 pb-12 last:pb-0">
             {index < education.length - 1 && (
-              <div className="absolute left-[4px] top-3 h-full w-px bg-border" />
+              <div className="absolute left-[5px] top-3 h-full w-px bg-border/70" />
             )}
-            {/* Timeline dot */}
-            <div className="relative mt-1.5 h-[9px] w-[9px] shrink-0 rounded-full bg-primary" />
+
+            <div className="relative mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full bg-primary shadow-[0_0_0_4px_hsl(var(--background))]" />
+
             <div className="min-w-0">
-              <span className="font-mono text-xs text-muted-foreground">
-                {item.period}
-              </span>
-              <h3 className="mt-1.5 text-sm font-semibold text-foreground">
-                {item.title}
-              </h3>
-              <p className="mt-0.5 text-sm text-muted-foreground">{item.institution}</p>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="font-mono text-xs text-muted-foreground">
+                  {item.period}
+                </span>
+                <span className="text-xs text-muted-foreground/60">•</span>
+                <span className="text-xs text-muted-foreground">
+                  {item.institution}
+                </span>
+              </div>
+
+              <div className="mt-2 flex items-center gap-3">
+                <h3 className="text-sm font-semibold text-foreground">
+                  {item.title}
+                </h3>
+
+                {item.status === "Completed" && (
+                  <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium tracking-wide text-emerald-400">
+                    Completed
+                  </span>
+                )}
+
+                {item.status === "In Progress" && (
+                  <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-2 py-0.5 text-[10px] font-medium tracking-wide text-blue-400">
+                    In Progress
+                  </span>
+                )}
+              </div>
+
+
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {item.description}
               </p>
