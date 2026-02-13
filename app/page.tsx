@@ -12,9 +12,9 @@ export default function Page() {
       <Navbar />
 
       <main className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-        <div id="inicio">
+        <section id="inicio" className="scroll-mt-28">
           <Hero />
-        </div>
+        </section>
 
         <section id="sobre-mi" className="scroll-mt-28">
           <Summary />
@@ -24,7 +24,7 @@ export default function Page() {
           <Projects />
         </section>
 
-        <section id="stack" className="scroll-mt-28">
+        <section id="tech-stack" className="scroll-mt-28">
           <TechStack />
         </section>
 
