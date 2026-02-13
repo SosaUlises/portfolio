@@ -1,74 +1,120 @@
 "use client"
 
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { SectionShell } from "@/components/portfolio/section-shell"
 
 const stack = [
   {
     title: "Backend",
-    color: "text-blue-400",
+    color: "text-blue-300",
+    dot: "bg-blue-400",
     badge:
-      "bg-blue-500/10 border-blue-500/20 text-blue-300 hover:bg-blue-500/15",
+      "border-blue-500/25 bg-blue-500/10 text-blue-200 hover:bg-blue-500/15",
     items: ["C#", ".NET 8", "ASP.NET Core", "REST APIs"],
   },
   {
     title: "Arquitectura & Patrones",
-    color: "text-violet-400",
+    color: "text-violet-300",
+    dot: "bg-violet-400",
     badge:
-      "bg-violet-500/10 border-violet-500/20 text-violet-300 hover:bg-violet-500/15",
+      "border-violet-500/25 bg-violet-500/10 text-violet-200 hover:bg-violet-500/15",
     items: ["Clean Architecture", "CQRS", "Repository", "Service Layer", "MVC"],
   },
   {
     title: "Seguridad",
-    color: "text-emerald-400",
+    color: "text-emerald-300",
+    dot: "bg-emerald-400",
     badge:
-      "bg-emerald-500/10 border-emerald-500/20 text-emerald-300 hover:bg-emerald-500/15",
+      "border-emerald-500/25 bg-emerald-500/10 text-emerald-200 hover:bg-emerald-500/15",
     items: ["ASP.NET Identity", "JWT", "RBAC"],
   },
   {
     title: "Base de Datos",
-    color: "text-amber-400",
+    color: "text-amber-300",
+    dot: "bg-amber-400",
     badge:
-      "bg-amber-500/10 border-amber-500/20 text-amber-300 hover:bg-amber-500/15",
+      "border-amber-500/25 bg-amber-500/10 text-amber-200 hover:bg-amber-500/15",
     items: ["Entity Framework Core", "PostgreSQL", "SQL Server"],
   },
   {
     title: "Integraciones & Cloud",
-    color: "text-cyan-400",
+    color: "text-cyan-300",
+    dot: "bg-cyan-400",
     badge:
-      "bg-cyan-500/10 border-cyan-500/20 text-cyan-300 hover:bg-cyan-500/15",
+      "border-cyan-500/25 bg-cyan-500/10 text-cyan-200 hover:bg-cyan-500/15",
     items: ["OpenAI API", "Swagger", "Git", "Render", "Neon"],
   },
 ]
 
 export function TechStack() {
   return (
-    <ScrollReveal className="mt-28" staggerMs={60}>
-      <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-        Tech Stack
-      </h2>
+    <ScrollReveal className="mt-24" staggerMs={60}>
+      <SectionShell>
+        <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+          Tech Stack
+        </h2>
 
-      <div className="mt-12 grid gap-14 md:grid-cols-2 reveal-stagger">
-        {stack.map((section) => (
-          <div key={section.title} className="space-y-5">
-            <h3
-              className={`text-sm font-semibold tracking-wide ${section.color}`}
-            >
-              {section.title}
-            </h3>
+        <div className="mt-10 grid gap-5 md:grid-cols-2 reveal-stagger">
+          {stack.map((section) => {
+            const isFull = section.title === "Integraciones & Cloud"
 
-            <div className="flex flex-wrap gap-3">
-              {section.items.map((tech) => (
-                <span
-                  key={tech}
-                  className={`rounded-md border px-4 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 hover:scale-[1.03] ${section.badge}`}
+            return (
+              <div
+                key={section.title}
+                className={[
+                  "rounded-2xl border border-border/40 bg-background/20",
+                  "px-5 py-5 sm:px-6 sm:py-6",
+                  "transition hover:bg-background/30 hover:border-primary/20",
+                  isFull ? "md:col-span-2 text-center" : "",
+                ].join(" ")}
+              >
+                <div
+                  className={
+                    isFull
+                      ? "mx-auto max-w-2xl"
+                      : ""
+                  }
                 >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+                  <div
+                    className={[
+                      "flex items-center gap-2",
+                      isFull ? "justify-center" : "",
+                    ].join(" ")}
+                  >
+               
+                    <h3
+                      className={`text-sm font-semibold tracking-wide ${section.color}`}
+                    >
+                      {section.title}
+                    </h3>
+                  </div>
+
+                  <div
+                    className={[
+                      "mt-4 flex flex-wrap gap-2",
+                      isFull ? "justify-center" : "",
+                    ].join(" ")}
+                  >
+                    {section.items.map((tech) => (
+                      <span
+                        key={tech}
+                        className={[
+                          "rounded-full border px-3 py-1",
+                          "text-[11px] font-medium tracking-wide",
+                          "transition-all duration-200 hover:scale-[1.03]",
+                          section.badge,
+                        ].join(" ")}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </SectionShell>
     </ScrollReveal>
   )
 }

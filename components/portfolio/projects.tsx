@@ -6,10 +6,12 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { projects } from "@/lib/projects"
+import { SectionShell } from "@/components/portfolio/section-shell"
 
 export function Projects() {
   return (
     <ScrollReveal className="mt-20" staggerMs={70}>
+      <SectionShell>
       <h2  className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
         Proyectos
       </h2>
@@ -57,6 +59,7 @@ export function Projects() {
           </div>
         ))}
       </div>
+      </SectionShell>
     </ScrollReveal>
   )
 }

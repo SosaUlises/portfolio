@@ -1,6 +1,7 @@
 "use client"
 
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { SectionShell } from "@/components/portfolio/section-shell"
 
 const education = [
   {
@@ -32,6 +33,7 @@ const education = [
 export function Education() {
   return (
     <ScrollReveal className="mt-24" staggerMs={80}>
+       <SectionShell>
       <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
         Educación
       </h2>
@@ -83,6 +85,7 @@ export function Education() {
           </div>
         ))}
       </div>
+      </SectionShell>
     </ScrollReveal>
   )
 }
