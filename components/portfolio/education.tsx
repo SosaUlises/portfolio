@@ -20,12 +20,12 @@ const education = [
     status: "Completed",
   },
   {
-    period: "Certificación",
-    title: "Inglés Upper Intermediate (B2)",
-    institution: "EF SET Certificate · Instituto Blossom (online)",
-    description:
-    "Nivel B2. Lectura y análisis de documentación técnica en inglés; comunicación escrita efectiva y nivel intermedio en comprensión auditiva y expresión oral.",
-  },
+  period: "Actualidad",
+  title: "Inglés Upper Intermediate (B2)",
+  institution: "Instituto Blossom (modalidad online) · Certificación EF SET",
+  description:
+    "Formación continua con clases semanales. Nivel B2 certificado; lectura y análisis de documentación técnica, comunicación escrita sólida y competencia intermedia en listening y speaking.",
+},
 ]
 
 
