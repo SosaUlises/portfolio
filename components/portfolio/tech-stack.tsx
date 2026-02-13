@@ -42,12 +42,12 @@ const stack = [
 
 export function TechStack() {
   return (
-    <ScrollReveal className="mt-28">
+    <ScrollReveal className="mt-28" staggerMs={60}>
       <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
         Tech Stack
       </h2>
 
-      <div className="mt-12 grid gap-14 md:grid-cols-2">
+      <div className="mt-12 grid gap-14 md:grid-cols-2 reveal-stagger">
         {stack.map((section) => (
           <div key={section.title} className="space-y-5">
             <h3

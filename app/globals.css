@@ -57,3 +57,71 @@
     scroll-behavior: smooth;
   }
 }
+
+/* --- Scroll reveal (premium + lightweight) --- */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  filter: blur(4px);
+  transition:
+    opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+.reveal.reveal--in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+/* Stagger (only for elements inside .reveal-stagger) */
+.reveal.reveal--stagger .reveal-stagger > * {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  filter: blur(4px);
+  transition:
+    opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--reveal-stagger, 60ms) * var(--reveal-index, 0));
+}
+
+/* When wrapper is in-view, animate children in */
+.reveal.reveal--in.reveal--stagger .reveal-stagger > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+/* Assign indexes (supports first 12 children; extend if needed) */
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(1)  { --reveal-index: 0; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(2)  { --reveal-index: 1; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(3)  { --reveal-index: 2; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(4)  { --reveal-index: 3; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(5)  { --reveal-index: 4; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(6)  { --reveal-index: 5; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(7)  { --reveal-index: 6; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(8)  { --reveal-index: 7; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(9)  { --reveal-index: 8; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(10) { --reveal-index: 9; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(11) { --reveal-index: 10; }
+.reveal.reveal--stagger .reveal-stagger > *:nth-child(12) { --reveal-index: 11; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  .reveal.reveal--stagger .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    transition-delay: 0ms !important;
+  }
+}

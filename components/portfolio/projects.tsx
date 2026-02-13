@@ -9,12 +9,12 @@ import { projects } from "@/lib/projects"
 
 export function Projects() {
   return (
-    <ScrollReveal className="mt-20">
+    <ScrollReveal className="mt-20" staggerMs={70}>
       <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
         Proyectos
       </h2>
 
-      <div className="mt-6 flex flex-col gap-5">
+      <div className="mt-6 flex flex-col gap-5 reveal-stagger">
         {projects.map((project) => (
           <div
             key={project.slug}

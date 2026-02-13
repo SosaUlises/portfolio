@@ -1,32 +1,67 @@
 "use client"
 
-import React from "react"
+import * as React from "react"
 
-import { cn } from "@/lib/utils"
-import { useScrollReveal } from "@/hooks/use-scroll-reveal"
-
-interface ScrollRevealProps {
+type ScrollRevealProps = {
   children: React.ReactNode
   className?: string
-  delay?: number
+  as?: React.ElementType
+  staggerMs?: number // 0 = sin stagger
 }
 
-export function ScrollReveal({ children, className, delay = 0 }: ScrollRevealProps) {
-  const { ref, isVisible } = useScrollReveal(0.1)
+function prefersReducedMotion() {
+  if (typeof window === "undefined") return false
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+}
+
+export function ScrollReveal({
+  children,
+  className = "",
+  as: Tag = "div",
+  staggerMs = 0,
+}: ScrollRevealProps) {
+  const ref = React.useRef<HTMLElement | null>(null)
+  const [inView, setInView] = React.useState(false)
+
+  React.useEffect(() => {
+    if (prefersReducedMotion()) {
+      setInView(true)
+      return
+    }
+
+    const el = ref.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -10% 0px" }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <div
-      ref={ref}
-      className={cn(
-        "transition-all duration-700 ease-out",
-        isVisible
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-8",
-        className
-      )}
-      style={{ transitionDelay: `${delay}ms` }}
+    <Tag
+      ref={ref as any}
+      className={[
+        "reveal",
+        inView ? "reveal--in" : "",
+        staggerMs > 0 ? "reveal--stagger" : "",
+        className,
+      ].join(" ")}
+      style={
+        staggerMs > 0
+          ? ({ ["--reveal-stagger" as any]: `${staggerMs}ms` } as React.CSSProperties)
+          : undefined
+      }
     >
       {children}
-    </div>
+    </Tag>
   )
 }

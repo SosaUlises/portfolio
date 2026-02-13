@@ -31,19 +31,20 @@ const education = [
 
 export function Education() {
   return (
-    <ScrollReveal className="mt-24">
+    <ScrollReveal className="mt-24" staggerMs={80}>
       <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
         Educación
       </h2>
 
-      <div className="mt-10">
+      <div className="mt-10 reveal-stagger">
         {education.map((item, index) => (
           <div key={item.title} className="relative flex gap-6 pb-12 last:pb-0">
             {index < education.length - 1 && (
               <div className="absolute left-[5px] top-3 h-full w-px bg-border/70" />
             )}
 
-            <div className="relative mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full bg-primary shadow-[0_0_0_4px_hsl(var(--background))]" />
+            <div className="relative mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full bg-primary ring-4 ring-background" />
+
 
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1">

@@ -32,7 +32,25 @@ export default function RootLayout({
       <body
         className={`${_inter.variable} ${_jetbrainsMono.variable} font-sans antialiased`}
       >
-        {children}
+        <div className="relative min-h-screen overflow-x-clip bg-background">
+          {/* soft gradient */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-80"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(900px_circle_at_50%_0%,hsl(var(--primary)/0.16),transparent_55%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(700px_circle_at_0%_20%,hsl(var(--primary)/0.10),transparent_55%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(700px_circle_at_100%_30%,hsl(var(--primary)/0.08),transparent_55%)]" />
+          </div>
+
+          {/* subtle top-to-bottom shading */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/35"
+          />
+
+          <div className="relative">{children}</div>
+        </div>
       </body>
     </html>
   )
