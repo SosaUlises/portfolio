@@ -7,7 +7,7 @@ export function Summary() {
   return (
     <ScrollReveal>
       <Separator className="mb-12" />
-      <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+      <h2 id="sobre-mi" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
         Sobre mi
       </h2>
     <p className="mt-5 text-base leading-7 text-foreground">

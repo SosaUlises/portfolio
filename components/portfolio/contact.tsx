@@ -49,7 +49,7 @@ export function Contact() {
         estoy disponible. Respondo rápido por LinkedIn o email.
       </p>
 
-      <div className="mt-9 flex flex-wrap gap-3">
+      <div id="contacto"  className="mt-9 flex flex-wrap gap-3">
         {links.map((link) => {
           const Icon = link.icon
           const isPrimary = link.variant === "primary"

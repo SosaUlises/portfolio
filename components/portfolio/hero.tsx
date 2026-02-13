@@ -4,7 +4,7 @@ import { Github, Linkedin, FileText } from "lucide-react"
 
 export function Hero() {
   return (
-    <section className="min-h-[100dvh] px-6 py-24">
+    <section id="inicio" className="min-h-[100dvh] px-6 py-24">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-center text-center">
         <Avatar className="h-56 w-56 ring-2 ring-border/60 shadow-md">
           <AvatarImage
