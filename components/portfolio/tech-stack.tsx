@@ -62,11 +62,11 @@ export function TechStack() {
               <div
                 key={section.title}
                 className={[
-                  "rounded-2xl border border-border/40 bg-background/20",
+                  "card card-hover card-shine",
                   "px-5 py-5 sm:px-6 sm:py-6",
-                  "transition hover:bg-background/30 hover:border-primary/20",
                   isFull ? "md:col-span-2 text-center" : "",
                 ].join(" ")}
+
               >
                 <div
                   className={
@@ -99,9 +99,7 @@ export function TechStack() {
                       <span
                         key={tech}
                         className={[
-                          "rounded-full border px-3 py-1",
-                          "text-[11px] font-medium tracking-wide",
-                          "transition-all duration-200 hover:scale-[1.03]",
+                      "chip chip-hover",
                           section.badge,
                         ].join(" ")}
                       >

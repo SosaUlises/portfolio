@@ -40,11 +40,8 @@ export function Education() {
 
       <div className="mt-10 reveal-stagger">
         {education.map((item, index) => (
-          <div key={item.title} className="relative flex gap-6 pb-12 last:pb-0">
-            {index < education.length - 1 && (
-              <div className="absolute left-[5px] top-3 h-full w-px bg-border/70" />
-            )}
-
+          <div key={item.title} className="card card-hover card-shine relative flex gap-6 p-6 mb-5 last:mb-0">
+      
             <div className="relative mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full bg-primary ring-4 ring-background" />
 
 

@@ -6,11 +6,26 @@ export function Hero() {
   return (
     <section id="inicio" className="min-h-[100dvh] px-6 py-24">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-center text-center">
-        <Avatar className="h-56 w-56 ring-2 ring-border/60 shadow-md">
+        <Avatar className="group relative h-56 w-56 overflow-hidden rounded-full ring-1 ring-border/70 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:ring-primary/25 hover:shadow-[0_18px_55px_rgba(0,0,0,0.55)]">
+          {/* soft glow */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-10 rounded-full bg-[hsl(var(--primary))] opacity-0 blur-[55px] transition-opacity duration-300 ease-out group-hover:opacity-[0.08]"
+          />
+          {/* subtle shine */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+            style={{
+              background:
+                "radial-gradient(500px circle at 30% 0%, rgba(255,255,255,0.10), transparent 45%)",
+            }}
+          />
+
           <AvatarImage
             src="/uliphoto.jpg"
             alt="Sosa Ulises"
-            className="object-cover"
+            className="h-full w-full object-cover transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.035]"
           />
           <AvatarFallback className="bg-muted text-muted-foreground text-xl">
             SUE
@@ -39,7 +54,10 @@ export function Hero() {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
-          <Button asChild className="gap-2">
+          <Button
+            asChild
+            className="gap-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
+          >
             <a
               href="/CV_SosaUlises.pdf"
               target="_blank"
@@ -52,7 +70,11 @@ export function Hero() {
             </a>
           </Button>
 
-          <Button variant="secondary" asChild className="gap-2">
+          <Button
+            variant="secondary"
+            asChild
+            className="gap-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.30)]"
+          >
             <a
               href="https://github.com/SosaUlises"
               target="_blank"
@@ -63,7 +85,11 @@ export function Hero() {
             </a>
           </Button>
 
-          <Button variant="secondary" asChild className="gap-2">
+          <Button
+            variant="secondary"
+            asChild
+            className="gap-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.30)]"
+          >
             <a
               href="https://linkedin.com/in/sosaulises"
               target="_blank"

@@ -75,7 +75,7 @@ export function Contact() {
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
         {/* Left big card */}
         <div className="lg:col-span-2">
-          <CardShell className="p-8">
+          <CardShell className="p-8 ">
             {/* subtle primary glow (small + dark, not a big blue wash) */}
             <div
               aria-hidden
@@ -99,11 +99,14 @@ export function Contact() {
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
                   href={`mailto:${EMAIL}`}
-                  className={[
-                    "inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold",
-                    "bg-foreground text-background",
-                    "transition hover:opacity-90 active:scale-[0.99]",
-                  ].join(" ")}
+            className={[
+                "relative inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold",
+                "bg-foreground text-background",
+                "transition-all duration-300 ease-out",
+                "hover:-translate-y-0.5 hover:shadow-[0_12px_35px_rgba(0,0,0,0.45)]",
+                "active:translate-y-0 active:scale-[0.99]",
+                "overflow-hidden",
+              ].join(" ")}
                 >
                   <Mail className="h-4 w-4" />
                   Enviar correo
@@ -143,7 +146,7 @@ export function Contact() {
             rel="noopener noreferrer"
             className="group"
           >
-            <CardShell className="p-5 hover:-translate-y-0.5 hover:border-primary/25">
+            <CardShell className="p-5 card-glow hover:-translate-y-0.5 hover:border-primary/25">
               <div className="relative flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
@@ -164,7 +167,7 @@ export function Contact() {
             rel="noopener noreferrer"
             className="group"
           >
-            <CardShell className="p-5 hover:-translate-y-0.5 hover:border-primary/25">
+            <CardShell className="p-5 card-glow hover:-translate-y-0.5 hover:border-primary/25">
               <div className="relative flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
@@ -185,7 +188,7 @@ export function Contact() {
             rel="noopener noreferrer"
             className="group"
           >
-            <CardShell className="p-5 hover:-translate-y-0.5 hover:border-primary/25">
+            <CardShell className="p-5 card-glow hover:-translate-y-0.5 hover:border-primary/25">
               <div className="relative flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">

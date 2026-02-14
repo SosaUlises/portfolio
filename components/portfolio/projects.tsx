@@ -20,7 +20,7 @@ export function Projects() {
         {projects.map((project) => (
           <div
             key={project.slug}
-            className="group flex flex-col gap-4 rounded-lg border border-border p-6 transition-colors hover:border-primary/30"
+            className="card card-hover card-shine group flex flex-col gap-4 p-6"
           >
             <div>
               <h3 className="text-base font-semibold text-foreground">
