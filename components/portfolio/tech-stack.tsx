@@ -10,7 +10,7 @@ const stack = [
     dot: "bg-blue-400",
     badge:
       "border-blue-500/25 bg-blue-500/10 text-blue-200 hover:bg-blue-500/15",
-    items: ["C#", ".NET 8", "ASP.NET Core", "REST APIs"],
+    items: ["C#", ".NET", "ASP.NET Core", "REST APIs"],
   },
   {
     title: "Arquitectura & Patrones",
