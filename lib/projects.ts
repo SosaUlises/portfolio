@@ -24,7 +24,7 @@ export const projects: Project[] = [
     tags: [".NET 8", "Clean Architecture", "CQRS", "JWT", "PostgreSQL", "Swagger", "OpenAI", "Identity"],
     repoUrl: "https://github.com/SosaUlises/GymAPI",
     docsUrl: "https://gymapi-yln2.onrender.com/index.html",
-    imageUrl: "/sosagym.png",
+    imageUrl: "/sosagym.PNG",
     imageAlt: "Swagger UI - Sosa Gym API",
     highlights: [
       "Clean Architecture + CQRS para separar dominio, casos de uso y persistencia, facilitando mantenimiento y escalabilidad.",
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/SosaUlises/SistemaVetIng",
     liveUrl: "https://sistemaveting-dcpx.onrender.com/",
     apiUrl: "https://perrospeligrososapi.onrender.com/swagger/index.html",
-    imageUrl: "/veting.png",
+    imageUrl: "/veting.PNG",
     imageAlt: "VetIng - pantalla principal",
     highlights: [
       "Plataforma integral (web app + APIs) para operación clínica y administrativa: turnos, historias clínicas, pagos, reportes y auditoría.",
