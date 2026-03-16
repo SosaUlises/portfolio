@@ -7,6 +7,7 @@ import { Home, User, Briefcase, Mail } from "lucide-react"
 const items = [
   { href: "#inicio", label: "Inicio", Icon: Home, id: "inicio" },
   { href: "#sobre-mi", label: "Sobre mí", Icon: User, id: "sobre-mi" },
+  { href: "#experiencia", label: "Experiencia", Icon: Briefcase, id: "experiencia" },
   { href: "#proyectos", label: "Proyectos", Icon: Briefcase, id: "proyectos" },
   { href: "#contacto", label: "Contacto", Icon: Mail, id: "contacto" },
 ] as const

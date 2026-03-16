@@ -1,8 +1,8 @@
 export interface Project {
   slug: string
   title: string
-  summary: string       
-  description: string    
+  summary: string
+  description: string
   tags: string[]
   repoUrl?: string
   docsUrl?: string
@@ -36,6 +36,7 @@ export const projects: Project[] = [
       "Calidad de código: FluentValidation, AutoMapper y manejo global de excepciones; documentación en Swagger (Render).",
     ],
   },
+
   {
     slug: "veting",
     title: "VetIng",
@@ -57,6 +58,28 @@ export const projects: Project[] = [
       "Integraciones externas: Simulación de pagos online con Mercado Pago. API “Perros Peligrosos” protegida por API Key.",
       "Auditoría y trazabilidad con registro de eventos para control y seguimiento de acciones del sistema.",
       "Testing con xUnit (unitario e integración) y aplicación de patrones de diseño (Repository/Service, Observer, Decorator, Memento, Composite y Singleton).",
+    ],
+  },
+
+  {
+    slug: "blossom-institute",
+    title: "Blossom Institute API",
+    summary:
+      "Backend API para gestión académica: cursos, estudiantes, tareas, entregas, asistencia y reportes. Arquitectura Clean Architecture + CQRS.",
+    description:
+      "Backend API desarrollada en .NET 8 para la gestión académica de institutos educativos. Permite administrar cursos, estudiantes, tareas, entregas, asistencias y reportes académicos desde una plataforma centralizada. Implementa Clean Architecture + CQRS, autenticación con ASP.NET Identity + JWT y persistencia en PostgreSQL. Incluye documentación pública mediante Swagger para exploración y testing de endpoints.",
+    tags: [".NET 8", "Clean Architecture", "CQRS", "JWT", "PostgreSQL", "Swagger", "Identity"],
+    repoUrl: "https://github.com/SosaUlises/blossom-institute-api",
+    docsUrl: "https://blossom-demo.onrender.com/index.html",
+    imageUrl: "/blossomimg.PNG",
+    imageAlt: "Swagger UI - Blossom Institute API",
+    highlights: [
+      "Sistema académico completo: cursos, clases, matrículas, tareas, entregas, asistencia y calificaciones.",
+      "Arquitectura Clean Architecture + CQRS separando dominio, aplicación, infraestructura y API.",
+      "Autenticación segura con ASP.NET Core Identity + JWT y control de acceso por roles (Admin, Profesor, Alumno).",
+      "Gestión de tareas con entregas, adjuntos y feedback docente.",
+      "Reportes académicos preparados para exportación (Excel / PDF).",
+      "Demo pública disponible mediante Swagger con cuenta admin de prueba.",
     ],
   },
 ]

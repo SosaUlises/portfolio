@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/portfolio/navbar"
 import { Hero } from "@/components/portfolio/hero"
 import { Summary } from "@/components/portfolio/summary"
+import { Experience } from "@/components/portfolio/experience"
 import { Projects } from "@/components/portfolio/projects"
 import { TechStack } from "@/components/portfolio/tech-stack"
 import { Education } from "@/components/portfolio/education"
@@ -18,6 +19,10 @@ export default function Page() {
 
         <section id="sobre-mi" className="scroll-mt-28">
           <Summary />
+        </section>
+
+        <section id="experiencia" className="scroll-mt-28">
+          <Experience />
         </section>
 
         <section id="proyectos" className="scroll-mt-28">
