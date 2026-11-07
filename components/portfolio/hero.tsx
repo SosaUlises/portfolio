@@ -4,7 +4,7 @@ import { Github, Linkedin, FileText } from "lucide-react"
 
 export function Hero() {
   return (
-    <section id="inicio" className="min-h-[100dvh] px-6 py-24">
+    <div className="py-12 sm:py-20">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-center text-center">
         <Avatar className="group relative h-56 w-56 overflow-hidden rounded-full ring-1 ring-border/70 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:ring-primary/25 hover:shadow-[0_18px_55px_rgba(0,0,0,0.55)]">
           {/* soft glow */}
@@ -101,6 +101,6 @@ export function Hero() {
           </Button>
         </div>
       </div>
-    </section>
+    </div>
   )
 }

@@ -10,7 +10,7 @@ export function SectionShell({
   glow?: boolean
 }) {
   return (
-    <section
+    <div
       className={[
         "relative overflow-hidden rounded-2xl border border-border/60",
         "bg-background/30 backdrop-blur-xl",
@@ -43,6 +43,6 @@ export function SectionShell({
       ) : null}
 
       <div className="relative">{children}</div>
-    </section>
+    </div>
   )
 }

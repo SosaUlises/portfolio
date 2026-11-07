@@ -1,8 +1,5 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
-import { ScrollReveal } from "@/components/scroll-reveal"
 import { SectionShell } from "@/components/portfolio/section-shell"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -11,32 +8,31 @@ import { projects } from "@/lib/projects"
 
 export function Projects() {
   return (
-    <ScrollReveal className="mt-20" staggerMs={70}>
-      <SectionShell>
-        <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          Proyectos
-        </h2>
+    <SectionShell>
+      <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+        Proyectos
+      </h2>
 
-        <div id="proyectos" className="mt-6 grid gap-5 md:grid-cols-2 reveal-stagger">
-          {projects.map((project) => (
-            <article
-              key={project.slug}
-              className={[
-                "card card-hover card-shine group overflow-hidden rounded-2xl",
-                "border border-border/50 bg-background/20",
-                "transition hover:border-primary/20 hover:bg-background/25",
-              ].join(" ")}
-            >
-              {/* Preview */}
-              <div className="relative aspect-[16/9] w-full overflow-hidden">
-                <Image
-                  src={project.imageUrl ?? "/placeholder.png"}
-                  alt={project.imageAlt ?? project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority={false}
-                />
+      <div className="mt-6 grid gap-5 md:grid-cols-2 reveal-stagger">
+        {projects.map((project) => (
+          <article
+            key={project.slug}
+            className={[
+              "card card-hover card-shine group overflow-hidden rounded-2xl",
+              "border border-border/50 bg-background/20",
+              "transition hover:border-primary/20 hover:bg-background/25",
+            ].join(" ")}
+          >
+            {/* Preview */}
+            <div className="relative aspect-[16/9] w-full overflow-hidden">
+              <Image
+                src={project.imageUrl ?? "/placeholder.svg"}
+                alt={project.imageAlt ?? project.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority={false}
+              />
 
                 {/* overlay suave para integrar con el fondo */}
                 <div
@@ -136,6 +132,5 @@ export function Projects() {
           ))}
         </div>
       </SectionShell>
-    </ScrollReveal>
   )
 }

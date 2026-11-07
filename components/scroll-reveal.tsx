@@ -2,14 +2,13 @@
 
 import * as React from "react"
 
-type ScrollRevealProps = {
+interface ScrollRevealProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
   className?: string
-  as?: React.ElementType
-  staggerMs?: number // 0 = sin stagger
+  staggerMs?: number
 }
 
-function prefersReducedMotion() {
+function prefersReducedMotion(): boolean {
   if (typeof window === "undefined") return false
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches
 }
@@ -17,10 +16,11 @@ function prefersReducedMotion() {
 export function ScrollReveal({
   children,
   className = "",
-  as: Tag = "div",
   staggerMs = 0,
+  style,
+  ...rest
 }: ScrollRevealProps) {
-  const ref = React.useRef<HTMLElement | null>(null)
+  const ref = React.useRef<HTMLDivElement>(null)
   const [inView, setInView] = React.useState(false)
 
   React.useEffect(() => {
@@ -46,22 +46,28 @@ export function ScrollReveal({
     return () => observer.disconnect()
   }, [])
 
+  const customStyle: React.CSSProperties = {
+    ...style,
+    ...(staggerMs > 0
+      ? ({ ["--reveal-stagger"]: `${staggerMs}ms` } as React.CSSProperties)
+      : {}),
+  }
+
   return (
-    <Tag
-      ref={ref as any}
+    <div
+      ref={ref}
       className={[
         "reveal",
         inView ? "reveal--in" : "",
         staggerMs > 0 ? "reveal--stagger" : "",
         className,
-      ].join(" ")}
-      style={
-        staggerMs > 0
-          ? ({ ["--reveal-stagger" as any]: `${staggerMs}ms` } as React.CSSProperties)
-          : undefined
-      }
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={customStyle}
+      {...rest}
     >
       {children}
-    </Tag>
+    </div>
   )
 }

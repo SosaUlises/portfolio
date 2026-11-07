@@ -1,6 +1,8 @@
 import React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
+import { Navbar } from "@/components/portfolio/navbar"
+import { Footer } from "@/components/portfolio/footer"
 
 import "./globals.css"
 
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0f0f11",
+  themeColor: "#0B0D12",
   width: "device-width",
   initialScale: 1,
 }
@@ -32,7 +34,7 @@ export default function RootLayout({
       <body
         className={`${_inter.variable} ${_jetbrainsMono.variable} font-sans antialiased`}
       >
-        <div className="relative min-h-screen overflow-x-clip bg-background">
+        <div className="relative flex min-h-screen flex-col overflow-x-clip bg-background">
           {/* soft gradient */}
           <div
             aria-hidden
@@ -49,7 +51,9 @@ export default function RootLayout({
             className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/35"
           />
 
-          <div className="relative">{children}</div>
+          <Navbar />
+          <div className="relative flex-1">{children}</div>
+          <Footer />
         </div>
       </body>
     </html>

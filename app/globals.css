@@ -10,39 +10,52 @@
 
 @layer base {
   :root {
-    --background: 240 6% 6%;
-    --foreground: 240 5% 82%;
-    --card: 240 5% 9%;
-    --card-foreground: 240 5% 82%;
-    --popover: 240 5% 9%;
-    --popover-foreground: 240 5% 82%;
-    --primary: 220 80% 62%;
-    --primary-foreground: 240 6% 6%;
-    --secondary: 240 4% 13%;
-    --secondary-foreground: 240 5% 68%;
-    --muted: 240 4% 13%;
-    --muted-foreground: 240 4% 48%;
-    --accent: 220 80% 62%;
-    --accent-foreground: 240 6% 6%;
+    /* Paleta aprobada en docs/design-brief.md (Dark Premium + Editorial Moderno) */
+    --background: 223 24% 6%;           /* #0B0D12 */
+    --background-elevated: 220 26% 9%;  /* #11151D */
+    --surface: 220 25% 12%;             /* #171C26 */
+    --border: 218 21% 21%;              /* #2A3240 */
+
+    --foreground: 220 33% 97%;          /* #F4F6FA (Text primary) */
+    --text-secondary: 215 20% 76%;      /* #B5BFCD (Text secondary) */
+    --text-muted: 214 16% 60%;          /* #8A97A8 (Text muted) */
+
+    --card: 220 25% 12%;                /* #171C26 */
+    --card-foreground: 220 33% 97%;
+
+    --popover: 220 26% 9%;              /* #11151D */
+    --popover-foreground: 220 33% 97%;
+
+    --primary: 224 100% 70%;            /* #648DFF (Accent) */
+    --primary-hover: 224 100% 76%;      /* #83A5FF (Accent hover) */
+    --primary-subtle: 223 45% 20%;      /* #1C2949 (Accent subtle) */
+    --primary-foreground: 223 24% 6%;
+
+    --secondary: 220 26% 9%;            /* #11151D */
+    --secondary-foreground: 215 20% 76%;/* #B5BFCD */
+
+    --muted: 220 26% 9%;                /* #11151D */
+    --muted-foreground: 214 16% 60%;    /* #8A97A8 */
+
+    --accent: 223 45% 20%;              /* #1C2949 */
+    --accent-foreground: 220 33% 97%;
+
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 4% 14%;
-    --input: 240 4% 14%;
-    --ring: 220 80% 62%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --radius: 0.5rem;
-    --sidebar-background: 240 6% 6%;
-    --sidebar-foreground: 240 5% 82%;
-    --sidebar-primary: 220 80% 62%;
-    --sidebar-primary-foreground: 240 6% 6%;
-    --sidebar-accent: 240 4% 13%;
-    --sidebar-accent-foreground: 240 5% 82%;
-    --sidebar-border: 240 4% 14%;
-    --sidebar-ring: 220 80% 62%;
+
+    --input: 218 21% 21%;               /* #2A3240 */
+    --ring: 224 100% 70%;               /* #648DFF */
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 223 24% 6%;
+    --sidebar-foreground: 220 33% 97%;
+    --sidebar-primary: 224 100% 70%;
+    --sidebar-primary-foreground: 223 24% 6%;
+    --sidebar-accent: 220 26% 9%;
+    --sidebar-accent-foreground: 220 33% 97%;
+    --sidebar-border: 218 21% 21%;
+    --sidebar-ring: 224 100% 70%;
   }
 }
 
@@ -58,41 +71,34 @@
   }
 }
 
-/* --- Scroll reveal (premium + lightweight) --- */
+/* --- Scroll reveal (performant: opacity + transform only, no filter blurs) --- */
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 10px, 0);
-  filter: blur(4px);
+  transform: translate3d(0, 14px, 0);
   transition:
-    opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 800ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform, filter;
+    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .reveal.reveal--in {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  filter: blur(0);
 }
 
 /* Stagger (only for elements inside .reveal-stagger) */
 .reveal.reveal--stagger .reveal-stagger > * {
   opacity: 0;
-  transform: translate3d(0, 10px, 0);
-  filter: blur(4px);
+  transform: translate3d(0, 14px, 0);
   transition:
-    opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 800ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: calc(var(--reveal-stagger, 60ms) * var(--reveal-index, 0));
 }
 
-/* When wrapper is in-view, animate children in */
 .reveal.reveal--in.reveal--stagger .reveal-stagger > * {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  filter: blur(0);
 }
 
 /* Assign indexes (supports first 12 children; extend if needed) */
@@ -114,52 +120,47 @@
   .reveal {
     opacity: 1 !important;
     transform: none !important;
-    filter: none !important;
     transition: none !important;
   }
   .reveal.reveal--stagger .reveal-stagger > * {
     opacity: 1 !important;
     transform: none !important;
-    filter: none !important;
     transition: none !important;
     transition-delay: 0ms !important;
   }
 }
 
 /* ------------------------------ */
-/* Premium reusable UI primitives */
+/* UI primitives                  */
 /* ------------------------------ */
 
 @layer components {
-  /* Base card: glass + border + shadow */
+  /* Base card */
   .card {
-    @apply relative overflow-hidden rounded-2xl border border-border/50 bg-background/25 backdrop-blur-xl;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    @apply relative overflow-hidden rounded-xl border border-border/70 bg-card/60 backdrop-blur-md;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   }
 
-  /* Hover: lift + softer border + deeper shadow */
+  /* Hover */
   .card-hover {
     @apply transition-all duration-300 ease-out;
   }
   .card-hover:hover {
     transform: translate3d(0, -2px, 0);
-    box-shadow: 0 18px 55px rgba(0,0,0,0.55);
-  }
-  .card-hover:hover {
-    border-color: hsl(var(--primary) / 0.22);
-    background-color: hsl(var(--background) / 0.35);
+    border-color: hsl(var(--primary) / 0.35);
+    background-color: hsl(var(--card) / 0.85);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   }
 
-  /* Subtle shine layer (enable by adding card-shine) */
   .card-shine::before {
     content: "";
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 300ms ease-out;
+    transition: opacity 250ms ease-out;
     background: radial-gradient(
-      700px circle at 30% 0%,
-      rgba(255,255,255,0.10),
+      600px circle at 30% 0%,
+      rgba(255, 255, 255, 0.06),
       transparent 45%
     );
     pointer-events: none;
@@ -168,22 +169,21 @@
     opacity: 1;
   }
 
-  /* Optional premium glow (enable by adding card-glow) */
   .card-glow::after {
     content: "";
     position: absolute;
-    inset: -80px;
+    inset: -40px;
     background: hsl(var(--primary));
     opacity: 0;
-    filter: blur(70px);
-    transition: opacity 300ms ease-out;
+    filter: blur(50px);
+    transition: opacity 250ms ease-out;
     pointer-events: none;
   }
   .card-glow:hover::after {
-    opacity: 0.08;
+    opacity: 0.05;
   }
 
-  /* Small “chip/pill” style for badges */
+  /* Small chip style */
   .chip {
     @apply rounded-full border px-3 py-1 text-[11px] font-medium tracking-wide;
   }
@@ -191,6 +191,6 @@
     @apply transition-all duration-200 ease-out;
   }
   .chip-hover:hover {
-    transform: translate3d(0, -1px, 0) scale(1.03);
+    transform: translate3d(0, -1px, 0);
   }
 }

@@ -66,7 +66,7 @@ export function Contact() {
   }
 
   return (
-    <ScrollReveal className="mt-24 pb-24" as="section">
+    <ScrollReveal className="pb-12">
       <Separator className="mb-12" />
       <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
         Contacto
@@ -204,10 +204,6 @@ export function Contact() {
           </a>
         </div>
       </div>
-
-      <p className="mt-14 text-xs text-muted-foreground/60">
-        {"Sosa Ulises Ezequiel \u00A9 2026"}
-      </p>
     </ScrollReveal>
   )
 }

@@ -2,20 +2,27 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Home, User, Briefcase, Mail } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { Home, User, Briefcase, FolderGit2, Mail } from "lucide-react"
 
 const items = [
-  { href: "#inicio", label: "Inicio", Icon: Home, id: "inicio" },
-  { href: "#sobre-mi", label: "Sobre mí", Icon: User, id: "sobre-mi" },
-  { href: "#experiencia", label: "Experiencia", Icon: Briefcase, id: "experiencia" },
-  { href: "#proyectos", label: "Proyectos", Icon: Briefcase, id: "proyectos" },
-  { href: "#contacto", label: "Contacto", Icon: Mail, id: "contacto" },
+  { href: "/#inicio", label: "Inicio", Icon: Home, id: "inicio" },
+  { href: "/#sobre-mi", label: "Sobre mí", Icon: User, id: "sobre-mi" },
+  { href: "/#experiencia", label: "Experiencia", Icon: Briefcase, id: "experiencia" },
+  { href: "/#proyectos", label: "Proyectos", Icon: FolderGit2, id: "proyectos" },
+  { href: "/#contacto", label: "Contacto", Icon: Mail, id: "contacto" },
 ] as const
 
 function useActiveSection(sectionIds: string[]) {
-  const [active, setActive] = React.useState(sectionIds[0] ?? "inicio")
+  const [active, setActive] = React.useState<string>(sectionIds[0] ?? "inicio")
+  const pathname = usePathname()
 
   React.useEffect(() => {
+    if (pathname !== "/") {
+      setActive("")
+      return
+    }
+
     const els = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[]
@@ -38,7 +45,7 @@ function useActiveSection(sectionIds: string[]) {
 
     els.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [sectionIds])
+  }, [sectionIds, pathname])
 
   return active
 }
@@ -56,7 +63,7 @@ export function Navbar() {
 
   return (
     <header className="pointer-events-none sticky top-5 z-50 flex justify-center px-6">
-      <nav className="pointer-events-auto w-full max-w-5xl">
+      <nav className="pointer-events-auto w-full max-w-5xl" aria-label="Navegación principal">
         <div
           className={[
             "mx-auto flex w-fit items-center gap-1 rounded-full border p-1 backdrop-blur",
@@ -70,6 +77,8 @@ export function Navbar() {
               <Link
                 key={href}
                 href={href}
+                aria-label={label}
+                title={label}
                 className={[
                   "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm transition",
                   "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
@@ -79,7 +88,7 @@ export function Navbar() {
                 ].join(" ")}
                 aria-current={isActive ? "page" : undefined}
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-4 w-4" aria-hidden="true" />
                 <span className="hidden sm:inline">{label}</span>
               </Link>
             )

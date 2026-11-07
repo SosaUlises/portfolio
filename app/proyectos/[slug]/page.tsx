@@ -89,10 +89,10 @@ export default async function ProyectoPage({
 
         {/* Action Buttons */}
         <section className="mt-10 flex flex-wrap gap-3">
-          {"liveUrl" in project && (project as any).liveUrl ? (
+          {project.liveUrl ? (
             <Button asChild className="gap-2 transition-transform hover:scale-[1.02]">
               <a
-                href={(project as any).liveUrl}
+                href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -102,7 +102,7 @@ export default async function ProyectoPage({
             </Button>
           ) : null}
 
-          {"docsUrl" in project && project.docsUrl ? (
+          {project.docsUrl ? (
             <Button
               asChild
               variant="secondary"
@@ -119,14 +119,14 @@ export default async function ProyectoPage({
             </Button>
           ) : null}
 
-          {"apiUrl" in project && (project as any).apiUrl ? (
+          {project.apiUrl ? (
             <Button
               asChild
               variant="secondary"
               className="gap-2 transition-transform hover:scale-[1.02]"
             >
               <a
-                href={(project as any).apiUrl}
+                href={project.apiUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
