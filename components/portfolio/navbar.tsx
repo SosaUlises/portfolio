@@ -56,6 +56,26 @@ export function Navbar() {
   const active = useActiveSection(navItems.map((i) => i.id))
   const [scrolled, setScrolled] = React.useState(false)
   const [mobileOpen, setMobileOpen] = React.useState(false)
+  const pathname = usePathname()
+
+  // Close mobile navigation on route change
+  React.useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
+
+  // Handle Escape key to close mobile menu
+  React.useEffect(() => {
+    if (!mobileOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [mobileOpen])
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -79,16 +99,16 @@ export function Navbar() {
           <Link
             href="/#inicio"
             aria-label="Ir al inicio de Ulises Sosa"
-            className="group flex items-center gap-1.5 font-mono text-sm font-bold tracking-tight text-foreground transition-colors hover:text-primary"
+            className="group flex items-center font-mono text-sm font-bold tracking-tight text-foreground transition-colors hover:text-primary"
           >
             <span>US</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-primary transition-transform group-hover:scale-125" />
+            <span className="text-primary transition-transform group-hover:scale-125">.</span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav
             aria-label="Navegación principal"
-            className="hidden md:flex items-center gap-1 rounded-full border border-border/60 bg-surface/60 p-1.5 backdrop-blur-md"
+            className="hidden md:flex items-center gap-1 rounded-full border border-border/70 bg-surface/70 px-2 py-1.5 backdrop-blur-md shadow-sm"
           >
             {navItems.map(({ href, label, id }) => {
               const isActive = active === id
@@ -101,7 +121,7 @@ export function Navbar() {
                     "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
                     isActive
                       ? "bg-primary/15 text-primary font-semibold"
-                      : "text-text-muted hover:text-foreground hover:bg-secondary/70",
+                      : "text-text-muted hover:text-foreground hover:bg-surface-hover",
                   ].join(" ")}
                   aria-current={isActive ? "page" : undefined}
                 >
@@ -118,9 +138,9 @@ export function Navbar() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
             aria-label={mobileOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
-            className="inline-flex md:hidden items-center justify-center rounded-lg border border-border bg-surface/70 p-2 text-text-secondary hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="inline-flex md:hidden items-center justify-center rounded-lg border border-border/80 bg-surface/80 p-2 text-text-secondary hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
           </button>
         </div>
       </div>
@@ -129,7 +149,9 @@ export function Navbar() {
       {mobileOpen ? (
         <div
           id="mobile-navigation"
-          className="md:hidden border-b border-border bg-background-elevated/95 px-6 py-4 backdrop-blur-xl shadow-lg"
+          role="region"
+          aria-label="Menú de navegación para dispositivos móviles"
+          className="md:hidden border-b border-border bg-background-elevated/95 px-6 py-4 backdrop-blur-xl shadow-xl animate-in fade-in slide-in-from-top-2 duration-200"
         >
           <nav className="flex flex-col space-y-1">
             {navItems.map(({ href, label, id }) => {
@@ -142,14 +164,14 @@ export function Navbar() {
                   className={[
                     "flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm transition-colors",
                     isActive
-                      ? "bg-primary/10 text-primary font-semibold"
+                      ? "bg-primary/15 text-primary font-semibold"
                       : "text-text-secondary hover:bg-surface hover:text-foreground",
                   ].join(" ")}
                   aria-current={isActive ? "page" : undefined}
                 >
                   <span>{label}</span>
                   {isActive ? (
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
                   ) : null}
                 </Link>
               )

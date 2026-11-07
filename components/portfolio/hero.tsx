@@ -1,104 +1,132 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, FileText } from "lucide-react"
+import { ArrowDown, Github, Linkedin, FileText, MapPin } from "lucide-react"
 
 export function Hero() {
   return (
-    <div className="py-12 sm:py-20">
-      <div className="mx-auto flex max-w-4xl flex-col items-center justify-center text-center">
-        <Avatar className="group relative h-48 w-48 sm:h-56 sm:w-56 overflow-hidden rounded-full ring-1 ring-border/70 shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:ring-primary/25 hover:shadow-[0_18px_55px_rgba(0,0,0,0.55)]">
-          {/* soft glow */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -inset-10 rounded-full bg-[hsl(var(--primary))] opacity-0 blur-[55px] transition-opacity duration-300 ease-out group-hover:opacity-[0.08]"
-          />
-          {/* subtle shine */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
-            style={{
-              background:
-                "radial-gradient(500px circle at 30% 0%, rgba(255,255,255,0.10), transparent 45%)",
-            }}
-          />
+    <div className="pt-6 pb-12 sm:pt-10 sm:pb-20 lg:pt-14 lg:pb-24">
+      <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+        {/* Left Column: Personal Presentation & CTAs */}
+        <div className="flex flex-col items-center text-center lg:col-span-7 lg:items-start lg:text-left">
+          {/* Eyebrow */}
+          <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
+            ANALISTA EN SISTEMAS · SOFTWARE DEVELOPMENT
+          </p>
 
-          <AvatarImage
-            src="/uliphoto.jpg"
-            alt="Ulises Sosa"
-            className="h-full w-full object-cover transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.035]"
-          />
-          <AvatarFallback className="bg-muted text-muted-foreground text-xl">
-            US
-          </AvatarFallback>
-        </Avatar>
+          {/* Name */}
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            Ulises Sosa<span className="text-primary">.</span>
+          </h1>
 
-        <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-border/70 bg-secondary/60 px-3.5 py-1 text-xs text-muted-foreground">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          Analista en Sistemas · Estudiante de Ingeniería en Sistemas
+          {/* Professional Headline */}
+          <p className="mt-3 text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight text-text-secondary">
+            Analista en Sistemas <span className="text-border">|</span> Desarrollador de Software
+          </p>
+
+          {/* Summary / Lead */}
+          <p className="mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-text-secondary">
+            Soy Analista en Sistemas y estudiante avanzado de Ingeniería en Sistemas. Desarrollo soluciones backend y full stack, con interés en la arquitectura de software, la tecnología y el aprendizaje continuo.
+          </p>
+
+          {/* Location */}
+          <p className="mt-4 flex items-center gap-1.5 text-xs text-text-muted">
+            <MapPin className="h-3.5 w-3.5 text-primary/80" aria-hidden="true" />
+            <span>Rosario, Santa Fe, Argentina</span>
+          </p>
+
+          {/* Actions */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+            {/* Primary CTA */}
+            <Button
+              asChild
+              size="lg"
+              className="gap-2 bg-primary text-primary-foreground hover:bg-primary-hover font-medium shadow-sm transition-transform hover:-translate-y-0.5"
+            >
+              <Link href="/#proyectos">
+                Ver proyectos
+                <ArrowDown className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </Button>
+
+            {/* Secondary CTA: CV */}
+            <Button
+              asChild
+              variant="secondary"
+              size="lg"
+              className="gap-2 border border-border/80 bg-surface text-text-primary hover:bg-surface-hover hover:border-primary/40 transition-transform hover:-translate-y-0.5"
+            >
+              <a
+                href="/CV_SosaUlises.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
+                <FileText className="h-4 w-4" aria-hidden="true" />
+                Descargar CV
+              </a>
+            </Button>
+
+            {/* Social CTAs */}
+            <div className="flex items-center gap-2">
+              <Button
+                asChild
+                variant="outline"
+                size="icon"
+                className="h-10 w-10 rounded-lg border-border/80 bg-surface/60 text-text-secondary hover:text-foreground hover:border-primary/50 transition-colors"
+                aria-label="Perfil de LinkedIn de Ulises Sosa"
+              >
+                <a
+                  href="https://linkedin.com/in/sosaulises"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                variant="outline"
+                size="icon"
+                className="h-10 w-10 rounded-lg border-border/80 bg-surface/60 text-text-secondary hover:text-foreground hover:border-primary/50 transition-colors"
+                aria-label="Perfil de GitHub de Ulises Sosa"
+              >
+                <a
+                  href="https://github.com/SosaUlises"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
 
-        <h1 className="mt-6 text-4xl font-extrabold tracking-tight leading-none sm:text-6xl lg:text-7xl">
-          Ulises Sosa
-        </h1>
+        {/* Right Column: Editorial Photograph */}
+        <div className="flex justify-center lg:col-span-5 lg:justify-end">
+          <div className="group relative w-56 sm:w-64 lg:w-72 xl:w-80">
+            {/* Subtle frame container */}
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border/80 bg-surface p-2 shadow-2xl transition-all duration-300 group-hover:border-primary/40">
+              <div className="relative h-full w-full overflow-hidden rounded-xl bg-background-elevated">
+                <Image
+                  src="/uliphoto.jpg"
+                  alt="Fotografía profesional de Ulises Sosa"
+                  fill
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  sizes="(max-width: 640px) 224px, (max-width: 1024px) 288px, 320px"
+                  priority
+                />
+              </div>
+            </div>
 
-        <p className="mt-4 text-xl sm:text-2xl font-semibold text-primary">
-          Analista en Sistemas | Desarrollador de Software
-        </p>
-
-        <p className="mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-text-secondary">
-          Soy Analista en Sistemas y estudiante avanzado de Ingeniería en Sistemas. Desarrollo soluciones backend y full stack, con interés en la arquitectura de software, la tecnología y el aprendizaje continuo.
-        </p>
-
-        <p className="mt-3 text-xs text-text-muted">
-          Rosario, Santa Fe, Argentina
-        </p>
-
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Button
-            asChild
-            className="gap-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
-          >
-            <a
-              href="/CV_SosaUlises.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-            >
-              <FileText className="h-4 w-4" />
-              <span className="sm:hidden">CV</span>
-              <span className="hidden sm:inline">Descargar CV</span>
-            </a>
-          </Button>
-
-          <Button
-            variant="secondary"
-            asChild
-            className="gap-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.30)]"
-          >
-            <a
-              href="https://github.com/SosaUlises"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="h-4 w-4" />
-              GitHub
-            </a>
-          </Button>
-
-          <Button
-            variant="secondary"
-            asChild
-            className="gap-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.30)]"
-          >
-            <a
-              href="https://linkedin.com/in/sosaulises"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Linkedin className="h-4 w-4" />
-              LinkedIn
-            </a>
-          </Button>
+            {/* Subtle decorative framing accent */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-3 -right-3 -z-10 h-full w-full rounded-2xl border border-primary/20 opacity-40 transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:border-primary/40"
+            />
+          </div>
         </div>
       </div>
     </div>
