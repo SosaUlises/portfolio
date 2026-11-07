@@ -13,9 +13,9 @@ export function Summary() {
         </div>
 
         {/* Right Column: Editorial Narrative Paragraphs (~60-65%) */}
-        <div className="md:col-span-7 lg:col-span-7 space-y-6 text-[15px] sm:text-base lg:text-[17px] leading-relaxed text-text-secondary text-left">
+        <div className="md:col-span-7 lg:col-span-7 space-y-6 sm:space-y-7 text-[15px] sm:text-base lg:text-[17px] leading-[1.7] text-text-secondary text-left">
           <p>
-            Soy Analista en Sistemas Informáticos y estudiante avanzado de Ingeniería en Sistemas. Me apasiona el desarrollo de software y la creación de soluciones tecnológicas que respondan a necesidades reales. Tengo experiencia desarrollando aplicaciones full stack con tecnologías como C#, .NET, ASP.NET Core, TypeScript, React, Next.js y PostgreSQL, aplicando principios de arquitectura de software, buenas prácticas de desarrollo y diseño de sistemas escalables y mantenibles.
+            Soy Analista en Sistemas Informáticos y estudiante avanzado de Ingeniería en Sistemas. Me apasiona el desarrollo de software y la creación de soluciones tecnológicas que respondan a necesidades reales. Tengo experiencia desarrollando aplicaciones full stack, trabajando tanto en frontend como en backend, con especial interés en la arquitectura de software, las buenas prácticas de desarrollo y la construcción de sistemas mantenibles.
           </p>
           <p>
             En paralelo a mi formación universitaria, trabajé durante aproximadamente seis años en la gestión de comercios familiares, asumiendo responsabilidades en la coordinación de equipos, organización de procesos y administración operativa. Durante esta etapa también lideré la implementación y configuración de un sistema de gestión en cinco locales comerciales, incluyendo la capacitación del personal y su adaptación a las nuevas herramientas. Esta experiencia me permitió desarrollar una visión integral, combinando conocimientos tecnológicos con habilidades de liderazgo, comunicación y resolución de problemas.
