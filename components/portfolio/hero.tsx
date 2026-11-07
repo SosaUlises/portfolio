@@ -124,13 +124,8 @@ export function Hero() {
         <div className="hidden md:grid md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
           {/* Left Column: Personal Presentation & CTAs */}
           <div className="flex flex-col items-start text-left md:col-span-7 lg:col-span-7">
-            {/* Eyebrow */}
-            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
-              TECNOLOGÍA · DESARROLLO · INNOVACIÓN
-            </p>
-
             {/* Name */}
-            <h1 className="mt-4 text-5xl font-extrabold tracking-tight text-foreground lg:text-7xl">
+            <h1 className="text-5xl font-extrabold tracking-tight text-foreground lg:text-7xl">
               Ulises Sosa<span className="text-primary">.</span>
             </h1>
 
