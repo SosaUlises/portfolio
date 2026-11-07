@@ -1,9 +1,10 @@
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { projects } from "@/lib/projects"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ExternalLink, Github } from "lucide-react"
+import { ArrowLeft, ExternalLink, Github, Layers, CheckCircle2, Lightbulb, Wrench } from "lucide-react"
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
@@ -20,8 +21,8 @@ export async function generateMetadata({
   if (!project) return { title: "Proyecto no encontrado" }
 
   return {
-    title: `${project.title} | Sosa Ulises`,
-    description: project.description,
+    title: `${project.title} | Ulises Sosa`,
+    description: project.summary ?? project.description,
   }
 }
 
@@ -36,27 +37,84 @@ export default async function ProyectoPage({
   if (!project) notFound()
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-24">
-      
+    <main className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
       {/* Back button */}
       <Link
         href="/#proyectos"
-        className="group mb-12 inline-flex items-center gap-2 text-sm font-medium text-primary/90 transition-colors hover:text-primary"
+        className="group mb-8 inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary-hover"
       >
-        <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
-        Volver al portfolio
+        <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
+        Volver a proyectos
       </Link>
 
       {/* Main Card */}
-      <div className="card card-hover card-shine p-8 sm:p-10">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+      <article className="card p-6 sm:p-10">
+        {/* Header Badges */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          <span className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+            {project.category}
+          </span>
+          {project.status ? (
+            <span
+              className={[
+                "rounded-full border px-2.5 py-0.5 text-xs font-medium",
+                project.status === "En desarrollo"
+                  ? "border-amber-500/40 bg-amber-500/10 text-amber-300"
+                  : "border-border bg-secondary text-muted-foreground",
+              ].join(" ")}
+            >
+              {project.status}
+            </span>
+          ) : null}
+        </div>
+
+        {/* Title */}
+        <h1 className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
           {project.title}
         </h1>
 
-        <p className="mt-4 text-base leading-7 text-muted-foreground">
-          {project.description}
-        </p>
+        {/* Role */}
+        {project.role ? (
+          <p className="mt-2 text-sm font-medium text-text-muted">
+            <span className="text-foreground font-semibold">Rol:</span> {project.role}
+          </p>
+        ) : null}
 
+        {/* Image Preview or Fallback */}
+        <div className="mt-6 relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-border/60 bg-background-elevated">
+          {project.imageUrl ? (
+            <Image
+              src={project.imageUrl}
+              alt={project.imageAlt ?? project.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 896px"
+              priority
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center p-8 text-center">
+              <div className="rounded-2xl border border-border bg-surface p-4 text-primary shadow-sm">
+                <Layers className="h-8 w-8" />
+              </div>
+              <p className="mt-4 text-lg font-bold text-foreground">
+                {project.title}
+              </p>
+              <p className="mt-1 text-xs font-mono text-text-muted">
+                {project.category} · {project.status ?? "Software Project"}
+              </p>
+              <p className="mt-3 text-xs text-muted-foreground max-w-sm">
+                Capturas de interfaz en proceso de actualización según el despliegue más reciente.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Description / Summary */}
+        <div className="mt-8 space-y-4 text-base leading-relaxed text-text-secondary">
+          <p>{project.description}</p>
+        </div>
+
+        {/* Tags */}
         <div className="mt-6 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <Badge
@@ -69,16 +127,73 @@ export default async function ProyectoPage({
           ))}
         </div>
 
-        {/* Highlights */}
-        {project.highlights?.length ? (
-          <section className="mt-12 rounded-xl border border-border/40 bg-background/30 p-6">
-            <h2 className="text-sm font-semibold tracking-wide text-foreground">
-              Lo más relevante
-            </h2>
+        {/* Challenge & Solution */}
+        {project.challenge || project.solution ? (
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {project.challenge ? (
+              <div className="rounded-xl border border-border/70 bg-surface/50 p-6">
+                <h2 className="flex items-center gap-2 text-sm font-bold tracking-wide text-foreground">
+                  <Lightbulb className="h-4 w-4 text-primary" />
+                  Problema y Objetivo
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                  {project.challenge}
+                </p>
+              </div>
+            ) : null}
 
-            <ul className="mt-5 space-y-3 text-sm leading-6 text-muted-foreground">
+            {project.solution ? (
+              <div className="rounded-xl border border-border/70 bg-surface/50 p-6">
+                <h2 className="flex items-center gap-2 text-sm font-bold tracking-wide text-foreground">
+                  <Wrench className="h-4 w-4 text-primary" />
+                  Solución Desarrollada
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                  {project.solution}
+                </p>
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+
+        {/* Architecture Details */}
+        {project.architecture ? (
+          <div className="mt-8 rounded-xl border border-border/70 bg-surface/40 p-6">
+            <h2 className="text-sm font-bold tracking-wide text-foreground">
+              Arquitectura y Decisiones Técnicas
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+              {project.architecture}
+            </p>
+          </div>
+        ) : null}
+
+        {/* Key Features */}
+        {project.features && project.features.length > 0 ? (
+          <section className="mt-8 rounded-xl border border-border/70 bg-surface/40 p-6">
+            <h2 className="text-sm font-bold tracking-wide text-foreground">
+              Funcionalidades Principales Implementadas
+            </h2>
+            <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-text-secondary">
+              {project.features.map((feature) => (
+                <li key={feature} className="flex items-start gap-2.5">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
+        {/* Highlights fallback */}
+        {!project.features && project.highlights && project.highlights.length > 0 ? (
+          <section className="mt-8 rounded-xl border border-border/70 bg-surface/40 p-6">
+            <h2 className="text-sm font-bold tracking-wide text-foreground">
+              Aspectos Destacados
+            </h2>
+            <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-text-secondary">
               {project.highlights.map((item) => (
-                <li key={item} className="flex gap-3">
+                <li key={item} className="flex items-start gap-2.5">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                   <span>{item}</span>
                 </li>
@@ -87,8 +202,25 @@ export default async function ProyectoPage({
           </section>
         ) : null}
 
+        {/* Learnings */}
+        {project.learnings && project.learnings.length > 0 ? (
+          <section className="mt-8 rounded-xl border border-border/70 bg-surface/30 p-6">
+            <h2 className="text-sm font-bold tracking-wide text-foreground">
+              Aprendizajes y Estado Actual
+            </h2>
+            <ul className="mt-3 space-y-2 text-sm leading-relaxed text-text-muted">
+              {project.learnings.map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <span className="text-primary font-bold">·</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
         {/* Action Buttons */}
-        <section className="mt-10 flex flex-wrap gap-3">
+        <section className="mt-10 flex flex-wrap gap-3 border-t border-border/60 pt-6">
           {project.liveUrl ? (
             <Button asChild className="gap-2 transition-transform hover:scale-[1.02]">
               <a
@@ -97,7 +229,7 @@ export default async function ProyectoPage({
                 rel="noopener noreferrer"
               >
                 <ExternalLink className="h-4 w-4" />
-                Demo Web
+                Acceder a la Aplicación (Demo)
               </a>
             </Button>
           ) : null}
@@ -114,7 +246,7 @@ export default async function ProyectoPage({
                 rel="noopener noreferrer"
               >
                 <ExternalLink className="h-4 w-4" />
-                Swagger / Docs
+                Documentación / Swagger
               </a>
             </Button>
           ) : null}
@@ -131,7 +263,7 @@ export default async function ProyectoPage({
                 rel="noopener noreferrer"
               >
                 <ExternalLink className="h-4 w-4" />
-                API Externa
+                API Backend
               </a>
             </Button>
           ) : null}
@@ -148,12 +280,12 @@ export default async function ProyectoPage({
                 rel="noopener noreferrer"
               >
                 <Github className="h-4 w-4" />
-                Repositorio
+                Repositorio en GitHub
               </a>
             </Button>
           ) : null}
         </section>
-      </div>
+      </article>
     </main>
   )
 }

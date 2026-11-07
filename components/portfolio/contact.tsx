@@ -87,13 +87,12 @@ export function Contact() {
             />
 
             <div className="relative">
-              <h3 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-                ¿Creamos algo <span className="text-primary">único</span> juntos?
+              <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                Contacto y comunicación
               </h3>
 
-              <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-                Estoy disponible para nuevos proyectos. Si buscás backend sólido
-                en .NET, código limpio y foco en arquitectura, hablemos.
+              <p className="mt-3 max-w-2xl text-base leading-relaxed text-text-secondary">
+                Si te interesa conversar sobre desarrollo de software, arquitectura de sistemas o compartir ideas sobre tecnología, podés escribirme directamente por correo o contactarme a través de mis redes.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">

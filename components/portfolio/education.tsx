@@ -8,12 +8,12 @@ export function Education() {
         Educación
       </h2>
 
-      <div className="mt-10 reveal-stagger">
+      <div className="mt-10 reveal-stagger space-y-4">
         {education.map((item) => (
-          <div key={item.title} className="card card-hover card-shine relative flex gap-6 p-6 mb-5 last:mb-0">
-            <div className="relative mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full bg-primary ring-4 ring-background" />
+          <div key={item.title} className="card card-hover card-shine relative flex gap-5 p-6 sm:p-7">
+            <div className="relative mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-primary ring-4 ring-primary/20" />
 
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                 <span className="font-mono text-xs text-muted-foreground">
                   {item.period}
@@ -24,25 +24,31 @@ export function Education() {
                 </span>
               </div>
 
-              <div className="mt-2 flex items-center gap-3">
-                <h3 className="text-sm font-semibold text-foreground">
+              <div className="mt-2 flex flex-wrap items-center gap-3">
+                <h3 className="text-base font-semibold text-foreground">
                   {item.title}
                 </h3>
 
-                {item.status === "Completed" && (
-                  <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium tracking-wide text-emerald-400">
-                    Completed
+                {item.status === "Completado" && (
+                  <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium tracking-wide text-emerald-400">
+                    Completado
                   </span>
                 )}
 
-                {item.status === "In Progress" && (
-                  <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-2 py-0.5 text-[10px] font-medium tracking-wide text-blue-400">
-                    In Progress
+                {item.status === "En curso" && (
+                  <span className="rounded-full border border-primary/40 bg-primary/10 px-2.5 py-0.5 text-[11px] font-medium tracking-wide text-primary">
+                    En curso
+                  </span>
+                )}
+
+                {item.status === "Formación continua" && (
+                  <span className="rounded-full border border-border bg-secondary/80 px-2.5 py-0.5 text-[11px] font-medium tracking-wide text-text-muted">
+                    Formación continua
                   </span>
                 )}
               </div>
 
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-2 text-sm leading-relaxed text-text-secondary">
                 {item.description}
               </p>
             </div>

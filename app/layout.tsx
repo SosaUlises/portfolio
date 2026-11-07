@@ -13,9 +13,9 @@ const _jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Sosa Ulises Ezequiel | Desarrollador Backend .NET",
+  title: "Ulises Sosa | Analista en Sistemas · Desarrollador de Software",
   description:
-    "Desarrollador Backend .NET orientado al diseño e implementación de APIs RESTful, Clean Architecture, CQRS e integración de servicios de IA.",
+    "Portfolio profesional de Ulises Sosa. Analista en Sistemas Informáticos y estudiante de Ingeniería en Sistemas. Desarrollo de soluciones backend .NET, aplicaciones full stack y soporte IT.",
 }
 
 export const viewport: Viewport = {

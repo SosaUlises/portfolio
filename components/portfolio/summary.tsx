@@ -7,19 +7,22 @@ export function Summary() {
       <Separator className="mb-12" />
       <SectionShell glow>
         <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          Sobre mi
+          Sobre mí
         </h2>
-        <p className="mt-5 text-base leading-7 text-foreground">
-          Desarrollador Backend .NET orientado a la construcción de APIs RESTful robustas y mantenibles. Trabajo con arquitectura limpia, separación de responsabilidades y diseño centrado en la lógica de negocio.
-        </p>
 
-        <p className="mt-4 text-base leading-7 text-foreground">
-          He desarrollado proyectos aplicando distintos enfoques arquitectónicos según el contexto, incluyendo Clean Architecture y CQRS, así como estructuras MVC con patrones Repository y Service. También he implementado autenticación con JWT e integración de servicios de IA.
-        </p>
+        <div className="mt-5 space-y-4 text-base leading-relaxed text-text-secondary">
+          <p>
+            Soy Analista en Sistemas Informáticos y actualmente curso los últimos años de Ingeniería en Sistemas en la Universidad Abierta Interamericana (UAI Rosario). Mi enfoque combina fundamentos sólidos de ingeniería, análisis de procesos y construcción de software mantenible, con especial interés en la arquitectura y en comprender cómo funcionan los sistemas en su totalidad.
+          </p>
 
-        <p className="mt-6 text-base leading-7 text-foreground/80">
-          Soy Analista en Sistemas Informáticos y estudiante avanzado de Ingeniería en Sistemas, con interés en construir sistemas escalables, seguros y bien diseñados. Me interesa integrarme a un equipo donde pueda aportar buenas prácticas, asumir responsabilidades reales y continuar creciendo profesionalmente como Backend Developer.
-        </p>
+          <p>
+            He desarrollado soluciones full stack y APIs backend utilizando principalmente C#, .NET, PostgreSQL, Next.js, React y TypeScript. Me motiva diseñar arquitecturas desacopladas, modelar bases de datos relacionales con criterio de negocio e implementar interfaces web claras y funcionales.
+          </p>
+
+          <p>
+            Antes de incorporarme formalmente al sector tecnológico, trabajé durante aproximadamente seis años en comercios familiares dedicados a la venta de calzado. Esa etapa fue clave para desarrollar habilidades interpersonales, coordinación de equipos, atención al cliente y resolución pragmática de problemas. Entre otras responsabilidades, participé activamente en la implementación y configuración del software de gestión Dux en cinco locales comerciales, encargándome de la capacitación y acompañamiento de los usuarios para optimizar la operatoria diaria.
+          </p>
+        </div>
       </SectionShell>
     </div>
   )
