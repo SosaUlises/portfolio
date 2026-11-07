@@ -20,37 +20,37 @@ export function Hero() {
         {/* Mobile Layout (< 768px): Classic Centered Vertical Composition   */}
         {/* ================================================================ */}
         <div className="flex flex-col items-center text-center md:hidden">
-          {/* 1. Circular Photograph (144–176px) */}
-          <div className="relative h-36 w-36 sm:h-44 sm:w-44 shrink-0 overflow-hidden rounded-full border border-border/80 shadow-lg">
+          {/* 1. Circular Photograph (180–200px) */}
+          <div className="relative h-[180px] w-[180px] sm:h-[200px] sm:w-[200px] shrink-0 overflow-hidden rounded-full border border-border/80 shadow-lg">
             <Image
               src="/uliphoto.jpg"
               alt="Fotografía de Ulises Sosa"
               fill
               className="object-cover object-center"
-              sizes="(max-width: 640px) 144px, 176px"
+              sizes="(max-width: 640px) 180px, 200px"
               priority
             />
           </div>
 
-          {/* 2. Dominant Name */}
-          <h1 className="mt-5 text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+          {/* 2. Dominant Name (38–42px) */}
+          <h1 className="mt-6 text-[38px] sm:text-[42px] leading-tight font-extrabold tracking-tight text-foreground">
             Ulises Sosa<span className="text-primary">.</span>
           </h1>
 
-          {/* 3. Professional Headline */}
-          <div className="mt-2 text-base sm:text-lg font-medium leading-snug text-text-secondary">
+          {/* 3. Professional Headline (16–18px) */}
+          <div className="mt-2.5 text-base sm:text-lg font-medium leading-snug text-text-secondary">
             <p>Analista en Sistemas</p>
             <p className="text-text-muted">Desarrollador de Software</p>
           </div>
 
           {/* 4. Discrete Location */}
-          <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-text-muted">
+          <p className="mt-3.5 flex items-center justify-center gap-1.5 text-xs text-text-muted">
             <MapPin className="h-3.5 w-3.5 text-primary/80" aria-hidden="true" />
             <span>Rosario, Santa Fe, Argentina</span>
           </p>
 
           {/* 5. Primary & Secondary Actions */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
             <Button
               asChild
               size="default"
@@ -81,7 +81,7 @@ export function Hero() {
           </div>
 
           {/* 6. Secondary Social Links */}
-          <div className="mt-3 flex items-center justify-center gap-2">
+          <div className="mt-3.5 flex items-center justify-center gap-2">
             <Button
               asChild
               variant="outline"
@@ -126,7 +126,7 @@ export function Hero() {
           <div className="flex flex-col items-start text-left md:col-span-7 lg:col-span-7">
             {/* Eyebrow */}
             <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
-              ANALISTA EN SISTEMAS · SOFTWARE DEVELOPMENT
+              TECNOLOGÍA · DESARROLLO · INNOVACIÓN
             </p>
 
             {/* Name */}
@@ -141,7 +141,7 @@ export function Hero() {
 
             {/* Summary / Lead (Kept exclusively on desktop) */}
             <p className="mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-text-secondary">
-              Soy Analista en Sistemas y estudiante avanzado de Ingeniería en Sistemas. Desarrollo soluciones backend y full stack, con interés en la arquitectura de software, la tecnología y el aprendizaje continuo.
+              Soy Analista en Sistemas y estudiante avanzado de Ingeniería en Sistemas. Desarrollo aplicaciones full stack, con especial interés en la arquitectura de software, la resolución de problemas y la creación de soluciones tecnológicas.
             </p>
 
             {/* Location */}
@@ -219,15 +219,15 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Circular Photograph (240–280px) */}
+          {/* Right Column: Circular Photograph (220–240px) */}
           <div className="flex justify-center md:col-span-5 md:justify-end">
-            <div className="relative h-60 w-60 sm:h-64 sm:w-64 lg:h-72 lg:w-72 shrink-0 overflow-hidden rounded-full border border-border/80 shadow-xl">
+            <div className="relative h-[220px] w-[220px] lg:h-[240px] lg:w-[240px] shrink-0 overflow-hidden rounded-full border border-border/80 shadow-lg">
               <Image
                 src="/uliphoto.jpg"
                 alt="Fotografía profesional de Ulises Sosa"
                 fill
                 className="object-cover object-center transition-transform duration-300 hover:scale-105"
-                sizes="(max-width: 1024px) 256px, 288px"
+                sizes="(max-width: 1024px) 220px, 240px"
                 priority
               />
             </div>
