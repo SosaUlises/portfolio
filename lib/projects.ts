@@ -84,7 +84,7 @@ export const projects: Project[] = [
     slug: "blossom-institute",
     title: "Blossom Institute API",
     category: "Backend API / Gestión Académica",
-    status: "Producción",
+    status: "En desarrollo",
     featured: true,
     summary:
       "API REST para la gestión académica institucional (cursos, alumnos, tareas, asistencias y reportes) construida con .NET 8, Clean Architecture y CQRS.",
