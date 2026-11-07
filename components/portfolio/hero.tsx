@@ -5,22 +5,148 @@ import { ArrowDown, Github, Linkedin, FileText, MapPin } from "lucide-react"
 
 export function Hero() {
   return (
-    <div className="pt-6 pb-12 sm:pt-10 sm:pb-20 lg:pt-14 lg:pb-24">
-      <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
+    <div className="pt-4 pb-10 sm:pt-6 sm:pb-16 lg:pt-12 lg:pb-20">
+      {/* ------------------------------------------------------------------ */}
+      {/* Mobile Layout (< 768px)                                            */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="flex flex-col text-left md:hidden space-y-6">
+        {/* Upper Block: Identity & Circular Photo */}
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            {/* Eyebrow */}
+            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
+              HOLA, SOY
+            </p>
+
+            {/* Name */}
+            <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+              Ulises Sosa<span className="text-primary">.</span>
+            </h1>
+
+            {/* Professional Headline (split naturally) */}
+            <div className="mt-1 text-sm font-medium leading-tight text-text-secondary">
+              <p>Analista en Sistemas</p>
+              <p className="text-text-muted">Desarrollador de Software</p>
+            </div>
+          </div>
+
+          {/* Right: Circular Photo (96–120px) */}
+          <div className="relative h-24 w-24 shrink-0 sm:h-28 sm:w-28 overflow-hidden rounded-full border border-border/80 shadow-md">
+            <Image
+              src="/uliphoto.jpg"
+              alt="Fotografía de Ulises Sosa"
+              fill
+              className="object-cover object-center"
+              sizes="112px"
+              priority
+            />
+          </div>
+        </div>
+
+        {/* Lower Block: Description, Actions & Location */}
+        <div className="space-y-4">
+          {/* Brief Description */}
+          <p className="text-[15px] sm:text-base leading-relaxed text-text-secondary">
+            Soy Analista en Sistemas y estudiante avanzado de Ingeniería en Sistemas. Desarrollo soluciones backend y full stack, con interés en la arquitectura de software, la tecnología y el aprendizaje continuo.
+          </p>
+
+          {/* Location */}
+          <p className="flex items-center gap-1.5 text-xs text-text-muted">
+            <MapPin className="h-3.5 w-3.5 text-primary/80" aria-hidden="true" />
+            <span>Rosario, Santa Fe, Argentina</span>
+          </p>
+
+          {/* Actions */}
+          <div className="space-y-3 pt-1">
+            {/* Primary & Secondary CTAs */}
+            <div className="flex flex-wrap items-center gap-3">
+              <Button
+                asChild
+                size="default"
+                className="gap-2 bg-primary text-primary-foreground hover:bg-primary-hover font-medium shadow-sm transition-transform hover:-translate-y-0.5"
+              >
+                <Link href="/#proyectos">
+                  Ver proyectos
+                  <ArrowDown className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </Button>
+
+              <Button
+                asChild
+                variant="secondary"
+                size="default"
+                className="gap-2 border border-border/80 bg-surface text-text-primary hover:bg-surface-hover hover:border-primary/40 transition-transform hover:-translate-y-0.5"
+              >
+                <a
+                  href="/CV_SosaUlises.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                >
+                  <FileText className="h-4 w-4" aria-hidden="true" />
+                  Descargar CV
+                </a>
+              </Button>
+            </div>
+
+            {/* Social CTAs: Discrete GitHub & LinkedIn */}
+            <div className="flex items-center gap-2 pt-0.5">
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="h-8 gap-1.5 rounded-lg border-border/80 bg-surface/60 px-3 text-xs text-text-secondary hover:text-foreground hover:border-primary/50 transition-colors"
+                aria-label="Perfil de LinkedIn de Ulises Sosa"
+              >
+                <a
+                  href="https://linkedin.com/in/sosaulises"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin className="h-3.5 w-3.5" aria-hidden="true" />
+                  <span>LinkedIn</span>
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="h-8 gap-1.5 rounded-lg border-border/80 bg-surface/60 px-3 text-xs text-text-secondary hover:text-foreground hover:border-primary/50 transition-colors"
+                aria-label="Perfil de GitHub de Ulises Sosa"
+              >
+                <a
+                  href="https://github.com/SosaUlises"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github className="h-3.5 w-3.5" aria-hidden="true" />
+                  <span>GitHub</span>
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Desktop Layout (>= 768px)                                          */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="hidden md:grid md:grid-cols-12 md:items-center md:gap-10 lg:gap-12">
         {/* Left Column: Personal Presentation & CTAs */}
-        <div className="flex flex-col items-center text-center lg:col-span-7 lg:items-start lg:text-left">
+        <div className="flex flex-col items-start text-left md:col-span-7 lg:col-span-7">
           {/* Eyebrow */}
           <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
             ANALISTA EN SISTEMAS · SOFTWARE DEVELOPMENT
           </p>
 
           {/* Name */}
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="mt-4 text-5xl font-extrabold tracking-tight text-foreground lg:text-7xl">
             Ulises Sosa<span className="text-primary">.</span>
           </h1>
 
           {/* Professional Headline */}
-          <p className="mt-3 text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight text-text-secondary">
+          <p className="mt-3 text-xl font-medium tracking-tight text-text-secondary sm:text-2xl lg:text-3xl">
             Analista en Sistemas <span className="text-border">|</span> Desarrollador de Software
           </p>
 
@@ -36,7 +162,7 @@ export function Hero() {
           </p>
 
           {/* Actions */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             {/* Primary CTA */}
             <Button
               asChild
@@ -104,27 +230,16 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right Column: Editorial Photograph */}
-        <div className="flex justify-center lg:col-span-5 lg:justify-end">
-          <div className="group relative w-56 sm:w-64 lg:w-72 xl:w-80">
-            {/* Subtle frame container */}
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border/80 bg-surface p-2 shadow-2xl transition-all duration-300 group-hover:border-primary/40">
-              <div className="relative h-full w-full overflow-hidden rounded-xl bg-background-elevated">
-                <Image
-                  src="/uliphoto.jpg"
-                  alt="Fotografía profesional de Ulises Sosa"
-                  fill
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                  sizes="(max-width: 640px) 224px, (max-width: 1024px) 288px, 320px"
-                  priority
-                />
-              </div>
-            </div>
-
-            {/* Subtle decorative framing accent */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -bottom-3 -right-3 -z-10 h-full w-full rounded-2xl border border-primary/20 opacity-40 transition-all duration-300 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:border-primary/40"
+        {/* Right Column: Circular Photograph (240–280px) */}
+        <div className="flex justify-center md:col-span-5 md:justify-end">
+          <div className="relative h-60 w-60 sm:h-64 sm:w-64 lg:h-72 lg:w-72 shrink-0 overflow-hidden rounded-full border border-border/80 shadow-xl">
+            <Image
+              src="/uliphoto.jpg"
+              alt="Fotografía profesional de Ulises Sosa"
+              fill
+              className="object-cover object-center transition-transform duration-300 hover:scale-105"
+              sizes="(max-width: 1024px) 256px, 288px"
+              priority
             />
           </div>
         </div>
