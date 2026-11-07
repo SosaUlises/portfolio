@@ -20,14 +20,15 @@ export function Hero() {
         {/* Mobile Layout (< 768px): Classic Centered Vertical Composition   */}
         {/* ================================================================ */}
         <div className="flex flex-col items-center text-center md:hidden">
-          {/* 1. Circular Photograph (180–200px) */}
-          <div className="relative h-[180px] w-[180px] sm:h-[200px] sm:w-[200px] shrink-0 overflow-hidden rounded-full border border-border/80 shadow-lg">
+          {/* 1. Circular Photograph (180–210px) */}
+          <div className="relative h-[190px] w-[190px] sm:h-[210px] sm:w-[210px] shrink-0 overflow-hidden rounded-full border border-border/80 shadow-lg">
             <Image
               src="/uliphoto.jpg"
               alt="Fotografía de Ulises Sosa"
               fill
+              quality={90}
               className="object-cover object-center"
-              sizes="(max-width: 640px) 180px, 200px"
+              sizes="(max-width: 768px) 420px, 500px"
               priority
             />
           </div>
@@ -37,10 +38,15 @@ export function Hero() {
             Ulises Sosa<span className="text-primary">.</span>
           </h1>
 
-          {/* 3. Professional Headline (16–18px) */}
-          <div className="mt-2.5 text-base sm:text-lg font-medium leading-snug text-text-secondary">
-            <p>Analista en Sistemas</p>
-            <p className="text-text-muted">Desarrollador de Software</p>
+          {/* 3. Professional Headline & Education */}
+          <div className="mt-2.5 space-y-1">
+            <div className="text-base sm:text-lg font-medium leading-snug text-text-secondary">
+              <p>Analista en Sistemas</p>
+              <p className="text-text-muted">Desarrollador de Software</p>
+            </div>
+            <p className="text-xs sm:text-sm text-text-muted/90 font-normal">
+              Estudiante de Ingeniería en Sistemas
+            </p>
           </div>
 
           {/* 4. Discrete Location */}
@@ -214,15 +220,16 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Circular Photograph (220–240px) */}
+          {/* Right Column: Circular Photograph (230–250px) */}
           <div className="flex justify-center md:col-span-5 md:justify-end">
-            <div className="relative h-[220px] w-[220px] lg:h-[240px] lg:w-[240px] shrink-0 overflow-hidden rounded-full border border-border/80 shadow-lg">
+            <div className="relative h-[235px] w-[235px] lg:h-[250px] lg:w-[250px] shrink-0 overflow-hidden rounded-full border border-border/80 shadow-lg">
               <Image
                 src="/uliphoto.jpg"
                 alt="Fotografía profesional de Ulises Sosa"
                 fill
+                quality={90}
                 className="object-cover object-center transition-transform duration-300 hover:scale-105"
-                sizes="(max-width: 1024px) 220px, 240px"
+                sizes="(max-width: 1024px) 470px, 500px"
                 priority
               />
             </div>
