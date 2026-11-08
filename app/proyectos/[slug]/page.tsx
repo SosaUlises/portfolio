@@ -5,6 +5,7 @@ import { projects } from "@/lib/projects"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ExternalLink, Github, Layers, CheckCircle2, Lightbulb, Wrench } from "lucide-react"
+import { EntrenateCaseStudy } from "@/components/portfolio/project-detail/entrenate-case-study"
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
@@ -35,6 +36,10 @@ export default async function ProyectoPage({
   const project = projects.find((p) => p.slug === slug)
 
   if (!project) notFound()
+
+  if (project.slug === "entrenate") {
+    return <EntrenateCaseStudy project={project} />
+  }
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
