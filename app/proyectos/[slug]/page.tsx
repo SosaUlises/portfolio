@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, ExternalLink, Github, Layers, CheckCircle2, Lightbulb, Wrench } from "lucide-react"
 import { EntrenateCaseStudy } from "@/components/portfolio/project-detail/entrenate-case-study"
+import { BlossomCaseStudy } from "@/components/portfolio/project-detail/blossom-case-study"
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }))
@@ -39,6 +40,10 @@ export default async function ProyectoPage({
 
   if (project.slug === "entrenate") {
     return <EntrenateCaseStudy project={project} />
+  }
+
+  if (project.slug === "blossom-institute") {
+    return <BlossomCaseStudy project={project} />
   }
 
   return (
