@@ -268,7 +268,39 @@ export default async function ProyectoPage({
             </Button>
           ) : null}
 
-          {project.repoUrl ? (
+          {project.frontendRepoUrl ? (
+            <Button
+              asChild
+              variant="outline"
+              className="gap-2 transition-transform hover:scale-[1.02]"
+            >
+              <a
+                href={project.frontendRepoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="h-4 w-4" />
+                Repositorio Frontend
+              </a>
+            </Button>
+          ) : null}
+
+          {project.backendRepoUrl ? (
+            <Button
+              asChild
+              variant="outline"
+              className="gap-2 transition-transform hover:scale-[1.02]"
+            >
+              <a
+                href={project.backendRepoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="h-4 w-4" />
+                Repositorio Backend
+              </a>
+            </Button>
+          ) : project.repoUrl ? (
             <Button
               asChild
               variant="outline"

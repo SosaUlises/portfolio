@@ -43,11 +43,6 @@ export function Experience() {
                     <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground">
                       {exp.company}
                     </h3>
-                    {exp.modality ? (
-                      <span className="rounded-md border border-border/80 bg-secondary/60 px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
-                        {exp.modality}
-                      </span>
-                    ) : null}
                   </div>
 
                   <p className="mt-1 text-[15px] sm:text-base font-medium text-primary">

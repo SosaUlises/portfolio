@@ -2,12 +2,14 @@ export interface Project {
   slug: string
   title: string
   category: string
+  type?: string
   status?: string
   featured: boolean
   summary: string
   description: string
   role?: string
   tags: string[]
+  primaryTags?: string[]
   highlights?: string[]
   challenge?: string
   solution?: string
@@ -15,6 +17,8 @@ export interface Project {
   features?: string[]
   learnings?: string[]
   repoUrl?: string
+  frontendRepoUrl?: string
+  backendRepoUrl?: string
   docsUrl?: string
   liveUrl?: string
   apiUrl?: string
@@ -27,13 +31,21 @@ export const projects: Project[] = [
     slug: "entrenate",
     title: "Entrenate",
     category: "Aplicación Full Stack",
+    type: "Proyecto personal",
     status: "En desarrollo",
     featured: true,
     summary:
-      "Plataforma web de entrenamiento físico orientada a brindar una experiencia personalizada, con frontend en Next.js y backend en ASP.NET Core (.NET 9) sobre PostgreSQL.",
+      "Plataforma web de entrenamiento personalizado que adapta la experiencia a los objetivos y disponibilidad de cada usuario. Desarrollada con Next.js, TypeScript, .NET y PostgreSQL, integra autenticación, gestión de perfiles y Clean Architecture, con una visión de evolución hacia la planificación inteligente mediante IA.",
     description:
-      "Entrenate es una plataforma de entrenamiento físico orientada a ofrecer una experiencia personalizada, adaptada a los objetivos, características y disponibilidad de cada usuario. Es un proyecto propio que desarrollo utilizando una arquitectura moderna con frontend y backend desacoplados, autenticación segura mediante JWT y despliegue cloud independiente.",
+      "Entrenate es una plataforma web de entrenamiento personalizado, desarrollada para adaptar la experiencia a los objetivos, el nivel y la disponibilidad de cada usuario. Construida con Next.js, TypeScript, .NET y PostgreSQL, incorpora autenticación segura, gestión de perfiles y un backend basado en Clean Architecture. Su arquitectura está preparada para evolucionar hacia la planificación inteligente de rutinas y recomendaciones personalizadas mediante inteligencia artificial.",
     role: "Diseño y desarrollo integral: frontend, backend API, modelado relacional y despliegue cloud.",
+    primaryTags: [
+      "Next.js",
+      "TypeScript",
+      "ASP.NET Core / .NET 9",
+      "PostgreSQL",
+      "Clean Architecture",
+    ],
     tags: [
       "Next.js",
       "React",
@@ -41,6 +53,7 @@ export const projects: Project[] = [
       "Tailwind CSS",
       "ASP.NET Core",
       ".NET 9",
+      "Clean Architecture",
       "PostgreSQL",
       "Entity Framework Core",
       "JWT",
@@ -49,14 +62,17 @@ export const projects: Project[] = [
       "Vercel",
       "Render",
     ],
+    repoUrl: "https://github.com/SosaUlises/entrenate",
     liveUrl: "https://entrenate-three.vercel.app/login",
     apiUrl: "https://entrenate.onrender.com",
+    imageUrl: "/entrenate-preview.png",
+    imageAlt: "Pantalla de inicio de sesión - Entrenate",
     challenge:
       "Construir una plataforma escalable que resuelva el registro, autenticación segura y personalización del perfil de entrenamiento de cada usuario (objetivos, nivel de experiencia, días disponibles, preferencias y equipamiento), manteniendo una separación clara entre la interfaz web y la lógica de dominio.",
     solution:
       "Se estructuró una solución desacoplada con cliente web en Next.js (desplegado en Vercel) y una API REST en ASP.NET Core .NET 9 (desplegada en Render) conectada a PostgreSQL en Neon. Se implementó un flujo guiado de onboarding para recopilar las preferencias del usuario y persistirlas de manera estructurada para futuras planificaciones.",
     architecture:
-      "Frontend desarrollado con Next.js y Tailwind CSS para una interfaz reactiva y accesible. Backend implementado con ASP.NET Core aplicando el patrón CQRS mediante MediatR, validación estricta de comandos con FluentValidation, autenticación con ASP.NET Core Identity + JWT y persistencia mediante Entity Framework Core.",
+      "Frontend desarrollado con Next.js y Tailwind CSS para una interfaz reactiva y accesible. Backend implementado con ASP.NET Core aplicando el patrón CQRS mediante MediatR, validación estricta de comandos con FluentValidation, autenticación con ASP.NET Core Identity + JWT y persistencia mediante Entity Framework Core sobre Clean Architecture.",
     features: [
       "Registro de usuarios e inicio de sesión seguro con tokens JWT.",
       "Recuperación y cambio de contraseña.",
@@ -64,7 +80,6 @@ export const projects: Project[] = [
       "Persistencia, consulta y actualización del perfil en base de datos PostgreSQL.",
       "API REST modular con validación centralizada de entradas.",
       "Despliegues automatizados de frontend (Vercel) y backend (Render).",
-      "Visión futura: personalización inteligente de planes de entrenamiento adaptados a la progresión del usuario.",
     ],
     learnings: [
       "Coordinación de despliegues y políticas CORS entre frontend en Vercel y backend en Render.",
@@ -82,54 +97,68 @@ export const projects: Project[] = [
 
   {
     slug: "blossom-institute",
-    title: "Blossom Institute API",
-    category: "Backend API / Gestión Académica",
+    title: "Blossom Institute",
+    category: "Aplicación Full Stack",
+    type: "Proyecto independiente",
     status: "En desarrollo",
     featured: true,
     summary:
-      "API REST para la gestión académica institucional (cursos, alumnos, tareas, asistencias y reportes) construida con .NET 8, Clean Architecture y CQRS.",
+      "Blossom Institute es una plataforma web de gestión académica en desarrollo, orientada a centralizar la administración de cursos, estudiantes, asistencia y actividades. Combina un frontend desarrollado con Next.js y TypeScript con una API REST en .NET y PostgreSQL, siguiendo principios de Clean Architecture y CQRS para mantener una estructura modular y escalable.",
     description:
-      "Backend API desarrollada para la gestión académica centralizada de un instituto educativo. Proporciona servicios para administración de cursos, matrículas, seguimiento de asistencia, asignación de tareas con entregas y reportes académicos, con enfoque en arquitectura limpia, robustez y separación estricta de responsabilidades.",
-    role: "Diseño de arquitectura backend, desarrollo de APIs REST, modelado relacional y documentación interactiva.",
+      "Blossom Institute es una plataforma web de gestión académica en desarrollo, orientada a centralizar la administración institucional de cursos, comisiones, estudiantes, seguimiento de asistencia y asignación de tareas con entregas. Combina un frontend desarrollado con Next.js y TypeScript con una API REST en ASP.NET Core (.NET 8) y PostgreSQL, siguiendo principios de Clean Architecture y CQRS para mantener una estructura modular y escalable.",
+    role: "Diseño de arquitectura, desarrollo integral de frontend y backend API, modelado relacional y documentación interactiva.",
+    primaryTags: [
+      "Next.js",
+      "TypeScript",
+      ".NET 8",
+      "PostgreSQL",
+      "Clean Architecture",
+    ],
     tags: [
+      "Next.js",
+      "React",
+      "TypeScript",
       ".NET 8",
       "ASP.NET Core",
+      "PostgreSQL",
       "Clean Architecture",
       "CQRS",
-      "PostgreSQL",
+      "Tailwind CSS",
       "JWT",
       "Swagger",
       "Entity Framework Core",
     ],
+    liveUrl: "https://blossom-institute.vercel.app/login",
+    frontendRepoUrl: "https://github.com/SosaUlises/blossom-institute-front",
+    backendRepoUrl: "https://github.com/SosaUlises/blossom-institute-api",
     repoUrl: "https://github.com/SosaUlises/blossom-institute-api",
     docsUrl: "https://blossom-demo.onrender.com/index.html",
-    imageUrl: "/blossomimg.PNG",
-    imageAlt: "Swagger UI - Blossom Institute API",
+    imageUrl: "/blossom-preview.jpg",
+    imageAlt: "Pantalla de inicio de sesión - Blossom Institute",
     challenge:
-      "Centralizar y ordenar los procesos académicos del instituto, permitiendo a administradores, profesores y estudiantes gestionar comisiones, clases, asistencias, entregas de trabajos y calificaciones desde un sistema seguro y confiable.",
+      "Centralizar y ordenar los procesos académicos institucionales, permitiendo a administradores, profesores y estudiantes gestionar comisiones, clases, asistencias y entregas de trabajos desde un sistema unificado, seguro y modular.",
     solution:
-      "Se diseñó una API REST bajo los principios de Clean Architecture y CQRS, separando el dominio y los casos de uso de la infraestructura y los controladores. Se implementó autenticación con ASP.NET Core Identity y JWT con roles (Admin, Profesor, Alumno) y persistencia en PostgreSQL.",
+      "Se estructuró una plataforma full stack integrando una interfaz web en Next.js con una API REST en ASP.NET Core diseñada con Clean Architecture y CQRS, separando el dominio y los casos de uso de la infraestructura. Se implementó autenticación con ASP.NET Core Identity y JWT con permisos por roles y persistencia en PostgreSQL.",
     architecture:
-      "Clean Architecture estructurada en capas de Dominio, Aplicación, Infraestructura y API. Desacoplamiento de lecturas y escrituras mediante CQRS, persistencia con Entity Framework Core sobre PostgreSQL y documentación pública en Swagger.",
+      "Frontend en Next.js desacoplado del backend. API estructurada en capas de Dominio, Aplicación, Infraestructura y API siguiendo Clean Architecture y CQRS. Persistencia mediante Entity Framework Core sobre PostgreSQL y documentación pública en Swagger UI.",
     features: [
       "Gestión de cursos, clases, matrículas y comisiones.",
       "Control de asistencia por clase con estados de presencia.",
       "Módulo de tareas con entregas de alumnos, retroalimentación docente y calificaciones.",
       "Seguridad mediante ASP.NET Core Identity y JWT con control de acceso basado en roles.",
-      "Arquitectura preparada para generación de reportes académicos.",
-      "Entorno demo disponible públicamente con Swagger para exploración de endpoints.",
+      "Entorno demo disponible públicamente con Swagger para exploración interactiva de endpoints.",
     ],
     learnings: [
-      "Modelado de reglas de dominio ricas adaptadas a dinámicas académicas reales.",
-      "Estandarización de respuestas de API y manejo centralizado de excepciones.",
-      "Estrategias de control de acceso granular por roles para resguardar la privacidad de los alumnos.",
+      "Diseño de arquitectura limpia y desacoplamiento estricto entre frontend y backend.",
+      "Modelado de reglas de dominio adaptadas a dinámicas académicas reales.",
+      "Estandarización de respuestas de API, manejo centralizado de excepciones y documentación viva.",
     ],
     highlights: [
+      "Arquitectura Full Stack con Next.js en frontend y .NET 8 en backend.",
       "Clean Architecture + CQRS para separar dominio, casos de uso e infraestructura.",
       "Autenticación y autorización con ASP.NET Core Identity + JWT por roles.",
       "Modelo académico completo: cursos, clases, matrículas, entregas y asistencia.",
-      "Persistencia con PostgreSQL y Entity Framework Core.",
-      "Documentación interactiva disponible en Swagger UI con entorno de prueba.",
+      "Persistencia relacional con PostgreSQL y Entity Framework Core.",
     ],
   },
 
