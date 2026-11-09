@@ -1,6 +1,7 @@
 import { Server, Monitor, Database, Cloud, Wrench } from "lucide-react"
 import { coreTechBlocks, supportKnowledge } from "@/lib/tech-stack"
 import { TechIcon } from "@/components/portfolio/tech-icon"
+import { reveal } from "@/lib/motion"
 
 const blockIconMap = {
   Server,
@@ -13,7 +14,7 @@ export function TechStack() {
   return (
     <div className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
       {/* Section Header */}
-      <div className="flex flex-col">
+      <div className="flex flex-col" {...reveal()}>
         <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
           04 / TECNOLOGÍAS Y HERRAMIENTAS
         </p>
@@ -27,11 +28,15 @@ export function TechStack() {
 
       {/* Main Core Groups (Open 2-Column Grid on Desktop, NO outer cards) */}
       <div className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-16 gap-y-8 sm:gap-y-10 lg:gap-y-12 items-start">
-        {coreTechBlocks.map((block) => {
+        {coreTechBlocks.map((block, index) => {
           const Icon = blockIconMap[block.iconName]
 
           return (
-            <div key={block.id} className="flex flex-col">
+            <div
+              key={block.id}
+              className="flex flex-col"
+              {...reveal({ delay: index % 2 === 0 ? 0 : 1 })}
+            >
               {/* Category Header: Icon + Title */}
               <div className="flex items-center gap-2.5">
                 <Icon className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
@@ -45,7 +50,7 @@ export function TechStack() {
                 {block.items.map((item) => (
                   <div
                     key={item.name}
-                    className="inline-flex items-center gap-2.5 rounded-lg border border-border/50 bg-[#11151F]/90 px-3 py-2 text-[13px] sm:text-sm font-medium text-foreground/90 transition-colors duration-150 hover:border-border/80 hover:bg-[#151A26] hover:text-foreground"
+                    className="inline-flex items-center gap-2.5 rounded-lg border border-border/50 bg-[#11151F]/90 px-3 py-2 text-[13px] sm:text-sm font-medium text-foreground/90 transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-border/80 hover:bg-[#151A26] hover:text-foreground [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-[0_6px_16px_-8px_rgba(0,0,0,0.6)] active:bg-[#151A26] motion-reduce:transition-colors motion-reduce:hover:translate-y-0"
                   >
                     <div className="flex h-5 w-5 sm:h-[22px] sm:w-[22px] shrink-0 items-center justify-center">
                       <TechIcon name={item.icon} className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
@@ -60,7 +65,7 @@ export function TechStack() {
       </div>
 
       {/* Secondary Tier: Soporte e Infraestructura (Discrete editorial strip, NO cards, NO chips) */}
-      <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-border/40">
+      <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-border/40" {...reveal({ variant: "fade" })}>
         <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
           <div className="flex items-center gap-2 shrink-0">
             <Wrench className="h-3.5 w-3.5 text-text-muted" aria-hidden="true" />

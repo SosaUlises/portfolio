@@ -5,44 +5,37 @@ import { Projects } from "@/components/portfolio/projects"
 import { TechStack } from "@/components/portfolio/tech-stack"
 import { Education } from "@/components/portfolio/education"
 import { Contact } from "@/components/portfolio/contact"
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { MotionReveal } from "@/components/motion-reveal"
 
 export default function Page() {
   return (
     <main className="mx-auto max-w-[1200px] px-6 pb-16 sm:pb-24">
+      {/* Single shared scroll-reveal observer (renders nothing) */}
+      <MotionReveal />
+
       <section id="inicio" className="scroll-mt-20 md:scroll-mt-28">
         <Hero />
       </section>
 
       <div className="space-y-20 sm:space-y-28 pt-8 sm:pt-16 md:pt-24">
         <section id="sobre-mi" className="scroll-mt-28">
-          <ScrollReveal>
-            <Summary />
-          </ScrollReveal>
+          <Summary />
         </section>
 
         <section id="experiencia" className="scroll-mt-28">
-          <ScrollReveal staggerMs={70}>
-            <Experience />
-          </ScrollReveal>
+          <Experience />
         </section>
 
         <section id="proyectos" className="scroll-mt-28">
-          <ScrollReveal staggerMs={70}>
-            <Projects />
-          </ScrollReveal>
+          <Projects />
         </section>
 
         <section id="tech-stack" className="scroll-mt-28">
-          <ScrollReveal staggerMs={60}>
-            <TechStack />
-          </ScrollReveal>
+          <TechStack />
         </section>
 
         <section id="educacion" className="scroll-mt-28">
-          <ScrollReveal staggerMs={80}>
-            <Education />
-          </ScrollReveal>
+          <Education />
         </section>
 
         <section id="contacto" className="scroll-mt-28">

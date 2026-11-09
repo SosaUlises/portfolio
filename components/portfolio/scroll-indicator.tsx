@@ -32,7 +32,7 @@ export function ScrollIndicator({
   return (
     <div
       className={[
-        "transition-all duration-300 ease-out",
+        "transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
         isVisible
           ? "opacity-100 translate-y-0 pointer-events-auto"
           : "opacity-0 translate-y-2 pointer-events-none",
@@ -43,11 +43,11 @@ export function ScrollIndicator({
         href={targetHref}
         tabIndex={isVisible ? 0 : -1}
         aria-label="Deslizar a la sección Sobre mí"
-        className="group inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-foreground transition-colors"
+        className="group inline-flex items-center gap-2 rounded-sm text-xs font-mono text-text-muted hover:text-foreground transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         <span>Deslizá para explorar</span>
         <ArrowDown
-          className="h-3.5 w-3.5 text-primary transition-transform group-hover:translate-y-0.5 motion-safe:animate-bounce motion-reduce:animate-none"
+          className="h-3.5 w-3.5 text-primary motion-nudge"
           aria-hidden="true"
         />
       </a>

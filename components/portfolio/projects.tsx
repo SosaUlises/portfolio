@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowRight, ExternalLink, Github } from "lucide-react"
 import { projects } from "@/lib/projects"
 import { Button } from "@/components/ui/button"
+import { reveal } from "@/lib/motion"
 
 export function Projects() {
   const featuredProjects = projects.filter((p) => p.featured)
@@ -12,7 +13,7 @@ export function Projects() {
   return (
     <div className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
       {/* Section Header */}
-      <div className="flex flex-col">
+      <div className="flex flex-col" {...reveal()}>
         <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
           03 / PROYECTOS DESTACADOS
         </p>
@@ -30,8 +31,8 @@ export function Projects() {
         {entrenate ? (
           <article className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Visual Frame (7 cols desktop) */}
-            <div className="lg:col-span-7">
-              <div className="group relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full overflow-hidden rounded-2xl border border-border/70 bg-gradient-to-br from-[#141923] via-[#0F131A] to-[#0A0D13] shadow-xl transition-all duration-300 hover:border-primary/40 flex flex-col justify-between">
+            <div className="lg:col-span-7" {...reveal({ variant: "media" })}>
+              <div className="group relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full overflow-hidden rounded-2xl border border-border/70 bg-gradient-to-br from-[#141923] via-[#0F131A] to-[#0A0D13] shadow-xl transition-[border-color,box-shadow] duration-300 ease-out hover:border-primary/40 hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.7)] flex flex-col justify-between">
                 {/* Mockup Window Header */}
                 <div className="z-10 flex items-center justify-between border-b border-border/60 bg-[#121620]/90 px-4 py-2.5 backdrop-blur">
                   <div className="flex items-center gap-1.5">
@@ -52,7 +53,7 @@ export function Projects() {
                       src={entrenate.imageUrl}
                       alt={entrenate.imageAlt || "Pantalla de inicio de sesión - Entrenate"}
                       fill
-                      className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.015] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                       sizes="(max-width: 1024px) 100vw, 55vw"
                       priority
                     />
@@ -69,7 +70,7 @@ export function Projects() {
             {/* Editorial Content (5 cols desktop) */}
             <div className="lg:col-span-5 flex flex-col space-y-5">
               {/* Index & Badges */}
-              <div className="flex flex-wrap items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-2.5" {...reveal({ delay: 1 })}>
                 <span className="font-mono text-xs font-bold text-primary tracking-wider">
                   01
                 </span>
@@ -85,7 +86,7 @@ export function Projects() {
               </div>
 
               {/* Title & Type */}
-              <div>
+              <div {...reveal({ delay: 2 })}>
                 <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
                   {entrenate.title}
                 </h3>
@@ -97,12 +98,15 @@ export function Projects() {
               </div>
 
               {/* Description */}
-              <p className="text-[15px] sm:text-base leading-[1.7] text-text-secondary text-left">
+              <p
+                className="text-[15px] sm:text-base leading-[1.7] text-text-secondary text-left"
+                {...reveal({ delay: 3 })}
+              >
                 {entrenate.summary}
               </p>
 
               {/* Technologies (Max 4-5) */}
-              <div className="space-y-2 pt-1">
+              <div className="space-y-2 pt-1" {...reveal({ delay: 4 })}>
                 <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
                   Tecnologías principales:
                 </p>
@@ -119,7 +123,7 @@ export function Projects() {
               </div>
 
               {/* Actions */}
-              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-3">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-3" {...reveal({ delay: 5 })}>
                 <Button
                   asChild
                   size="sm"
@@ -180,14 +184,15 @@ export function Projects() {
         <div
           className="border-t border-border/60 my-16 sm:my-20 lg:my-24"
           aria-hidden="true"
+          {...reveal({ variant: "rule" })}
         />
 
         {/* Project 02 — Blossom Institute (Alternating layout on desktop) */}
         {blossom ? (
           <article className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Visual Frame (7 cols desktop, placed on right via lg:order-2) */}
-            <div className="lg:col-span-7 lg:order-2">
-              <div className="group relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full overflow-hidden rounded-2xl border border-border/70 bg-gradient-to-br from-[#141923] via-[#0F131A] to-[#0A0D13] shadow-xl transition-all duration-300 hover:border-primary/40 flex flex-col justify-between">
+            <div className="lg:col-span-7 lg:order-2" {...reveal({ variant: "media", delayLg: 2 })}>
+              <div className="group relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full overflow-hidden rounded-2xl border border-border/70 bg-gradient-to-br from-[#141923] via-[#0F131A] to-[#0A0D13] shadow-xl transition-[border-color,box-shadow] duration-300 ease-out hover:border-primary/40 hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.7)] flex flex-col justify-between">
                 {/* Mockup Window Header */}
                 <div className="z-10 flex items-center justify-between border-b border-border/60 bg-[#121620]/90 px-4 py-2.5 backdrop-blur">
                   <div className="flex items-center gap-1.5">
@@ -208,7 +213,7 @@ export function Projects() {
                       src={blossom.imageUrl}
                       alt={blossom.imageAlt || "Pantalla de inicio de sesión - Blossom Institute"}
                       fill
-                      className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.015] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                       sizes="(max-width: 1024px) 100vw, 55vw"
                     />
                   ) : null}
@@ -224,7 +229,7 @@ export function Projects() {
             {/* Editorial Content (5 cols desktop, placed on left via lg:order-1) */}
             <div className="lg:col-span-5 lg:order-1 flex flex-col space-y-5">
               {/* Index & Badges */}
-              <div className="flex flex-wrap items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-2.5" {...reveal({ delay: 1, delayLg: 0 })}>
                 <span className="font-mono text-xs font-bold text-primary tracking-wider">
                   02
                 </span>
@@ -240,7 +245,7 @@ export function Projects() {
               </div>
 
               {/* Title & Type */}
-              <div>
+              <div {...reveal({ delay: 2, delayLg: 1 })}>
                 <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
                   {blossom.title}
                 </h3>
@@ -252,12 +257,15 @@ export function Projects() {
               </div>
 
               {/* Description */}
-              <p className="text-[15px] sm:text-base leading-[1.7] text-text-secondary text-left">
+              <p
+                className="text-[15px] sm:text-base leading-[1.7] text-text-secondary text-left"
+                {...reveal({ delay: 3, delayLg: 2 })}
+              >
                 {blossom.summary}
               </p>
 
               {/* Technologies (Max 4-5) */}
-              <div className="space-y-2 pt-1">
+              <div className="space-y-2 pt-1" {...reveal({ delay: 4, delayLg: 3 })}>
                 <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
                   Tecnologías principales:
                 </p>
@@ -274,7 +282,7 @@ export function Projects() {
               </div>
 
               {/* Actions */}
-              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-3">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-3" {...reveal({ delay: 5, delayLg: 4 })}>
                 <Button
                   asChild
                   size="sm"

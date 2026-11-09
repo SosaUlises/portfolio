@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Mail, Copy, Check, Linkedin, Github, MessageCircle } from "lucide-react"
-import { ScrollReveal } from "@/components/scroll-reveal"
+import { reveal } from "@/lib/motion"
 
 const EMAIL = "sosa10ulises@gmail.com"
 const WHATSAPP_PHONE = "5493412765611"
@@ -89,24 +89,30 @@ export function Contact() {
   }
 
   return (
-    <ScrollReveal className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
+    <div className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
       {/* Eyebrow */}
-      <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
+      <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted" {...reveal()}>
         06 / CONTACTO
       </p>
 
       {/* Dominant Editorial Heading */}
-      <h2 className="mt-3 text-2xl sm:text-3xl lg:text-[34px] font-bold tracking-tight text-foreground leading-tight lg:leading-[1.2]">
+      <h2
+        className="mt-3 text-2xl sm:text-3xl lg:text-[34px] font-bold tracking-tight text-foreground leading-tight lg:leading-[1.2]"
+        {...reveal({ delay: 1 })}
+      >
         ¿Construimos algo juntos<span className="text-primary">?</span>
       </h2>
 
       {/* Description */}
-      <p className="mt-4 max-w-2xl text-[15px] sm:text-base lg:text-[17px] text-text-secondary leading-relaxed">
+      <p
+        className="mt-4 max-w-2xl text-[15px] sm:text-base lg:text-[17px] text-text-secondary leading-relaxed"
+        {...reveal({ delay: 2 })}
+      >
         Estoy abierto a conectar con profesionales, compartir ideas y participar en proyectos donde pueda aportar mis conocimientos en desarrollo de software.
       </p>
 
       {/* Primary Actions (Email CTAs) */}
-      <div className="mt-8 flex flex-wrap items-center gap-3">
+      <div className="mt-8 flex flex-wrap items-center gap-3" {...reveal({ delay: 3 })}>
         <a
           href={`mailto:${EMAIL}`}
           title={EMAIL}
@@ -147,7 +153,7 @@ export function Contact() {
       </div>
 
       {/* Subtle Horizontal Divider */}
-      <div className="mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-border/40">
+      <div className="mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-border/40" {...reveal({ delay: 4 })}>
         {/* Secondary Professional Links Navigation */}
         <nav
           aria-label="Perfiles profesionales y canales alternativos"
@@ -174,6 +180,6 @@ export function Contact() {
           })}
         </nav>
       </div>
-    </ScrollReveal>
+    </div>
   )
 }

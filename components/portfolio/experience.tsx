@@ -1,13 +1,14 @@
 import Image from "next/image"
 import { Calendar, MapPin } from "lucide-react"
 import { experiences } from "@/lib/experience"
+import { reveal } from "@/lib/motion"
 
 export function Experience() {
   return (
     <div className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-10 lg:gap-16 items-start">
         {/* Left Column: Eyebrow + Section Title (~35-40%) */}
-        <div className="md:col-span-5 lg:col-span-5">
+        <div className="md:col-span-5 lg:col-span-5" {...reveal()}>
           <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
             02 / EXPERIENCIA PROFESIONAL
           </p>
@@ -23,7 +24,7 @@ export function Experience() {
               key={`${exp.company}-${exp.role}`}
               className="flex flex-col gap-5 sm:gap-6"
             >
-              <div className="flex items-start gap-4 sm:gap-5">
+              <div className="flex items-start gap-4 sm:gap-5" {...reveal({ delay: 1 })}>
                 {/* Isotipo Container (56px mobile / 64px desktop) */}
                 {exp.logoUrl ? (
                   <div className="relative flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border border-border/70 bg-[#161B22] p-2 sm:p-2.5 shadow-sm">
@@ -65,7 +66,10 @@ export function Experience() {
               </div>
 
               {/* Editorial Description */}
-              <p className="text-[15px] sm:text-base lg:text-[17px] leading-[1.7] text-text-secondary text-left">
+              <p
+                className="text-[15px] sm:text-base lg:text-[17px] leading-[1.7] text-text-secondary text-left"
+                {...reveal({ delay: 2 })}
+              >
                 {exp.description}
               </p>
             </article>

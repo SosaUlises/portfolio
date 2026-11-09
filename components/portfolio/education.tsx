@@ -1,6 +1,7 @@
 import { Calendar, Award } from "lucide-react"
 import { education, EducationStatus } from "@/lib/education"
 import { InstitutionLogo } from "@/components/portfolio/institution-logo"
+import { reveal } from "@/lib/motion"
 
 function StatusPill({ status }: { status: EducationStatus }) {
   switch (status) {
@@ -33,7 +34,7 @@ export function Education() {
     <div className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-10 lg:gap-16 items-start">
         {/* Left Column: Eyebrow + Section Title + Subtitle (~35-40%) */}
-        <div className="md:col-span-5 lg:col-span-5">
+        <div className="md:col-span-5 lg:col-span-5" {...reveal()}>
           <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
             05 / EDUCACIÓN
           </p>
@@ -47,9 +48,15 @@ export function Education() {
 
         {/* Right Column: Editorial Timeline (~60-65%) */}
         <div className="md:col-span-7 lg:col-span-7">
-          <div className="relative space-y-10 sm:space-y-12 lg:space-y-14 before:absolute before:left-7 sm:before:left-8 before:top-7 sm:before:top-8 before:bottom-7 sm:before:bottom-8 before:w-px before:-translate-x-1/2 before:bg-[#323B4C]">
+          <div className="relative space-y-10 sm:space-y-12 lg:space-y-14 before:absolute before:left-7 sm:before:left-8 before:top-7 sm:before:top-8 before:bottom-7 sm:before:bottom-8 before:w-px before:-translate-x-1/2 before:bg-[#323B4C]"
+            {...reveal({ variant: "line" })}
+          >
             {education.map((item) => (
-              <article key={item.id} className="relative flex items-start gap-4 sm:gap-5">
+              <article
+                key={item.id}
+                className="relative flex items-start gap-4 sm:gap-5"
+                {...reveal({ delay: 1 })}
+              >
                 {/* Institutional Logo Container (Timeline Node: 56px mobile / 64px desktop) */}
                 <div className="relative z-10 flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border border-border/70 bg-[#161B22] p-2 sm:p-2.5 shadow-sm transition-all duration-300 hover:border-border">
                   <InstitutionLogo name={item.logo} className="h-auto max-h-full w-auto max-w-full object-contain" />

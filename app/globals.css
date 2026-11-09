@@ -71,62 +71,187 @@
   }
 }
 
-/* --- Scroll reveal (performant: opacity + transform only, no filter blurs) --- */
-.reveal {
+/* ================================================================== */
+/* Motion Design System                                               */
+/* ------------------------------------------------------------------ */
+/* Principles: opacity + transform only, ease-out, short distances,   */
+/* run once. Content is visible by default (progressive enhancement): */
+/* the hidden "pre-reveal" state only applies once the client-side    */
+/* <MotionReveal /> adds `.motion-ready` to <html>. Without JS, or    */
+/* with prefers-reduced-motion, everything renders in its final state.*/
+/* ================================================================== */
+
+:root {
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-duration-micro: 180ms;
+  --motion-duration-fast: 280ms;
+  --motion-duration-reveal: 650ms;
+  --motion-duration-media: 800ms;
+  --motion-duration-draw: 1100ms;
+  --motion-stagger: 80ms;
+  --motion-hero-step: 90ms;
+  --motion-distance: 16px;
+  --motion-distance-media: 24px;
+}
+
+/* --- Hero entrance (pure CSS keyframes: runs on first paint, no JS) --- */
+@keyframes motion-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes motion-enter-photo {
+  from {
+    opacity: 0;
+    transform: scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes motion-enter-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-enter {
+  animation: motion-enter 700ms var(--motion-ease-out) both;
+  animation-delay: calc(var(--motion-hero-step) * var(--hero-step, 0));
+}
+.hero-enter-photo {
+  animation: motion-enter-photo 900ms var(--motion-ease-out) both;
+}
+.hero-enter-fade {
+  animation: motion-enter-fade 600ms ease-out both;
+  animation-delay: calc(var(--motion-hero-step) * var(--hero-step, 0));
+}
+.hero-step-1 { --hero-step: 1; }
+.hero-step-2 { --hero-step: 2; }
+.hero-step-3 { --hero-step: 3; }
+.hero-step-4 { --hero-step: 4; }
+.hero-step-5 { --hero-step: 5; }
+.hero-step-8 { --hero-step: 8; }
+
+/* --- Scroll cue: subtle, slow nudge (replaces the generic bounce) --- */
+@keyframes motion-nudge {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 3px, 0);
+  }
+}
+.motion-nudge {
+  animation: motion-nudge 2.2s var(--motion-ease-in-out) infinite;
+}
+
+/* --- Scroll reveal ([data-reveal], driven by a single shared observer) --- */
+.motion-ready [data-reveal] {
+  transition-property: opacity, transform;
+  transition-duration: var(--motion-duration-reveal);
+  transition-timing-function: var(--motion-ease-out);
+}
+
+.motion-ready [data-reveal]:not([data-reveal="line"]):not([data-revealed]) {
   opacity: 0;
-  transform: translate3d(0, 14px, 0);
-  transition:
-    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translate3d(0, var(--motion-distance), 0);
 }
 
-.reveal.reveal--in {
+/* Variant: media (project screenshots) — slightly longer, tiny scale */
+.motion-ready [data-reveal="media"] {
+  transition-duration: var(--motion-duration-media);
+}
+.motion-ready [data-reveal="media"]:not([data-revealed]) {
+  transform: translate3d(0, var(--motion-distance-media), 0) scale(0.985);
+}
+
+/* Variant: fade (no movement) */
+.motion-ready [data-reveal="fade"]:not([data-revealed]) {
+  transform: none;
+}
+
+/* Variant: rule (horizontal divider drawn from the left) */
+.motion-ready [data-reveal="rule"] {
+  transform-origin: left center;
+  transition-duration: var(--motion-duration-draw);
+}
+.motion-ready [data-reveal="rule"]:not([data-revealed]) {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: scaleX(0);
 }
 
-/* Stagger (only for elements inside .reveal-stagger) */
-.reveal.reveal--stagger .reveal-stagger > * {
-  opacity: 0;
-  transform: translate3d(0, 14px, 0);
-  transition:
-    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--reveal-stagger, 60ms) * var(--reveal-index, 0));
+/* Variant: line (vertical timeline drawn on the element's ::before).
+   Uses Tailwind's --tw-scale-y so the existing -translate-x-1/2 centering
+   of the pseudo-element is preserved. The element itself never hides. */
+.motion-ready [data-reveal="line"]::before {
+  transform-origin: top center;
+  transition: transform var(--motion-duration-draw) var(--motion-ease-out);
+}
+.motion-ready [data-reveal="line"]:not([data-revealed])::before {
+  --tw-scale-y: 0;
 }
 
-.reveal.reveal--in.reveal--stagger .reveal-stagger > * {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
+/* Stagger tokens (relative order between siblings entering together) */
+.motion-ready [data-reveal-delay="1"] { transition-delay: calc(var(--motion-stagger) * 1); }
+.motion-ready [data-reveal-delay="2"] { transition-delay: calc(var(--motion-stagger) * 2); }
+.motion-ready [data-reveal-delay="3"] { transition-delay: calc(var(--motion-stagger) * 3); }
+.motion-ready [data-reveal-delay="4"] { transition-delay: calc(var(--motion-stagger) * 4); }
+.motion-ready [data-reveal-delay="5"] { transition-delay: calc(var(--motion-stagger) * 5); }
+
+/* Desktop-only order override (e.g. alternating project layouts) */
+@media (min-width: 1024px) {
+  .motion-ready [data-reveal-delay-lg="0"] { transition-delay: 0ms; }
+  .motion-ready [data-reveal-delay-lg="1"] { transition-delay: calc(var(--motion-stagger) * 1); }
+  .motion-ready [data-reveal-delay-lg="2"] { transition-delay: calc(var(--motion-stagger) * 2); }
+  .motion-ready [data-reveal-delay-lg="3"] { transition-delay: calc(var(--motion-stagger) * 3); }
+  .motion-ready [data-reveal-delay-lg="4"] { transition-delay: calc(var(--motion-stagger) * 4); }
+  .motion-ready [data-reveal-delay-lg="5"] { transition-delay: calc(var(--motion-stagger) * 5); }
 }
 
-/* Assign indexes (supports first 12 children; extend if needed) */
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(1)  { --reveal-index: 0; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(2)  { --reveal-index: 1; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(3)  { --reveal-index: 2; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(4)  { --reveal-index: 3; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(5)  { --reveal-index: 4; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(6)  { --reveal-index: 5; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(7)  { --reveal-index: 6; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(8)  { --reveal-index: 7; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(9)  { --reveal-index: 8; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(10) { --reveal-index: 9; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(11) { --reveal-index: 10; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(12) { --reveal-index: 11; }
+/* Anchor navigation: target section resolves quickly, without stagger */
+.motion-ready [data-revealed="fast"],
+.motion-ready [data-revealed="fast"]::before {
+  transition-duration: var(--motion-duration-fast) !important;
+  transition-delay: 0ms !important;
+}
 
-/* Respect reduced motion */
+/* Already in (or above) the viewport at mount: no transition at all */
+.motion-ready [data-revealed="instant"],
+.motion-ready [data-revealed="instant"]::before {
+  transition: none !important;
+}
+
+/* --- Reduced motion: final state, no transforms, no loops --- */
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .hero-enter,
+  .hero-enter-photo,
+  .hero-enter-fade,
+  .motion-nudge {
+    animation: none !important;
+  }
+
+  .motion-ready [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
-  .reveal.reveal--stagger .reveal-stagger > * {
-    opacity: 1 !important;
-    transform: none !important;
+  .motion-ready [data-reveal="line"]::before {
+    --tw-scale-y: 1 !important;
     transition: none !important;
-    transition-delay: 0ms !important;
   }
 }
 
