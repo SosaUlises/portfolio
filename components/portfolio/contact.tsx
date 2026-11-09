@@ -1,9 +1,8 @@
 "use client"
 
 import * as React from "react"
+import { Mail, Copy, Check, Linkedin, Github, MessageCircle } from "lucide-react"
 import { ScrollReveal } from "@/components/scroll-reveal"
-import { Separator } from "@/components/ui/separator"
-import { Github, Linkedin, Mail, MessageCircle, Copy, Check } from "lucide-react"
 
 const EMAIL = "sosa10ulises@gmail.com"
 const WHATSAPP_PHONE = "5493412765611"
@@ -14,194 +13,166 @@ function whatsappLink() {
   return `https://wa.me/${WHATSAPP_PHONE}?text=${text}`
 }
 
-function CardShell({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
-  return (
-    <div
-      className={[
-        "relative overflow-hidden rounded-2xl border border-border/60",
-        "bg-background/35 backdrop-blur-xl",
-        "shadow-[0_8px_30px_rgba(0,0,0,0.35)]",
-        "transition",
-        className,
-      ].join(" ")}
-    >
-      {/* soft noise + vignette */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.55]"
-        style={{
-          background:
-            "radial-gradient(1200px circle at 50% 0%, rgba(255,255,255,0.04), transparent 55%), radial-gradient(900px circle at 100% 20%, rgba(255,255,255,0.03), transparent 55%)",
-        }}
-      />
-      {children}
-    </div>
-  )
-}
+const SOCIAL_LINKS = [
+  {
+    name: "LinkedIn",
+    href: "https://linkedin.com/in/sosaulises",
+    icon: Linkedin,
+    label: "Perfil de LinkedIn de Ulises Sosa",
+  },
+  {
+    name: "GitHub",
+    href: "https://github.com/SosaUlises",
+    icon: Github,
+    label: "Perfil de GitHub de Ulises Sosa",
+  },
+  {
+    name: "WhatsApp",
+    href: whatsappLink(),
+    icon: MessageCircle,
+    label: "Conversar por WhatsApp con Ulises Sosa",
+  },
+]
 
 export function Contact() {
   const [copied, setCopied] = React.useState(false)
+  const [copyError, setCopyError] = React.useState(false)
+  const timerRef = React.useRef<number | null>(null)
+
+  React.useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        window.clearTimeout(timerRef.current)
+      }
+    }
+  }, [])
 
   async function copyEmail() {
+    if (timerRef.current) {
+      window.clearTimeout(timerRef.current)
+    }
+
     try {
-      await navigator.clipboard.writeText(EMAIL)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(EMAIL)
+        setCopied(true)
+        setCopyError(false)
+        timerRef.current = window.setTimeout(() => setCopied(false), 2000)
+        return
+      }
+      throw new Error("Clipboard API not available")
     } catch {
-      const el = document.createElement("textarea")
-      el.value = EMAIL
-      document.body.appendChild(el)
-      el.select()
-      document.execCommand("copy")
-      document.body.removeChild(el)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 1200)
+      // Fallback robusto sin dependencias externas
+      try {
+        const el = document.createElement("textarea")
+        el.value = EMAIL
+        el.setAttribute("readonly", "")
+        el.style.position = "absolute"
+        el.style.left = "-9999px"
+        document.body.appendChild(el)
+        el.select()
+        const successful = document.execCommand("copy")
+        document.body.removeChild(el)
+        if (successful) {
+          setCopied(true)
+          setCopyError(false)
+          timerRef.current = window.setTimeout(() => setCopied(false), 2000)
+        } else {
+          setCopyError(true)
+          timerRef.current = window.setTimeout(() => setCopyError(false), 2500)
+        }
+      } catch {
+        setCopyError(true)
+        timerRef.current = window.setTimeout(() => setCopyError(false), 2500)
+      }
     }
   }
 
   return (
-    <ScrollReveal className="pb-12">
-      <Separator className="mb-12" />
-      <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-        Contacto
+    <ScrollReveal className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
+      {/* Eyebrow */}
+      <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
+        06 / CONTACTO
+      </p>
+
+      {/* Dominant Editorial Heading */}
+      <h2 className="mt-3 text-2xl sm:text-3xl lg:text-[34px] font-bold tracking-tight text-foreground leading-tight lg:leading-[1.2]">
+        ¿Construimos algo juntos<span className="text-primary">?</span>
       </h2>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-3">
-        {/* Left big card */}
-        <div className="lg:col-span-2">
-          <CardShell className="p-8 ">
-            {/* subtle primary glow (small + dark, not a big blue wash) */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -top-28 left-10 h-64 w-64 rounded-full bg-[hsl(var(--primary))] opacity-[0.10] blur-[80px]"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -bottom-40 right-10 h-72 w-72 rounded-full bg-[hsl(var(--primary))] opacity-[0.06] blur-[90px]"
-            />
+      {/* Description */}
+      <p className="mt-4 max-w-2xl text-[15px] sm:text-base lg:text-[17px] text-text-secondary leading-relaxed">
+        Estoy abierto a conectar con profesionales, compartir ideas y participar en proyectos donde pueda aportar mis conocimientos en desarrollo de software.
+      </p>
 
-            <div className="relative">
-              <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                Contacto y comunicación
-              </h3>
+      {/* Primary Actions (Email CTAs) */}
+      <div className="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href={`mailto:${EMAIL}`}
+          title={EMAIL}
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-150 hover:bg-primary-hover hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0"
+        >
+          <Mail className="h-4 w-4" aria-hidden="true" />
+          <span>Enviar correo</span>
+        </a>
 
-              <p className="mt-3 max-w-2xl text-base leading-relaxed text-text-secondary">
-                Si te interesa conversar sobre desarrollo de software, arquitectura de sistemas o compartir ideas sobre tecnología, podés escribirme directamente por correo o contactarme a través de mis redes.
-              </p>
+        <button
+          type="button"
+          onClick={copyEmail}
+          title={EMAIL}
+          aria-label={copied ? "Correo copiado al portapapeles" : "Copiar dirección de correo al portapapeles"}
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-border/80 bg-surface px-4 py-2.5 text-sm font-medium text-text-primary transition-all duration-150 hover:border-primary/40 hover:bg-surface/80 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0"
+        >
+          {copied ? (
+            <>
+              <Check className="h-4 w-4 text-emerald-400" aria-hidden="true" />
+              <span className="text-emerald-400 font-semibold" aria-live="polite">
+                ¡Copiado!
+              </span>
+            </>
+          ) : copyError ? (
+            <>
+              <Copy className="h-4 w-4 text-text-muted" aria-hidden="true" />
+              <span className="text-rose-400" aria-live="polite">
+                Error al copiar
+              </span>
+            </>
+          ) : (
+            <>
+              <Copy className="h-4 w-4 text-text-muted" aria-hidden="true" />
+              <span>Copiar correo</span>
+            </>
+          )}
+        </button>
+      </div>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a
-                  href={`mailto:${EMAIL}`}
-            className={[
-                "relative inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold",
-                "bg-foreground text-background",
-                "transition-all duration-300 ease-out",
-                "hover:-translate-y-0.5 hover:shadow-[0_12px_35px_rgba(0,0,0,0.45)]",
-                "active:translate-y-0 active:scale-[0.99]",
-                "overflow-hidden",
-              ].join(" ")}
-                >
-                  <Mail className="h-4 w-4" />
-                  Enviar correo
-                </a>
-
-                <button
-                  type="button"
-                  onClick={copyEmail}
-                  className={[
-                    "inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold",
-                    "border border-border/60 bg-background/30 text-foreground",
-                    "transition hover:border-primary/30 hover:bg-muted/10 active:scale-[0.99]",
-                  ].join(" ")}
-                >
-                  {copied ? (
-                    <>
-                      <Check className="h-4 w-4 text-emerald-400" />
-                      Copiado
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="h-4 w-4" />
-                      {EMAIL}
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
-          </CardShell>
-        </div>
-
-        {/* Right cards */}
-        <div className="flex flex-col gap-4">
-          <a
-            href="https://linkedin.com/in/sosaulises"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group"
-          >
-            <CardShell className="p-5 card-glow hover:-translate-y-0.5 hover:border-primary/25">
-              <div className="relative flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                    Perfil
-                  </p>
-                  <p className="mt-1 text-lg font-semibold text-foreground">
-                    LinkedIn
-                  </p>
-                </div>
-                <Linkedin className="mt-1 h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
-              </div>
-            </CardShell>
-          </a>
-
-          <a
-            href="https://github.com/SosaUlises"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group"
-          >
-            <CardShell className="p-5 card-glow hover:-translate-y-0.5 hover:border-primary/25">
-              <div className="relative flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                    Código
-                  </p>
-                  <p className="mt-1 text-lg font-semibold text-foreground">
-                    GitHub
-                  </p>
-                </div>
-                <Github className="mt-1 h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
-              </div>
-            </CardShell>
-          </a>
-
-          <a
-            href={whatsappLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group"
-          >
-            <CardShell className="p-5 card-glow hover:-translate-y-0.5 hover:border-primary/25">
-              <div className="relative flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                    Chat rápido
-                  </p>
-                  <p className="mt-1 text-lg font-semibold text-foreground">
-                    WhatsApp
-                  </p>
-                </div>
-                <MessageCircle className="mt-1 h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
-              </div>
-            </CardShell>
-          </a>
-        </div>
+      {/* Subtle Horizontal Divider */}
+      <div className="mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-border/40">
+        {/* Secondary Professional Links Navigation */}
+        <nav
+          aria-label="Perfiles profesionales y canales alternativos"
+          className="flex flex-wrap items-center gap-x-6 sm:gap-x-8 gap-y-3"
+        >
+          {SOCIAL_LINKS.map((link) => {
+            const Icon = link.icon
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+                className="group inline-flex items-center gap-2 text-sm text-text-secondary hover:text-foreground transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm py-1"
+              >
+                <Icon
+                  className="h-4 w-4 text-text-muted transition-colors duration-150 group-hover:text-primary"
+                  aria-hidden="true"
+                />
+                <span className="font-medium">{link.name}</span>
+              </a>
+            )
+          })}
+        </nav>
       </div>
     </ScrollReveal>
   )
