@@ -10,9 +10,10 @@
  *   <div {...reveal()} />                          // fade + short rise
  *   <div {...reveal({ delay: 2 })} />              // 2 × stagger token
  *   <div {...reveal({ variant: "media", delay: 0, delayLg: 1 })} />
+ *   <div {...reveal({ variant: "connector", delay: 2 })} />
  */
 
-export type RevealVariant = "up" | "fade" | "media" | "rule" | "line"
+export type RevealVariant = "up" | "fade" | "media" | "rule" | "line" | "connector"
 export type RevealDelay = 0 | 1 | 2 | 3 | 4 | 5
 
 export interface RevealOptions {

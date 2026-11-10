@@ -127,12 +127,27 @@
   }
 }
 
+@keyframes motion-enter-media {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .hero-enter {
   animation: motion-enter 700ms var(--motion-ease-out) both;
   animation-delay: calc(var(--motion-hero-step) * var(--hero-step, 0));
 }
 .hero-enter-photo {
   animation: motion-enter-photo 900ms var(--motion-ease-out) both;
+}
+.hero-enter-media {
+  animation: motion-enter-media 800ms var(--motion-ease-out) both;
+  animation-delay: calc(var(--motion-hero-step) * var(--hero-step, 5));
 }
 .hero-enter-fade {
   animation: motion-enter-fade 600ms ease-out both;
@@ -182,6 +197,16 @@
 /* Variant: fade (no movement) */
 .motion-ready [data-reveal="fade"]:not([data-revealed]) {
   transform: none;
+}
+
+/* Variant: connector (architecture diagrams flow) — subtle scale & fade */
+.motion-ready [data-reveal="connector"] {
+  transition-duration: var(--motion-duration-fast);
+  transition-timing-function: var(--motion-ease-out);
+}
+.motion-ready [data-reveal="connector"]:not([data-revealed]) {
+  opacity: 0;
+  transform: scale(0.92);
 }
 
 /* Variant: rule (horizontal divider drawn from the left) */
@@ -239,6 +264,7 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-enter,
   .hero-enter-photo,
+  .hero-enter-media,
   .hero-enter-fade,
   .motion-nudge {
     animation: none !important;

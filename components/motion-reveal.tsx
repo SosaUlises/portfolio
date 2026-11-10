@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { usePathname } from "next/navigation"
 
 const REVEAL_SELECTOR = "[data-reveal]"
 
@@ -11,7 +12,7 @@ const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
 
 /**
- * MotionReveal — single shared observer for the Home scroll reveals.
+ * MotionReveal — single shared observer for Home and Case Study scroll reveals.
  *
  * - Renders nothing; sections stay Server Components and opt in with
  *   `reveal()` data attributes (see `lib/motion.ts`).
@@ -22,9 +23,13 @@ const useIsomorphicLayoutEffect =
  * - Each element animates once (unobserved after reveal).
  * - Anchor navigation (`#section`) resolves the target section quickly,
  *   without stagger, so content is never invisible when the user lands.
+ * - Re-runs on `pathname` change so client-side route transitions (Home <-> Case Studies)
+ *   are automatically observed and animated without duplicate observers.
  * - Respects `prefers-reduced-motion`: does nothing, content stays static.
  */
 export function MotionReveal() {
+  const pathname = usePathname()
+
   useIsomorphicLayoutEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     if (!("IntersectionObserver" in window)) return
@@ -103,7 +108,7 @@ export function MotionReveal() {
       window.removeEventListener("hashchange", onHashChange)
       root.classList.remove("motion-ready")
     }
-  }, [])
+  }, [pathname])
 
   return null
 }

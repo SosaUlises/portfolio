@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import { Navbar } from "@/components/portfolio/navbar"
 import { Footer } from "@/components/portfolio/footer"
+import { MotionReveal } from "@/components/motion-reveal"
 
 import "./globals.css"
 
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body
         className={`${_inter.variable} ${_jetbrainsMono.variable} font-sans antialiased`}
       >
+        <MotionReveal />
         <div className="relative flex min-h-screen flex-col overflow-x-clip bg-background">
           {/* soft gradient */}
           <div

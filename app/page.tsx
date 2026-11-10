@@ -5,14 +5,10 @@ import { Projects } from "@/components/portfolio/projects"
 import { TechStack } from "@/components/portfolio/tech-stack"
 import { Education } from "@/components/portfolio/education"
 import { Contact } from "@/components/portfolio/contact"
-import { MotionReveal } from "@/components/motion-reveal"
 
 export default function Page() {
   return (
     <main className="mx-auto max-w-[1200px] px-6 pb-16 sm:pb-24">
-      {/* Single shared scroll-reveal observer (renders nothing) */}
-      <MotionReveal />
-
       <section id="inicio" className="scroll-mt-20 md:scroll-mt-28">
         <Hero />
       </section>

@@ -51,14 +51,14 @@ export default async function ProyectoPage({
       {/* Back button */}
       <Link
         href="/#proyectos"
-        className="group mb-8 inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary-hover"
+        className="group mb-8 inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary-hover hero-enter-fade focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
       >
         <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
         Volver a proyectos
       </Link>
 
       {/* Main Card */}
-      <article className="card p-6 sm:p-10">
+      <article className="card p-6 sm:p-10 hero-enter">
         {/* Header Badges */}
         <div className="flex flex-wrap items-center gap-2.5">
           <span className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">

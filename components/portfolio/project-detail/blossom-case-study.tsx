@@ -18,6 +18,7 @@ import {
 } from "lucide-react"
 import { Project } from "@/lib/projects"
 import { Button } from "@/components/ui/button"
+import { reveal, type RevealDelay } from "@/lib/motion"
 
 interface BlossomCaseStudyProps {
   project: Project
@@ -27,10 +28,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
   return (
     <article className="mx-auto max-w-[1200px] px-6 pt-8 pb-12 sm:py-16 md:py-20 text-left">
       {/* 1. Back Navigation */}
-      <nav aria-label="Navegación de retorno" className="mb-5 sm:mb-12">
+      <nav aria-label="Navegación de retorno" className="mb-5 sm:mb-12 hero-enter-fade">
         <Link
           href="/#proyectos"
-          className="group inline-flex items-center gap-2 text-sm font-medium text-text-muted transition-colors hover:text-primary"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-text-muted transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
         >
           <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
           <span>Volver a proyectos</span>
@@ -40,7 +41,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
       {/* 2. Hero Editorial */}
       <header>
         {/* Eyebrows */}
-        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 font-mono text-xs">
+        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 font-mono text-xs hero-enter hero-step-1">
           <span className="font-semibold uppercase tracking-wider text-primary">
             02 / CASO DE ESTUDIO
           </span>
@@ -53,7 +54,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
         </div>
 
         {/* Title & Subtitle group */}
-        <div className="mt-3.5 sm:mt-6">
+        <div className="mt-3.5 sm:mt-6 hero-enter hero-step-2">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1]">
             Blossom Institute<span className="text-primary">.</span>
           </h1>
@@ -64,7 +65,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
         </div>
 
         {/* Introductory Description (Exact Approved Copy) */}
-        <div className="mt-5 sm:mt-6 space-y-3.5 sm:space-y-4 text-[15px] sm:text-lg leading-[1.7] sm:leading-[1.75] text-text-secondary max-w-3xl">
+        <div className="mt-5 sm:mt-6 space-y-3.5 sm:space-y-4 text-[15px] sm:text-lg leading-[1.7] sm:leading-[1.75] text-text-secondary max-w-3xl hero-enter hero-step-3">
           <p>
             Blossom Institute es una plataforma Full Stack de gestión académica que desarrollo para un instituto de inglés, con el objetivo de centralizar cursos, estudiantes, asistencia, actividades y seguimiento del aprendizaje.
           </p>
@@ -74,7 +75,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
         </div>
 
         {/* Metadata Strip & Actions group */}
-        <div className="mt-5 sm:mt-8 pt-4 sm:pt-6 border-t border-border/60 max-w-xl">
+        <div className="mt-5 sm:mt-8 pt-4 sm:pt-6 border-t border-border/60 max-w-xl hero-enter hero-step-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-6">
             <div>
               <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
@@ -102,7 +103,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
             <Button
               asChild
               size="default"
-              className="bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm transition-all text-xs sm:text-sm h-9 sm:h-10 px-3.5 sm:px-4"
+              className="bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm transition-[transform,background-color] duration-200 hover:-translate-y-0.5 active:translate-y-0 text-xs sm:text-sm h-9 sm:h-10 px-3.5 sm:px-4"
             >
               <a
                 href="https://blossom-institute.vercel.app/login"
@@ -119,7 +120,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
               asChild
               variant="outline"
               size="default"
-              className="border-border/80 bg-surface/50 text-foreground hover:bg-surface hover:border-border text-xs sm:text-sm h-9 sm:h-10 px-3.5 sm:px-4"
+              className="border-border/80 bg-surface/50 text-foreground hover:bg-surface hover:border-border transition-[transform,background-color,border-color] duration-200 hover:-translate-y-0.5 active:translate-y-0 text-xs sm:text-sm h-9 sm:h-10 px-3.5 sm:px-4"
             >
               <a
                 href="https://github.com/SosaUlises/blossom-institute-front"
@@ -136,7 +137,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
               asChild
               variant="outline"
               size="default"
-              className="border-border/80 bg-surface/50 text-foreground hover:bg-surface hover:border-border text-xs sm:text-sm h-9 sm:h-10 px-3.5 sm:px-4"
+              className="border-border/80 bg-surface/50 text-foreground hover:bg-surface hover:border-border transition-[transform,background-color,border-color] duration-200 hover:-translate-y-0.5 active:translate-y-0 text-xs sm:text-sm h-9 sm:h-10 px-3.5 sm:px-4"
             >
               <a
                 href="https://github.com/SosaUlises/blossom-institute-api"
@@ -152,8 +153,8 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
         </div>
 
         {/* Protagonist Image inside Editorial Window Frame */}
-        <div className="mt-5 sm:mt-8">
-          <div className="group relative w-full overflow-hidden rounded-2xl border border-border/70 bg-[#0F131A] shadow-2xl transition-all duration-300 hover:border-primary/40">
+        <div className="mt-5 sm:mt-8 hero-enter-media hero-step-5">
+          <div className="group relative w-full overflow-hidden rounded-2xl border border-border/70 bg-[#0F131A] shadow-2xl transition-[border-color,box-shadow] duration-300 ease-out [@media(hover:hover)]:hover:border-primary/40 [@media(hover:hover)]:hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.7)]">
             {/* Window Header */}
             <div className="flex items-center justify-between border-b border-border/60 bg-[#121620]/90 px-4 py-3 backdrop-blur">
               <div className="flex items-center gap-1.5">
@@ -173,7 +174,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
                 src="/blossom-preview.jpg"
                 alt="Pantalla de inicio de sesión de Blossom Institute"
                 fill
-                className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.01]"
+                className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:scale-[1.015] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 priority
               />
@@ -187,7 +188,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
 
         {/* 01 / EL PRODUCTO */}
         <section className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-14 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-14 items-start" {...reveal()}>
             <div className="lg:col-span-5">
               <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
                 01 / EL PRODUCTO
@@ -213,7 +214,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
 
         {/* 02 / EXPERIENCIAS POR ROL */}
         <section className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
-          <div className="flex flex-col">
+          <div className="flex flex-col" {...reveal()}>
             <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
               02 / EXPERIENCIAS POR ROL
             </p>
@@ -230,7 +231,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
           <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             
             {/* Role 1: Admin */}
-            <div className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between">
+            <div
+              className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between transition-[border-color,background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-primary/40 hover:bg-surface/80 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.6)] motion-reduce:transition-colors motion-reduce:hover:translate-y-0"
+              {...reveal({ delay: 1 })}
+            >
               <div>
                 <div className="flex items-center justify-between">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
@@ -251,7 +255,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
             </div>
 
             {/* Role 2: Teacher */}
-            <div className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between">
+            <div
+              className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between transition-[border-color,background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-primary/40 hover:bg-surface/80 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.6)] motion-reduce:transition-colors motion-reduce:hover:translate-y-0"
+              {...reveal({ delay: 2 })}
+            >
               <div>
                 <div className="flex items-center justify-between">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
@@ -272,7 +279,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
             </div>
 
             {/* Role 3: Student */}
-            <div className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between">
+            <div
+              className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between transition-[border-color,background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-primary/40 hover:bg-surface/80 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.6)] motion-reduce:transition-colors motion-reduce:hover:translate-y-0"
+              {...reveal({ delay: 3 })}
+            >
               <div>
                 <div className="flex items-center justify-between">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
@@ -297,7 +307,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
 
         {/* 03 / ARQUITECTURA FULL STACK */}
         <section className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
-          <div className="flex flex-col">
+          <div className="flex flex-col" {...reveal()}>
             <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
               03 / ARQUITECTURA
             </p>
@@ -310,11 +320,14 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
           </div>
 
           {/* Architectural Diagram */}
-          <div className="mt-8 sm:mt-10 rounded-2xl border border-border/70 bg-surface/40 p-5 sm:p-8">
+          <div className="mt-8 sm:mt-10 rounded-2xl border border-border/70 bg-surface/40 p-5 sm:p-8" {...reveal({ delay: 1 })}>
             <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 sm:gap-6">
               
               {/* Tier 1: Frontend UI + BFF */}
-              <div className="flex-1 rounded-xl border border-border/80 bg-surface/70 p-4 sm:p-5 flex flex-col justify-between">
+              <div
+                className="flex-1 rounded-xl border border-border/80 bg-surface/70 p-4 sm:p-5 flex flex-col justify-between transition-[border-color,background-color] duration-200 hover:border-primary/40 hover:bg-surface/90"
+                {...reveal({ delay: 1 })}
+              >
                 <div>
                   <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold uppercase tracking-wider">
                     <Laptop className="h-4 w-4" />
@@ -342,7 +355,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
               </div>
 
               {/* Connector 1 */}
-              <div className="flex items-center justify-center py-2 lg:py-0 text-text-muted">
+              <div
+                className="flex items-center justify-center py-2 lg:py-0 text-text-muted"
+                {...reveal({ variant: "connector", delay: 2 })}
+              >
                 <div className="flex lg:flex-col items-center justify-center gap-1.5 font-mono text-xs text-text-muted">
                   <span>REST / HTTPS</span>
                   <span className="text-primary hidden lg:inline">→</span>
@@ -351,7 +367,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
               </div>
 
               {/* Tier 2: Backend API */}
-              <div className="flex-[1.4] rounded-xl border border-primary/40 bg-surface/90 p-4 sm:p-5 relative shadow-sm">
+              <div
+                className="flex-[1.4] rounded-xl border border-primary/40 bg-surface/90 p-4 sm:p-5 relative shadow-sm transition-[border-color,background-color] duration-200 hover:border-primary/60"
+                {...reveal({ delay: 3 })}
+              >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold uppercase tracking-wider">
                     <Server className="h-4 w-4" />
@@ -387,7 +406,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
               </div>
 
               {/* Connector 2 */}
-              <div className="flex items-center justify-center py-2 lg:py-0 text-text-muted">
+              <div
+                className="flex items-center justify-center py-2 lg:py-0 text-text-muted"
+                {...reveal({ variant: "connector", delay: 4 })}
+              >
                 <div className="flex lg:flex-col items-center justify-center gap-1.5 font-mono text-xs text-text-muted">
                   <span>EF Core</span>
                   <span className="text-primary hidden lg:inline">→</span>
@@ -396,7 +418,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
               </div>
 
               {/* Tier 3: Persistence */}
-              <div className="flex-1 rounded-xl border border-border/80 bg-surface/70 p-4 sm:p-5 flex flex-col justify-between">
+              <div
+                className="flex-1 rounded-xl border border-border/80 bg-surface/70 p-4 sm:p-5 flex flex-col justify-between transition-[border-color,background-color] duration-200 hover:border-primary/40 hover:bg-surface/90"
+                {...reveal({ delay: 5 })}
+              >
                 <div>
                   <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold uppercase tracking-wider">
                     <Database className="h-4 w-4" />
@@ -418,7 +443,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
             </div>
 
             {/* Architecture Highlights Strip */}
-            <div className="mt-6 pt-5 border-t border-border/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 font-mono text-xs">
+            <div
+              className="mt-6 pt-5 border-t border-border/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 font-mono text-xs"
+              {...reveal({ variant: "fade", delay: 5 })}
+            >
               <div className="flex items-start gap-2 text-text-secondary leading-relaxed">
                 <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                 <span>
@@ -429,7 +457,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
                 href="https://blossom-demo.onrender.com/index.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-h-[44px] inline-flex items-center gap-1.5 text-xs font-mono font-medium text-primary hover:text-primary-hover transition-colors px-3 py-2 rounded-lg border border-primary/20 bg-primary/5 hover:bg-primary/10 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary w-fit"
+                className="min-h-[44px] inline-flex items-center gap-1.5 text-xs font-mono font-medium text-primary hover:text-primary-hover transition-[transform,background-color,border-color,color] duration-200 hover:-translate-y-0.5 active:translate-y-0 px-3 py-2 rounded-lg border border-primary/20 bg-primary/5 hover:bg-primary/10 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary w-fit"
               >
                 <span>Documentación Swagger</span>
                 <ExternalLink className="h-3.5 w-3.5" />
@@ -440,7 +468,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
 
         {/* 04 / INGENIERÍA DEL DOMINIO */}
         <section className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
-          <div className="flex flex-col">
+          <div className="flex flex-col" {...reveal()}>
             <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
               04 / INGENIERÍA DEL DOMINIO
             </p>
@@ -455,7 +483,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
 
           {/* Academic Lifecycle Stepper / Process Flow */}
           <div className="mt-10 sm:mt-12">
-            <div className="rounded-2xl border border-border/70 bg-surface/30 p-5 sm:p-8">
+            <div className="rounded-2xl border border-border/70 bg-surface/30 p-5 sm:p-8" {...reveal({ delay: 1 })}>
               <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted mb-6">
                 Ciclo de tareas y evaluación formativa
               </p>
@@ -491,7 +519,8 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
                 ].map((item, index, arr) => (
                   <div
                     key={item.step}
-                    className="flex flex-col justify-between rounded-xl border border-border/60 bg-surface/60 p-4 transition-colors hover:border-primary/40 relative"
+                    className="flex flex-col justify-between rounded-xl border border-border/60 bg-surface/60 p-4 transition-[border-color,background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-primary/40 hover:bg-surface/90 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-[0_6px_16px_-8px_rgba(0,0,0,0.6)] motion-reduce:transition-colors motion-reduce:hover:translate-y-0 relative"
+                    {...reveal({ delay: (index + 1) as RevealDelay })}
                   >
                     <div>
                       <div className="flex items-center justify-between">
@@ -548,7 +577,11 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
                       desc: "La información queda disponible conservando el historial.",
                     },
                   ].map((item) => (
-                    <div key={item.step} className="relative flex items-start gap-3">
+                    <div
+                      key={item.step}
+                      className="relative flex items-start gap-3"
+                      {...reveal({ delay: 1 })}
+                    >
                       <span
                         className="absolute -left-[23px] top-1.5 h-3.5 w-3.5 rounded-full border border-primary/50 bg-background flex items-center justify-center ring-4 ring-surface/40"
                         aria-hidden="true"
@@ -578,13 +611,16 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
 
           {/* 3 Technical Decisions (Numbered with fine dividers) */}
           <div className="mt-10 sm:mt-12 border-t border-border/60 pt-6 sm:pt-8">
-            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted mb-5 sm:mb-6">
+            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted mb-5 sm:mb-6" {...reveal()}>
               Criterios de ingeniería
             </p>
 
             <div className="divide-y divide-border/60">
               {/* Decision 01 */}
-              <div className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start">
+              <div
+                className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start"
+                {...reveal({ delay: 1 })}
+              >
                 <div className="md:col-span-4 flex items-baseline gap-3">
                   <span className="font-mono text-xs font-bold text-primary">01</span>
                   <h3 className="text-base font-bold text-foreground">
@@ -597,7 +633,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
               </div>
 
               {/* Decision 02 */}
-              <div className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start">
+              <div
+                className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start"
+                {...reveal({ delay: 2 })}
+              >
                 <div className="md:col-span-4 flex items-baseline gap-3">
                   <span className="font-mono text-xs font-bold text-primary">02</span>
                   <h3 className="text-base font-bold text-foreground">
@@ -610,7 +649,10 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
               </div>
 
               {/* Decision 03 */}
-              <div className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start">
+              <div
+                className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start"
+                {...reveal({ delay: 3 })}
+              >
                 <div className="md:col-span-4 flex items-baseline gap-3">
                   <span className="font-mono text-xs font-bold text-primary">03</span>
                   <h3 className="text-base font-bold text-foreground">
@@ -627,7 +669,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
 
         {/* 05 / EVOLUCIÓN */}
         <section className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16 pb-8">
-          <div className="flex flex-col">
+          <div className="flex flex-col" {...reveal()}>
             <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
               05 / EVOLUCIÓN
             </p>
@@ -643,7 +685,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
           <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 md:divide-x md:divide-border/60 rounded-2xl border border-border/70 bg-surface/30 p-5 sm:p-8">
             
             {/* Category 1: Implementado */}
-            <div className="md:pr-8 space-y-3">
+            <div className="md:pr-8 space-y-3" {...reveal({ delay: 1 })}>
               <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold uppercase tracking-wider">
                 <CheckCircle2 className="h-4 w-4" />
                 <span>Implementado</span>
@@ -659,7 +701,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
             </div>
 
             {/* Category 2: En validación */}
-            <div className="md:px-8 space-y-3 pt-5 md:pt-0 border-t md:border-t-0 border-border/60">
+            <div className="md:px-8 space-y-3 pt-5 md:pt-0 border-t md:border-t-0 border-border/60" {...reveal({ delay: 2 })}>
               <div className="flex items-center gap-2 text-amber-300 font-mono text-xs font-semibold uppercase tracking-wider">
                 <Clock className="h-4 w-4" />
                 <span>En validación</span>
@@ -675,7 +717,7 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
             </div>
 
             {/* Category 3: Próximos pasos */}
-            <div className="md:pl-8 space-y-3 pt-5 md:pt-0 border-t md:border-t-0 border-border/60">
+            <div className="md:pl-8 space-y-3 pt-5 md:pt-0 border-t md:border-t-0 border-border/60" {...reveal({ delay: 3 })}>
               <div className="flex items-center gap-2 text-text-muted font-mono text-xs font-semibold uppercase tracking-wider">
                 <Sparkles className="h-4 w-4" />
                 <span>Próximos pasos</span>
@@ -696,17 +738,20 @@ export function BlossomCaseStudy({ project }: BlossomCaseStudyProps) {
       </div>
 
       {/* Footer Navigation Back to Projects & Next Project */}
-      <footer className="mt-16 pt-10 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer
+        className="mt-16 pt-10 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4"
+        {...reveal({ variant: "fade" })}
+      >
         <Link
           href="/#proyectos"
-          className="group inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover transition-colors"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm py-1"
         >
           <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
           <span>Volver al catálogo de proyectos</span>
         </Link>
         <Link
           href="/proyectos/entrenate"
-          className="group inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-foreground transition-colors font-mono text-xs"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-foreground transition-colors font-mono text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm py-1"
         >
           <span>Caso de estudio: Entrenate</span>
           <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />

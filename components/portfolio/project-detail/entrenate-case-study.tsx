@@ -18,6 +18,7 @@ import {
 } from "lucide-react"
 import { Project } from "@/lib/projects"
 import { Button } from "@/components/ui/button"
+import { reveal, type RevealDelay } from "@/lib/motion"
 
 interface EntrenateCaseStudyProps {
   project: Project
@@ -27,10 +28,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
   return (
     <article className="mx-auto max-w-[1200px] px-6 py-12 sm:py-16 md:py-20 text-left">
       {/* 1. Back Navigation */}
-      <nav aria-label="Navegación de retorno" className="mb-8 sm:mb-12">
+      <nav aria-label="Navegación de retorno" className="mb-8 sm:mb-12 hero-enter-fade">
         <Link
           href="/#proyectos"
-          className="group inline-flex items-center gap-2 text-sm font-medium text-text-muted transition-colors hover:text-primary"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-text-muted transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
         >
           <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
           <span>Volver a proyectos</span>
@@ -40,7 +41,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
       {/* 2. Hero Editorial */}
       <header>
         {/* Eyebrows */}
-        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 font-mono text-xs">
+        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 font-mono text-xs hero-enter hero-step-1">
           <span className="font-semibold uppercase tracking-wider text-primary">
             01 / CASO DE ESTUDIO
           </span>
@@ -53,7 +54,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
         </div>
 
         {/* Title & Subtitle group */}
-        <div className="mt-4 sm:mt-6">
+        <div className="mt-4 sm:mt-6 hero-enter hero-step-2">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1]">
             Entrenate<span className="text-primary">.</span>
           </h1>
@@ -64,7 +65,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
         </div>
 
         {/* Introductory Description (Exact Approved Copy) */}
-        <div className="mt-6 sm:mt-6 space-y-4 text-[15px] sm:text-lg leading-[1.7] sm:leading-[1.75] text-text-secondary max-w-3xl">
+        <div className="mt-6 sm:mt-6 space-y-4 text-[15px] sm:text-lg leading-[1.7] sm:leading-[1.75] text-text-secondary max-w-3xl hero-enter hero-step-3">
           <p>
             Entrenate es una plataforma de entrenamiento personalizado que integra
             planificación, seguimiento y adaptación en una única experiencia.
@@ -77,7 +78,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
         </div>
 
         {/* Metadata Strip & Actions group */}
-        <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-border/60 max-w-xl">
+        <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-border/60 max-w-xl hero-enter hero-step-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
@@ -106,7 +107,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
               <Button
                 asChild
                 size="default"
-                className="bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm transition-all text-xs sm:text-sm h-9 sm:h-10 px-3.5 sm:px-4"
+                className="bg-primary text-primary-foreground hover:bg-primary-hover shadow-sm transition-[transform,background-color] duration-200 hover:-translate-y-0.5 active:translate-y-0 text-xs sm:text-sm h-9 sm:h-10 px-3.5 sm:px-4"
               >
                 <a
                   href={project.liveUrl}
@@ -125,7 +126,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
                 asChild
                 variant="outline"
                 size="default"
-                className="border-border/80 bg-surface/50 text-foreground hover:bg-surface hover:border-border text-xs sm:text-sm h-9 sm:h-10 px-3.5 sm:px-4"
+                className="border-border/80 bg-surface/50 text-foreground hover:bg-surface hover:border-border transition-[transform,background-color,border-color] duration-200 hover:-translate-y-0.5 active:translate-y-0 text-xs sm:text-sm h-9 sm:h-10 px-3.5 sm:px-4"
               >
                 <a
                   href={project.repoUrl}
@@ -142,8 +143,8 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
         </div>
 
         {/* Protagonist Image inside Browser Window Frame */}
-        <div className="mt-6 sm:mt-8">
-          <div className="group relative w-full overflow-hidden rounded-2xl border border-border/70 bg-[#0F131A] shadow-2xl transition-all duration-300 hover:border-primary/40">
+        <div className="mt-6 sm:mt-8 hero-enter-media hero-step-5">
+          <div className="group relative w-full overflow-hidden rounded-2xl border border-border/70 bg-[#0F131A] shadow-2xl transition-[border-color,box-shadow] duration-300 ease-out [@media(hover:hover)]:hover:border-primary/40 [@media(hover:hover)]:hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.7)]">
             {/* Window Header */}
             <div className="flex items-center justify-between border-b border-border/60 bg-[#121620]/90 px-4 py-3 backdrop-blur">
               <div className="flex items-center gap-1.5">
@@ -164,7 +165,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
                   src={project.imageUrl}
                   alt={project.imageAlt || "Pantalla de inicio de sesión de Entrenate"}
                   fill
-                  className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.01]"
+                  className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:scale-[1.015] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                   sizes="(max-width: 1200px) 100vw, 1200px"
                   priority
                 />
@@ -179,7 +180,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
 
         {/* 01 / EL PRODUCTO */}
         <section className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-14 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-14 items-start" {...reveal()}>
             <div className="lg:col-span-5">
               <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
                 01 / EL PRODUCTO
@@ -204,7 +205,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
 
           {/* Product Journey / Conceptual Flow */}
           <div className="mt-10 sm:mt-12">
-            <div className="rounded-2xl border border-border/70 bg-surface/30 p-5 sm:p-8">
+            <div className="rounded-2xl border border-border/70 bg-surface/30 p-5 sm:p-8" {...reveal({ delay: 1 })}>
               <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted mb-6">
                 Recorrido del producto
               </p>
@@ -240,7 +241,8 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
                 ].map((item, index, arr) => (
                   <div
                     key={item.step}
-                    className="flex flex-col justify-between rounded-xl border border-border/60 bg-surface/60 p-4 transition-colors hover:border-primary/40 relative"
+                    className="flex flex-col justify-between rounded-xl border border-border/60 bg-surface/60 p-4 transition-[border-color,background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-primary/40 hover:bg-surface/90 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-[0_6px_16px_-8px_rgba(0,0,0,0.6)] motion-reduce:transition-colors motion-reduce:hover:translate-y-0 relative"
+                    {...reveal({ delay: (index + 1) as RevealDelay })}
                   >
                     <div>
                       <div className="flex items-center justify-between">
@@ -298,7 +300,11 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
                       desc: "Ajustes contextuales según las condiciones del día.",
                     },
                   ].map((item) => (
-                    <div key={item.step} className="relative flex items-start gap-3">
+                    <div
+                      key={item.step}
+                      className="relative flex items-start gap-3"
+                      {...reveal({ delay: 1 })}
+                    >
                       {/* Small circular indicator positioned exactly on the vertical line */}
                       <span
                         className="absolute -left-[23px] top-1.5 h-3.5 w-3.5 rounded-full border border-primary/50 bg-background flex items-center justify-center ring-4 ring-surface/40"
@@ -332,7 +338,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
 
         {/* 02 / ARQUITECTURA Y DESARROLLO */}
         <section className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
-          <div className="flex flex-col">
+          <div className="flex flex-col" {...reveal()}>
             <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
               02 / ARQUITECTURA
             </p>
@@ -346,11 +352,14 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
           </div>
 
           {/* Architectural Diagram */}
-          <div className="mt-8 sm:mt-10 rounded-2xl border border-border/70 bg-surface/40 p-5 sm:p-8">
+          <div className="mt-8 sm:mt-10 rounded-2xl border border-border/70 bg-surface/40 p-5 sm:p-8" {...reveal({ delay: 1 })}>
             <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 sm:gap-6">
               
               {/* Tier 1: Frontend */}
-              <div className="flex-1 rounded-xl border border-border/80 bg-surface/70 p-4 sm:p-5">
+              <div
+                className="flex-1 rounded-xl border border-border/80 bg-surface/70 p-4 sm:p-5 transition-[border-color,background-color] duration-200 hover:border-primary/40 hover:bg-surface/90"
+                {...reveal({ delay: 1 })}
+              >
                 <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold uppercase tracking-wider">
                   <Laptop className="h-4 w-4" />
                   <span>Frontend</span>
@@ -366,7 +375,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
               </div>
 
               {/* Connector 1 */}
-              <div className="flex items-center justify-center py-1 lg:py-0 text-text-muted">
+              <div
+                className="flex items-center justify-center py-1 lg:py-0 text-text-muted"
+                {...reveal({ variant: "connector", delay: 2 })}
+              >
                 <div className="flex lg:flex-col items-center gap-1.5 font-mono text-[11px] text-text-muted">
                   <span className="text-xs">REST / HTTPS</span>
                   <span className="text-primary hidden lg:inline">→</span>
@@ -375,7 +387,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
               </div>
 
               {/* Tier 2: Backend + External Integrations */}
-              <div className="flex-[1.4] rounded-xl border border-primary/40 bg-surface/90 p-4 sm:p-5 relative shadow-sm">
+              <div
+                className="flex-[1.4] rounded-xl border border-primary/40 bg-surface/90 p-4 sm:p-5 relative shadow-sm transition-[border-color,background-color] duration-200 hover:border-primary/60"
+                {...reveal({ delay: 3 })}
+              >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold uppercase tracking-wider">
                     <Server className="h-4 w-4" />
@@ -409,7 +424,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
               </div>
 
               {/* Connector 2 */}
-              <div className="flex items-center justify-center py-1 lg:py-0 text-text-muted">
+              <div
+                className="flex items-center justify-center py-1 lg:py-0 text-text-muted"
+                {...reveal({ variant: "connector", delay: 4 })}
+              >
                 <div className="flex lg:flex-col items-center gap-1.5 font-mono text-[11px] text-text-muted">
                   <span className="text-xs">EF Core</span>
                   <span className="text-primary hidden lg:inline">→</span>
@@ -418,7 +436,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
               </div>
 
               {/* Tier 3: Persistence */}
-              <div className="flex-1 rounded-xl border border-border/80 bg-surface/70 p-4 sm:p-5">
+              <div
+                className="flex-1 rounded-xl border border-border/80 bg-surface/70 p-4 sm:p-5 transition-[border-color,background-color] duration-200 hover:border-primary/40 hover:bg-surface/90"
+                {...reveal({ delay: 5 })}
+              >
                 <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold uppercase tracking-wider">
                   <Database className="h-4 w-4" />
                   <span>Persistencia</span>
@@ -437,13 +458,16 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
 
           {/* 3 Technical Decisions (Editorial Numbered Layout with Dividers) */}
           <div className="mt-10 sm:mt-12 border-t border-border/60 pt-6 sm:pt-8">
-            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted mb-5 sm:mb-6">
+            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted mb-5 sm:mb-6" {...reveal()}>
               Criterios de ingeniería
             </p>
 
             <div className="divide-y divide-border/60">
               {/* Decision 01 */}
-              <div className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start">
+              <div
+                className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start"
+                {...reveal({ delay: 1 })}
+              >
                 <div className="md:col-span-4 flex items-baseline gap-3">
                   <span className="font-mono text-xs font-bold text-primary">01</span>
                   <h3 className="text-base font-bold text-foreground">
@@ -456,7 +480,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
               </div>
 
               {/* Decision 02 */}
-              <div className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start">
+              <div
+                className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start"
+                {...reveal({ delay: 2 })}
+              >
                 <div className="md:col-span-4 flex items-baseline gap-3">
                   <span className="font-mono text-xs font-bold text-primary">02</span>
                   <h3 className="text-base font-bold text-foreground">
@@ -469,7 +496,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
               </div>
 
               {/* Decision 03 */}
-              <div className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start">
+              <div
+                className="py-5 sm:py-6 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-start"
+                {...reveal({ delay: 3 })}
+              >
                 <div className="md:col-span-4 flex items-baseline gap-3">
                   <span className="font-mono text-xs font-bold text-primary">03</span>
                   <h3 className="text-base font-bold text-foreground">
@@ -486,7 +516,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
 
         {/* 03 / ENTRENATE COACH */}
         <section className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
-          <div className="flex flex-col">
+          <div className="flex flex-col" {...reveal()}>
             <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
               03 / ENTRENATE COACH
             </p>
@@ -499,7 +529,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
           </div>
 
           {/* Principle Box */}
-          <div className="mt-6 sm:mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-8">
+          <div
+            className="mt-6 sm:mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-5 sm:p-8 transition-colors duration-200 hover:border-primary/50"
+            {...reveal({ delay: 1 })}
+          >
             <div className="flex items-start gap-4">
               <div className="rounded-xl border border-primary/40 bg-primary/10 p-2.5 text-primary shrink-0 hidden sm:flex">
                 <Brain className="h-6 w-6" />
@@ -518,7 +551,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
           {/* 3 Core Modules */}
           <div className="mt-6 sm:mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             {/* Module 1: Progress Coach */}
-            <div className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between">
+            <div
+              className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between transition-[border-color,background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-primary/40 hover:bg-surface/80 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.6)] motion-reduce:transition-colors motion-reduce:hover:translate-y-0"
+              {...reveal({ delay: 2 })}
+            >
               <div>
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
                   <Activity className="h-5 w-5" />
@@ -533,7 +569,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
             </div>
 
             {/* Module 2: Routine Planner */}
-            <div className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between">
+            <div
+              className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between transition-[border-color,background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-primary/40 hover:bg-surface/80 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.6)] motion-reduce:transition-colors motion-reduce:hover:translate-y-0"
+              {...reveal({ delay: 3 })}
+            >
               <div>
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
                   <Compass className="h-5 w-5" />
@@ -548,7 +587,10 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
             </div>
 
             {/* Module 3: Adaptive Training */}
-            <div className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between">
+            <div
+              className="rounded-xl border border-border/70 bg-surface/50 p-5 sm:p-6 flex flex-col justify-between transition-[border-color,background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-primary/40 hover:bg-surface/80 [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.6)] motion-reduce:transition-colors motion-reduce:hover:translate-y-0"
+              {...reveal({ delay: 4 })}
+            >
               <div>
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
                   <Zap className="h-5 w-5" />
@@ -566,7 +608,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
 
         {/* 04 / EVOLUCIÓN */}
         <section className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16 pb-8">
-          <div className="flex flex-col">
+          <div className="flex flex-col" {...reveal()}>
             <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
               04 / EVOLUCIÓN
             </p>
@@ -582,7 +624,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
           <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 md:divide-x md:divide-border/60 rounded-2xl border border-border/70 bg-surface/30 p-5 sm:p-8">
             
             {/* Category 1: Implementado */}
-            <div className="md:pr-8 space-y-3">
+            <div className="md:pr-8 space-y-3" {...reveal({ delay: 1 })}>
               <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold uppercase tracking-wider">
                 <CheckCircle2 className="h-4 w-4" />
                 <span>Implementado</span>
@@ -598,7 +640,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
             </div>
 
             {/* Category 2: En validación */}
-            <div className="md:px-8 space-y-3 pt-5 md:pt-0 border-t md:border-t-0 border-border/60">
+            <div className="md:px-8 space-y-3 pt-5 md:pt-0 border-t md:border-t-0 border-border/60" {...reveal({ delay: 2 })}>
               <div className="flex items-center gap-2 text-amber-300 font-mono text-xs font-semibold uppercase tracking-wider">
                 <Clock className="h-4 w-4" />
                 <span>En validación</span>
@@ -614,7 +656,7 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
             </div>
 
             {/* Category 3: Próximos pasos */}
-            <div className="md:pl-8 space-y-3 pt-5 md:pt-0 border-t md:border-t-0 border-border/60">
+            <div className="md:pl-8 space-y-3 pt-5 md:pt-0 border-t md:border-t-0 border-border/60" {...reveal({ delay: 3 })}>
               <div className="flex items-center gap-2 text-text-muted font-mono text-xs font-semibold uppercase tracking-wider">
                 <Sparkles className="h-4 w-4" />
                 <span>Próximos pasos</span>
@@ -635,17 +677,20 @@ export function EntrenateCaseStudy({ project }: EntrenateCaseStudyProps) {
       </div>
 
       {/* Footer Navigation Back to Projects */}
-      <footer className="mt-16 pt-10 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer
+        className="mt-16 pt-10 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4"
+        {...reveal({ variant: "fade" })}
+      >
         <Link
           href="/#proyectos"
-          className="group inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover transition-colors"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-hover transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm py-1"
         >
           <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
           <span>Volver al catálogo de proyectos</span>
         </Link>
         <Link
           href="/proyectos/blossom-institute"
-          className="group inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-foreground transition-colors font-mono text-xs"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-foreground transition-colors font-mono text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm py-1"
         >
           <span>Siguiente proyecto: Blossom Institute</span>
           <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
