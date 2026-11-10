@@ -21,7 +21,6 @@ function useActiveSection(sectionIds: string[]) {
 
   React.useEffect(() => {
     if (pathname !== "/") {
-      setActive("")
       return
     }
 
@@ -49,7 +48,7 @@ function useActiveSection(sectionIds: string[]) {
     return () => observer.disconnect()
   }, [sectionIds, pathname])
 
-  return active
+  return pathname !== "/" ? "" : active
 }
 
 export function Navbar() {
@@ -59,9 +58,11 @@ export function Navbar() {
   const pathname = usePathname()
 
   // Close mobile navigation on route change
-  React.useEffect(() => {
+  const [prevPathname, setPrevPathname] = React.useState(pathname)
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname)
     setMobileOpen(false)
-  }, [pathname])
+  }
 
   // Handle Escape key to close mobile menu
   React.useEffect(() => {

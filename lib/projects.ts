@@ -64,7 +64,6 @@ export const projects: Project[] = [
     ],
     repoUrl: "https://github.com/SosaUlises/entrenate",
     liveUrl: "https://entrenate-three.vercel.app/login",
-    apiUrl: "https://entrenate.onrender.com",
     imageUrl: "/entrenate-preview.png",
     imageAlt: "Pantalla de inicio de sesión - Entrenate",
     challenge:
@@ -197,7 +196,7 @@ export const projects: Project[] = [
     tags: ["ASP.NET Core", "MVC", "EF Core", "PostgreSQL", "Identity", "RBAC"],
     repoUrl: "https://github.com/SosaUlises/SistemaVetIng",
     liveUrl: "https://sistemaveting-dcpx.onrender.com/",
-    imageUrl: "/veting.PNG",
+    imageUrl: "/veting.webp",
     imageAlt: "VetIng - pantalla principal",
     highlights: [
       "Operación clínica y administrativa: turnos, historias clínicas y auditoría.",

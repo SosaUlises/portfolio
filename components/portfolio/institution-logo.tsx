@@ -18,7 +18,6 @@ export function InstitutionLogo({
         width={500}
         height={500}
         className={className}
-        priority
       />
     )
   }

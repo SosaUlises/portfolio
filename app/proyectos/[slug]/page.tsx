@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { projects } from "@/lib/projects"
 import { Badge } from "@/components/ui/badge"
@@ -16,15 +17,42 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>
-}) {
+}): Promise<Metadata> {
   const { slug } = await params
   const project = projects.find((p) => p.slug === slug)
 
   if (!project) return { title: "Proyecto no encontrado" }
 
+  const url = `https://portfolio-sosaulises.vercel.app/proyectos/${project.slug}`
+  const description = project.summary ?? project.description
+  const image = project.imageUrl ?? "/og-image.png"
+
   return {
-    title: `${project.title} | Ulises Sosa`,
-    description: project.summary ?? project.description,
+    title: project.title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${project.title} — Caso de estudio | Ulises Sosa`,
+      description,
+      url,
+      type: "article",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: project.imageAlt ?? `${project.title} preview`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — Caso de estudio | Ulises Sosa`,
+      description,
+      images: [image],
+    },
   }
 }
 
