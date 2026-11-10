@@ -21,11 +21,20 @@ const _jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio-sosaulises.vercel.app"),
   title: {
-    default: "Ulises Sosa | Analista en Sistemas · Desarrollador de Software",
+    default: "Ulises Sosa — Portfolio",
     template: "%s | Ulises Sosa",
   },
   description:
     "Portfolio profesional de Ulises Sosa. Analista en Sistemas Informáticos y estudiante de Ingeniería en Sistemas. Desarrollo de soluciones backend .NET, aplicaciones full stack y soporte IT.",
+  icons: {
+    icon: [
+      { url: "/icon.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon.ico", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   keywords: [
     "Ulises Sosa",
     "Desarrollador de Software",
