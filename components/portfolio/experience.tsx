@@ -1,121 +1,81 @@
-"use client"
-
-import Link from "next/link"
-import { ScrollReveal } from "@/components/scroll-reveal"
-import { SectionShell } from "@/components/portfolio/section-shell"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ExternalLink, Github } from "lucide-react"
-
-const experiences = [
-  {
-    company: "Blossom Institute",
-    role: "Backend Developer (Freelance)",
-    period: "2026 — Actualidad",
-    description:
-      "Desarrollo del backend para una plataforma de gestión académica orientada a institutos o centros educativos. El sistema centraliza cursos, estudiantes, tareas, asistencias, entregas y reportes académicos, con foco en arquitectura limpia, seguridad y escalabilidad.",
-    tags: [
-      ".NET 8",
-      "ASP.NET Core",
-      "Clean Architecture",
-      "CQRS",
-      "PostgreSQL",
-      "JWT",
-      "Swagger",
-    ],
-    highlights: [
-      "Diseño de APIs REST para gestión académica: cursos, clases, matrículas, tareas, entregas, asistencia y calificaciones.",
-      "Arquitectura basada en Clean Architecture + CQRS para separar dominio, casos de uso e infraestructura.",
-      "Autenticación y autorización con ASP.NET Core Identity + JWT y control por roles (Admin, Profesor, Alumno).",
-      "Persistencia con PostgreSQL y Entity Framework Core.",
-      "Soporte para adjuntos, reportes académicos y arquitectura preparada para exportación en Excel/PDF.",
-      "Demo pública disponible mediante Swagger UI.",
-    ],
-    liveUrl: "https://blossom-demo.onrender.com/index.html",
-    repoUrl: "https://github.com/SosaUlises/blossom-institute-api",
-  },
-]
+import Image from "next/image"
+import { Calendar, MapPin } from "lucide-react"
+import { experiences } from "@/lib/experience"
+import { reveal } from "@/lib/motion"
 
 export function Experience() {
   return (
-    <ScrollReveal className="mt-20" staggerMs={70}>
-      <SectionShell glow>
-        <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-          Experiencia
-        </h2>
+    <div className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-10 lg:gap-16 items-start">
+        {/* Left Column: Eyebrow + Section Title (~35-40%) */}
+        <div className="md:col-span-5 lg:col-span-5" {...reveal()}>
+          <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
+            02 / EXPERIENCIA PROFESIONAL
+          </p>
+          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-[34px] font-bold tracking-tight text-foreground leading-tight lg:leading-[1.2]">
+            Mi experiencia en tecnología.
+          </h2>
+        </div>
 
-        <div id="experiencia" className="mt-8 flex flex-col gap-6 reveal-stagger">
+        {/* Right Column: Experience Items List (~60-65%) */}
+        <div className="md:col-span-7 lg:col-span-7 space-y-10 sm:space-y-12">
           {experiences.map((exp) => (
             <article
               key={`${exp.company}-${exp.role}`}
-              className="card card-hover card-shine p-6"
+              className="flex flex-col gap-5 sm:gap-6"
             >
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground">
+              <div className="flex items-start gap-4 sm:gap-5" {...reveal({ delay: 1 })}>
+                {/* Isotipo Container (56px mobile / 64px desktop) */}
+                {exp.logoUrl ? (
+                  <div className="relative flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border border-border/70 bg-[#161B22] p-2 sm:p-2.5 shadow-sm">
+                    <Image
+                      src={exp.logoUrl}
+                      alt={exp.logoAlt || "Isotipo de Avalian"}
+                      width={838}
+                      height={673}
+                      className="h-auto max-h-full w-auto max-w-full object-contain"
+                    />
+                  </div>
+                ) : null}
+
+                {/* Company, Role & Meta */}
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground">
                       {exp.company}
                     </h3>
-                    <p className="text-sm text-primary">{exp.role}</p>
                   </div>
 
-                  <span className="text-xs font-mono text-muted-foreground">
-                    {exp.period}
-                  </span>
-                </div>
+                  <p className="mt-1 text-[15px] sm:text-base font-medium text-primary">
+                    {exp.role}
+                  </p>
 
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {exp.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {exp.tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      variant="secondary"
-                      className="rounded-md border border-border bg-secondary font-mono text-xs font-normal text-secondary-foreground"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-
-                <ul className="space-y-2 text-sm leading-6 text-muted-foreground">
-                  {exp.highlights.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="flex flex-wrap gap-3 pt-1">
-                  <Button
-                    asChild
-                    className="gap-2 transition-transform hover:scale-[1.02]"
-                  >
-                    <a href={exp.liveUrl} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4" />
-                      Swagger Demo
-                    </a>
-                  </Button>
-
-                  <Button
-                    asChild
-                    variant="secondary"
-                    className="gap-2 transition-transform hover:scale-[1.02]"
-                  >
-                    <a href={exp.repoUrl} target="_blank" rel="noopener noreferrer">
-                      <Github className="h-4 w-4" />
-                      Repositorio
-                    </a>
-                  </Button>
+                  <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-text-muted font-mono">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Calendar className="h-3.5 w-3.5 text-primary/70 shrink-0" />
+                      <span>{exp.period}</span>
+                    </span>
+                    {exp.location ? (
+                      <span className="inline-flex items-center gap-1.5">
+                        <MapPin className="h-3.5 w-3.5 text-muted-foreground/70 shrink-0" />
+                        <span>{exp.location}</span>
+                      </span>
+                    ) : null}
+                  </div>
                 </div>
               </div>
+
+              {/* Editorial Description */}
+              <p
+                className="text-[15px] sm:text-base lg:text-[17px] leading-[1.7] text-text-secondary text-left"
+                {...reveal({ delay: 2 })}
+              >
+                {exp.description}
+              </p>
             </article>
           ))}
         </div>
-      </SectionShell>
-    </ScrollReveal>
+      </div>
+    </div>
   )
 }

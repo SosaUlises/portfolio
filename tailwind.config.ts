@@ -10,13 +10,22 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        'reading': '720px',
+        'main': '1200px',
+      },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-jetbrains-mono)', 'monospace'],
       },
       colors: {
         background: 'hsl(var(--background))',
+        'background-elevated': 'hsl(var(--background-elevated))',
+        surface: 'hsl(var(--surface))',
         foreground: 'hsl(var(--foreground))',
+        'text-primary': 'hsl(var(--foreground))',
+        'text-secondary': 'hsl(var(--text-secondary))',
+        'text-muted': 'hsl(var(--text-muted))',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
@@ -27,6 +36,8 @@ const config: Config = {
         },
         primary: {
           DEFAULT: 'hsl(var(--primary))',
+          hover: 'hsl(var(--primary-hover))',
+          subtle: 'hsl(var(--primary-subtle))',
           foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
@@ -39,6 +50,8 @@ const config: Config = {
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
+          hover: 'hsl(var(--primary-hover))',
+          subtle: 'hsl(var(--primary-subtle))',
           foreground: 'hsl(var(--accent-foreground))',
         },
         destructive: {
@@ -48,13 +61,6 @@ const config: Config = {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))',
-        },
         sidebar: {
           DEFAULT: 'hsl(var(--sidebar-background))',
           foreground: 'hsl(var(--sidebar-foreground))',

@@ -10,39 +10,52 @@
 
 @layer base {
   :root {
-    --background: 240 6% 6%;
-    --foreground: 240 5% 82%;
-    --card: 240 5% 9%;
-    --card-foreground: 240 5% 82%;
-    --popover: 240 5% 9%;
-    --popover-foreground: 240 5% 82%;
-    --primary: 220 80% 62%;
-    --primary-foreground: 240 6% 6%;
-    --secondary: 240 4% 13%;
-    --secondary-foreground: 240 5% 68%;
-    --muted: 240 4% 13%;
-    --muted-foreground: 240 4% 48%;
-    --accent: 220 80% 62%;
-    --accent-foreground: 240 6% 6%;
+    /* Paleta aprobada en docs/design-brief.md (Dark Premium + Editorial Moderno) */
+    --background: 223 24% 6%;           /* #0B0D12 */
+    --background-elevated: 220 26% 9%;  /* #11151D */
+    --surface: 220 25% 12%;             /* #171C26 */
+    --border: 218 21% 21%;              /* #2A3240 */
+
+    --foreground: 220 33% 97%;          /* #F4F6FA (Text primary) */
+    --text-secondary: 215 20% 76%;      /* #B5BFCD (Text secondary) */
+    --text-muted: 214 16% 60%;          /* #8A97A8 (Text muted) */
+
+    --card: 220 25% 12%;                /* #171C26 */
+    --card-foreground: 220 33% 97%;
+
+    --popover: 220 26% 9%;              /* #11151D */
+    --popover-foreground: 220 33% 97%;
+
+    --primary: 224 100% 70%;            /* #648DFF (Accent) */
+    --primary-hover: 224 100% 76%;      /* #83A5FF (Accent hover) */
+    --primary-subtle: 223 45% 20%;      /* #1C2949 (Accent subtle) */
+    --primary-foreground: 223 24% 6%;
+
+    --secondary: 220 26% 9%;            /* #11151D */
+    --secondary-foreground: 215 20% 76%;/* #B5BFCD */
+
+    --muted: 220 26% 9%;                /* #11151D */
+    --muted-foreground: 214 16% 60%;    /* #8A97A8 */
+
+    --accent: 223 45% 20%;              /* #1C2949 */
+    --accent-foreground: 220 33% 97%;
+
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 4% 14%;
-    --input: 240 4% 14%;
-    --ring: 220 80% 62%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --radius: 0.5rem;
-    --sidebar-background: 240 6% 6%;
-    --sidebar-foreground: 240 5% 82%;
-    --sidebar-primary: 220 80% 62%;
-    --sidebar-primary-foreground: 240 6% 6%;
-    --sidebar-accent: 240 4% 13%;
-    --sidebar-accent-foreground: 240 5% 82%;
-    --sidebar-border: 240 4% 14%;
-    --sidebar-ring: 220 80% 62%;
+
+    --input: 218 21% 21%;               /* #2A3240 */
+    --ring: 224 100% 70%;               /* #648DFF */
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 223 24% 6%;
+    --sidebar-foreground: 220 33% 97%;
+    --sidebar-primary: 224 100% 70%;
+    --sidebar-primary-foreground: 223 24% 6%;
+    --sidebar-accent: 220 26% 9%;
+    --sidebar-accent-foreground: 220 33% 97%;
+    --sidebar-border: 218 21% 21%;
+    --sidebar-ring: 224 100% 70%;
   }
 }
 
@@ -58,139 +71,224 @@
   }
 }
 
-/* --- Scroll reveal (premium + lightweight) --- */
-.reveal {
+/* ================================================================== */
+/* Motion Design System                                               */
+/* ------------------------------------------------------------------ */
+/* Principles: opacity + transform only, ease-out, short distances,   */
+/* run once. Content is visible by default (progressive enhancement): */
+/* the hidden "pre-reveal" state only applies once the client-side    */
+/* <MotionReveal /> adds `.motion-ready` to <html>. Without JS, or    */
+/* with prefers-reduced-motion, everything renders in its final state.*/
+/* ================================================================== */
+
+:root {
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-duration-micro: 180ms;
+  --motion-duration-fast: 280ms;
+  --motion-duration-reveal: 650ms;
+  --motion-duration-media: 800ms;
+  --motion-duration-draw: 1100ms;
+  --motion-stagger: 80ms;
+  --motion-hero-step: 90ms;
+  --motion-distance: 16px;
+  --motion-distance-media: 24px;
+}
+
+/* --- Hero entrance (pure CSS keyframes: runs on first paint, no JS) --- */
+@keyframes motion-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes motion-enter-photo {
+  from {
+    opacity: 0;
+    transform: scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes motion-enter-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes motion-enter-media {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-enter {
+  animation: motion-enter 700ms var(--motion-ease-out) both;
+  animation-delay: calc(var(--motion-hero-step) * var(--hero-step, 0));
+}
+.hero-enter-photo {
+  animation: motion-enter-photo 900ms var(--motion-ease-out) both;
+}
+.hero-enter-media {
+  animation: motion-enter-media 800ms var(--motion-ease-out) both;
+  animation-delay: calc(var(--motion-hero-step) * var(--hero-step, 5));
+}
+.hero-enter-fade {
+  animation: motion-enter-fade 600ms ease-out both;
+  animation-delay: calc(var(--motion-hero-step) * var(--hero-step, 0));
+}
+.hero-step-1 { --hero-step: 1; }
+.hero-step-2 { --hero-step: 2; }
+.hero-step-3 { --hero-step: 3; }
+.hero-step-4 { --hero-step: 4; }
+.hero-step-5 { --hero-step: 5; }
+.hero-step-8 { --hero-step: 8; }
+
+/* --- Scroll cue: subtle, slow nudge (replaces the generic bounce) --- */
+@keyframes motion-nudge {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 3px, 0);
+  }
+}
+.motion-nudge {
+  animation: motion-nudge 2.2s var(--motion-ease-in-out) infinite;
+}
+
+/* --- Scroll reveal ([data-reveal], driven by a single shared observer) --- */
+.motion-ready [data-reveal] {
+  transition-property: opacity, transform;
+  transition-duration: var(--motion-duration-reveal);
+  transition-timing-function: var(--motion-ease-out);
+}
+
+.motion-ready [data-reveal]:not([data-reveal="line"]):not([data-revealed]) {
   opacity: 0;
-  transform: translate3d(0, 10px, 0);
-  filter: blur(4px);
-  transition:
-    opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 800ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform, filter;
+  transform: translate3d(0, var(--motion-distance), 0);
 }
 
-.reveal.reveal--in {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-  filter: blur(0);
+/* Variant: media (project screenshots) — slightly longer, tiny scale */
+.motion-ready [data-reveal="media"] {
+  transition-duration: var(--motion-duration-media);
+}
+.motion-ready [data-reveal="media"]:not([data-revealed]) {
+  transform: translate3d(0, var(--motion-distance-media), 0) scale(0.985);
 }
 
-/* Stagger (only for elements inside .reveal-stagger) */
-.reveal.reveal--stagger .reveal-stagger > * {
+/* Variant: fade (no movement) */
+.motion-ready [data-reveal="fade"]:not([data-revealed]) {
+  transform: none;
+}
+
+/* Variant: connector (architecture diagrams flow) — subtle scale & fade */
+.motion-ready [data-reveal="connector"] {
+  transition-duration: var(--motion-duration-fast);
+  transition-timing-function: var(--motion-ease-out);
+}
+.motion-ready [data-reveal="connector"]:not([data-revealed]) {
   opacity: 0;
-  transform: translate3d(0, 10px, 0);
-  filter: blur(4px);
-  transition:
-    opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 800ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 800ms cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: calc(var(--reveal-stagger, 60ms) * var(--reveal-index, 0));
+  transform: scale(0.92);
 }
 
-/* When wrapper is in-view, animate children in */
-.reveal.reveal--in.reveal--stagger .reveal-stagger > * {
+/* Variant: rule (horizontal divider drawn from the left) */
+.motion-ready [data-reveal="rule"] {
+  transform-origin: left center;
+  transition-duration: var(--motion-duration-draw);
+}
+.motion-ready [data-reveal="rule"]:not([data-revealed]) {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
-  filter: blur(0);
+  transform: scaleX(0);
 }
 
-/* Assign indexes (supports first 12 children; extend if needed) */
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(1)  { --reveal-index: 0; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(2)  { --reveal-index: 1; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(3)  { --reveal-index: 2; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(4)  { --reveal-index: 3; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(5)  { --reveal-index: 4; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(6)  { --reveal-index: 5; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(7)  { --reveal-index: 6; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(8)  { --reveal-index: 7; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(9)  { --reveal-index: 8; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(10) { --reveal-index: 9; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(11) { --reveal-index: 10; }
-.reveal.reveal--stagger .reveal-stagger > *:nth-child(12) { --reveal-index: 11; }
+/* Variant: line (vertical timeline drawn on the element's ::before).
+   Uses Tailwind's --tw-scale-y so the existing -translate-x-1/2 centering
+   of the pseudo-element is preserved. The element itself never hides. */
+.motion-ready [data-reveal="line"]::before {
+  transform-origin: top center;
+  transition: transform var(--motion-duration-draw) var(--motion-ease-out);
+}
+.motion-ready [data-reveal="line"]:not([data-revealed])::before {
+  --tw-scale-y: 0;
+}
 
-/* Respect reduced motion */
+/* Stagger tokens (relative order between siblings entering together) */
+.motion-ready [data-reveal-delay="1"] { transition-delay: calc(var(--motion-stagger) * 1); }
+.motion-ready [data-reveal-delay="2"] { transition-delay: calc(var(--motion-stagger) * 2); }
+.motion-ready [data-reveal-delay="3"] { transition-delay: calc(var(--motion-stagger) * 3); }
+.motion-ready [data-reveal-delay="4"] { transition-delay: calc(var(--motion-stagger) * 4); }
+.motion-ready [data-reveal-delay="5"] { transition-delay: calc(var(--motion-stagger) * 5); }
+
+/* Desktop-only order override (e.g. alternating project layouts) */
+@media (min-width: 1024px) {
+  .motion-ready [data-reveal-delay-lg="0"] { transition-delay: 0ms; }
+  .motion-ready [data-reveal-delay-lg="1"] { transition-delay: calc(var(--motion-stagger) * 1); }
+  .motion-ready [data-reveal-delay-lg="2"] { transition-delay: calc(var(--motion-stagger) * 2); }
+  .motion-ready [data-reveal-delay-lg="3"] { transition-delay: calc(var(--motion-stagger) * 3); }
+  .motion-ready [data-reveal-delay-lg="4"] { transition-delay: calc(var(--motion-stagger) * 4); }
+  .motion-ready [data-reveal-delay-lg="5"] { transition-delay: calc(var(--motion-stagger) * 5); }
+}
+
+/* Anchor navigation: target section resolves quickly, without stagger */
+.motion-ready [data-revealed="fast"],
+.motion-ready [data-revealed="fast"]::before {
+  transition-duration: var(--motion-duration-fast) !important;
+  transition-delay: 0ms !important;
+}
+
+/* Already in (or above) the viewport at mount: no transition at all */
+.motion-ready [data-revealed="instant"],
+.motion-ready [data-revealed="instant"]::before {
+  transition: none !important;
+}
+
+/* --- Reduced motion: final state, no transforms, no loops --- */
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .hero-enter,
+  .hero-enter-photo,
+  .hero-enter-media,
+  .hero-enter-fade,
+  .motion-nudge {
+    animation: none !important;
+  }
+
+  .motion-ready [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
-    filter: none !important;
     transition: none !important;
   }
-  .reveal.reveal--stagger .reveal-stagger > * {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
+  .motion-ready [data-reveal="line"]::before {
+    --tw-scale-y: 1 !important;
     transition: none !important;
-    transition-delay: 0ms !important;
   }
 }
 
 /* ------------------------------ */
-/* Premium reusable UI primitives */
+/* UI primitives                  */
 /* ------------------------------ */
 
 @layer components {
-  /* Base card: glass + border + shadow */
+  /* Base card */
   .card {
-    @apply relative overflow-hidden rounded-2xl border border-border/50 bg-background/25 backdrop-blur-xl;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
-  }
-
-  /* Hover: lift + softer border + deeper shadow */
-  .card-hover {
-    @apply transition-all duration-300 ease-out;
-  }
-  .card-hover:hover {
-    transform: translate3d(0, -2px, 0);
-    box-shadow: 0 18px 55px rgba(0,0,0,0.55);
-  }
-  .card-hover:hover {
-    border-color: hsl(var(--primary) / 0.22);
-    background-color: hsl(var(--background) / 0.35);
-  }
-
-  /* Subtle shine layer (enable by adding card-shine) */
-  .card-shine::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 300ms ease-out;
-    background: radial-gradient(
-      700px circle at 30% 0%,
-      rgba(255,255,255,0.10),
-      transparent 45%
-    );
-    pointer-events: none;
-  }
-  .card-shine:hover::before {
-    opacity: 1;
-  }
-
-  /* Optional premium glow (enable by adding card-glow) */
-  .card-glow::after {
-    content: "";
-    position: absolute;
-    inset: -80px;
-    background: hsl(var(--primary));
-    opacity: 0;
-    filter: blur(70px);
-    transition: opacity 300ms ease-out;
-    pointer-events: none;
-  }
-  .card-glow:hover::after {
-    opacity: 0.08;
-  }
-
-  /* Small “chip/pill” style for badges */
-  .chip {
-    @apply rounded-full border px-3 py-1 text-[11px] font-medium tracking-wide;
-  }
-  .chip-hover {
-    @apply transition-all duration-200 ease-out;
-  }
-  .chip-hover:hover {
-    transform: translate3d(0, -1px, 0) scale(1.03);
+    @apply relative overflow-hidden rounded-xl border border-border/70 bg-card/60 backdrop-blur-md;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   }
 }

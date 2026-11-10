@@ -1,118 +1,83 @@
-"use client"
+import { Server, Monitor, Database, Cloud, Wrench } from "lucide-react"
+import { coreTechBlocks, supportKnowledge } from "@/lib/tech-stack"
+import { TechIcon } from "@/components/portfolio/tech-icon"
+import { reveal } from "@/lib/motion"
 
-import { ScrollReveal } from "@/components/scroll-reveal"
-import { SectionShell } from "@/components/portfolio/section-shell"
-
-const stack = [
-  {
-    title: "Backend",
-    color: "text-blue-300",
-    dot: "bg-blue-400",
-    badge:
-      "border-blue-500/25 bg-blue-500/10 text-blue-200 hover:bg-blue-500/15",
-    items: ["C#", ".NET", "ASP.NET Core", "REST APIs"],
-  },
-  {
-    title: "Arquitectura & Patrones",
-    color: "text-violet-300",
-    dot: "bg-violet-400",
-    badge:
-      "border-violet-500/25 bg-violet-500/10 text-violet-200 hover:bg-violet-500/15",
-    items: ["Clean Architecture", "CQRS", "Repository", "Service Layer", "MVC"],
-  },
-  {
-    title: "Seguridad",
-    color: "text-emerald-300",
-    dot: "bg-emerald-400",
-    badge:
-      "border-emerald-500/25 bg-emerald-500/10 text-emerald-200 hover:bg-emerald-500/15",
-    items: ["ASP.NET Identity", "JWT", "RBAC"],
-  },
-  {
-    title: "Base de Datos",
-    color: "text-amber-300",
-    dot: "bg-amber-400",
-    badge:
-      "border-amber-500/25 bg-amber-500/10 text-amber-200 hover:bg-amber-500/15",
-    items: ["Entity Framework Core", "PostgreSQL", "SQL Server"],
-  },
-  {
-    title: "Integraciones & Cloud",
-    color: "text-cyan-300",
-    dot: "bg-cyan-400",
-    badge:
-      "border-cyan-500/25 bg-cyan-500/10 text-cyan-200 hover:bg-cyan-500/15",
-    items: ["OpenAI API", "Swagger", "Git", "Render", "Neon"],
-  },
-]
+const blockIconMap = {
+  Server,
+  Monitor,
+  Database,
+  Cloud,
+}
 
 export function TechStack() {
   return (
-    <ScrollReveal className="mt-24" staggerMs={60}>
-      <SectionShell>
-        <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-          Tech Stack
+    <div className="border-t border-border/60 pt-10 sm:pt-14 lg:pt-16">
+      {/* Section Header */}
+      <div className="flex flex-col" {...reveal()}>
+        <p className="font-mono text-xs font-semibold uppercase tracking-wider text-text-muted">
+          04 / TECNOLOGÍAS Y HERRAMIENTAS
+        </p>
+        <h2 className="mt-3 text-2xl sm:text-3xl lg:text-[34px] font-bold tracking-tight text-foreground leading-tight lg:leading-[1.2]">
+          Las tecnologías detrás de lo que construyo.
         </h2>
+        <p className="mt-3 text-[15px] sm:text-base text-text-secondary max-w-2xl leading-relaxed">
+          Tecnologías y herramientas con las que diseño, desarrollo y despliego aplicaciones Full Stack.
+        </p>
+      </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 reveal-stagger">
-          {stack.map((section) => {
-            const isFull = section.title === "Integraciones & Cloud"
+      {/* Main Core Groups (Open 2-Column Grid on Desktop, NO outer cards) */}
+      <div className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-16 gap-y-8 sm:gap-y-10 lg:gap-y-12 items-start">
+        {coreTechBlocks.map((block, index) => {
+          const Icon = blockIconMap[block.iconName]
 
-            return (
-              <div
-                key={section.title}
-                className={[
-                  "card card-hover card-shine",
-                  "px-5 py-5 sm:px-6 sm:py-6",
-                  isFull ? "md:col-span-2 text-center" : "",
-                ].join(" ")}
-
-              >
-                <div
-                  className={
-                    isFull
-                      ? "mx-auto max-w-2xl"
-                      : ""
-                  }
-                >
-                  <div
-                    className={[
-                      "flex items-center gap-2",
-                      isFull ? "justify-center" : "",
-                    ].join(" ")}
-                  >
-               
-                    <h3
-                      className={`text-sm font-semibold tracking-wide ${section.color}`}
-                    >
-                      {section.title}
-                    </h3>
-                  </div>
-
-                  <div
-                    className={[
-                      "mt-4 flex flex-wrap gap-2",
-                      isFull ? "justify-center" : "",
-                    ].join(" ")}
-                  >
-                    {section.items.map((tech) => (
-                      <span
-                        key={tech}
-                        className={[
-                      "chip chip-hover",
-                          section.badge,
-                        ].join(" ")}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+          return (
+            <div
+              key={block.id}
+              className="flex flex-col"
+              {...reveal({ delay: index % 2 === 0 ? 0 : 1 })}
+            >
+              {/* Category Header: Icon + Title */}
+              <div className="flex items-center gap-2.5">
+                <Icon className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
+                <h3 className="text-base sm:text-[17px] font-bold text-foreground tracking-tight">
+                  {block.title}
+                </h3>
               </div>
-            )
-          })}
+
+              {/* Tech Chips with Logos */}
+              <div className="mt-3.5 sm:mt-4 flex flex-wrap gap-2 sm:gap-2.5">
+                {block.items.map((item) => (
+                  <div
+                    key={item.name}
+                    className="inline-flex items-center gap-2.5 rounded-lg border border-border/50 bg-[#11151F]/90 px-3 py-2 text-[13px] sm:text-sm font-medium text-foreground/90 transition-[color,background-color,border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-border/80 hover:bg-[#151A26] hover:text-foreground [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:shadow-[0_6px_16px_-8px_rgba(0,0,0,0.6)] active:bg-[#151A26] motion-reduce:transition-colors motion-reduce:hover:translate-y-0"
+                  >
+                    <div className="flex h-5 w-5 sm:h-[22px] sm:w-[22px] shrink-0 items-center justify-center">
+                      <TechIcon name={item.icon} className="h-5 w-5 sm:h-[22px] sm:w-[22px]" />
+                    </div>
+                    <span className="leading-none whitespace-nowrap">{item.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Secondary Tier: Soporte e Infraestructura (Discrete editorial strip, NO cards, NO chips) */}
+      <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-border/40" {...reveal({ variant: "fade" })}>
+        <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 shrink-0">
+            <Wrench className="h-3.5 w-3.5 text-text-muted" aria-hidden="true" />
+            <h3 className="text-sm sm:text-[15px] font-semibold text-foreground/90">
+              Soporte e Infraestructura:
+            </h3>
+          </div>
+          <p className="text-xs sm:text-[13px] text-text-secondary leading-relaxed">
+            {supportKnowledge.join("\u00A0· ")}
+          </p>
         </div>
-      </SectionShell>
-    </ScrollReveal>
+      </div>
+    </div>
   )
 }

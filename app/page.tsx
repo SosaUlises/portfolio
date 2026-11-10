@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/portfolio/navbar"
 import { Hero } from "@/components/portfolio/hero"
 import { Summary } from "@/components/portfolio/summary"
 import { Experience } from "@/components/portfolio/experience"
@@ -9,14 +8,12 @@ import { Contact } from "@/components/portfolio/contact"
 
 export default function Page() {
   return (
-    <>
-      <Navbar />
+    <main className="mx-auto max-w-[1200px] px-6 pb-16 sm:pb-24">
+      <section id="inicio" className="scroll-mt-20 md:scroll-mt-28">
+        <Hero />
+      </section>
 
-      <main className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-        <section id="inicio" className="scroll-mt-28">
-          <Hero />
-        </section>
-
+      <div className="space-y-20 sm:space-y-28 pt-8 sm:pt-16 md:pt-24">
         <section id="sobre-mi" className="scroll-mt-28">
           <Summary />
         </section>
@@ -40,7 +37,7 @@ export default function Page() {
         <section id="contacto" className="scroll-mt-28">
           <Contact />
         </section>
-      </main>
-    </>
+      </div>
+    </main>
   )
 }

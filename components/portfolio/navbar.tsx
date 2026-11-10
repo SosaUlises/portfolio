@@ -2,20 +2,28 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Home, User, Briefcase, Mail } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { Menu, X } from "lucide-react"
 
-const items = [
-  { href: "#inicio", label: "Inicio", Icon: Home, id: "inicio" },
-  { href: "#sobre-mi", label: "Sobre mí", Icon: User, id: "sobre-mi" },
-  { href: "#experiencia", label: "Experiencia", Icon: Briefcase, id: "experiencia" },
-  { href: "#proyectos", label: "Proyectos", Icon: Briefcase, id: "proyectos" },
-  { href: "#contacto", label: "Contacto", Icon: Mail, id: "contacto" },
+const navItems = [
+  { href: "/#inicio", label: "Inicio", id: "inicio" },
+  { href: "/#sobre-mi", label: "Sobre mí", id: "sobre-mi" },
+  { href: "/#experiencia", label: "Experiencia", id: "experiencia" },
+  { href: "/#proyectos", label: "Proyectos", id: "proyectos" },
+  { href: "/#tech-stack", label: "Tecnologías", id: "tech-stack" },
+  { href: "/#educacion", label: "Educación", id: "educacion" },
+  { href: "/#contacto", label: "Contacto", id: "contacto" },
 ] as const
 
 function useActiveSection(sectionIds: string[]) {
-  const [active, setActive] = React.useState(sectionIds[0] ?? "inicio")
+  const [active, setActive] = React.useState<string>(sectionIds[0] ?? "inicio")
+  const pathname = usePathname()
 
   React.useEffect(() => {
+    if (pathname !== "/") {
+      return
+    }
+
     const els = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[]
@@ -31,61 +39,161 @@ function useActiveSection(sectionIds: string[]) {
         if (visible?.target?.id) setActive(visible.target.id)
       },
       {
-        threshold: [0.2, 0.35, 0.5],
-        rootMargin: "-15% 0px -65% 0px",
+        threshold: [0.15, 0.3, 0.5],
+        rootMargin: "-20% 0px -60% 0px",
       }
     )
 
     els.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [sectionIds])
+  }, [sectionIds, pathname])
 
-  return active
+  return pathname !== "/" ? "" : active
 }
 
 export function Navbar() {
-  const active = useActiveSection(items.map((i) => i.id))
+  const active = useActiveSection(navItems.map((i) => i.id))
   const [scrolled, setScrolled] = React.useState(false)
+  const [mobileOpen, setMobileOpen] = React.useState(false)
+  const pathname = usePathname()
+
+  // Close mobile navigation on route change
+  const [prevPathname, setPrevPathname] = React.useState(pathname)
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname)
+    setMobileOpen(false)
+  }
+
+  // Handle Escape key to close mobile menu
+  React.useEffect(() => {
+    if (!mobileOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [mobileOpen])
 
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 6)
+    const onScroll = () => setScrolled(window.scrollY > 20)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
   return (
-    <header className="pointer-events-none sticky top-5 z-50 flex justify-center px-6">
-      <nav className="pointer-events-auto w-full max-w-5xl">
-        <div
-          className={[
-            "mx-auto flex w-fit items-center gap-1 rounded-full border p-1 backdrop-blur",
-            "bg-background/55",
-            scrolled ? "border-border/70 shadow-sm" : "border-border/50",
-          ].join(" ")}
-        >
-          {items.map(({ href, label, Icon, id }) => {
+    <header className="sticky top-0 z-50 w-full">
+      <div
+        className={[
+          "w-full border-b transition-[background-color,border-color,box-shadow] duration-300 ease-out",
+          scrolled
+            ? "border-border/70 bg-background/85 backdrop-blur-md shadow-sm"
+            : "border-transparent bg-transparent",
+        ].join(" ")}
+      >
+        <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6">
+          {/* Logo / Monogram */}
+          <Link
+            href="/#inicio"
+            aria-label="Ir al inicio de Ulises Sosa"
+            className="group flex items-center font-mono text-sm font-bold tracking-tight text-foreground transition-colors hover:text-primary"
+          >
+            <span>US</span>
+            <span className="text-primary transition-transform group-hover:scale-125">.</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav
+            aria-label="Navegación principal"
+            className="hidden md:flex items-center gap-1 rounded-full border border-border/70 bg-surface/70 px-2 py-1.5 backdrop-blur-md shadow-sm"
+          >
+            {navItems.map(({ href, label, id }) => {
+              const isActive = active === id
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={[
+                    "rounded-full px-3.5 py-1 text-xs font-medium transition-[color,background-color] duration-200 ease-out",
+                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
+                    isActive
+                      ? "bg-primary/15 text-primary font-semibold"
+                      : "text-text-muted hover:text-foreground hover:bg-surface-hover",
+                  ].join(" ")}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {label}
+                </Link>
+              )
+            })}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
+            aria-label={mobileOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+            className="inline-flex md:hidden items-center justify-center rounded-lg border border-border/80 bg-surface/80 p-2 text-text-secondary transition-colors duration-150 hover:text-foreground active:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            {mobileOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Dropdown
+          Always mounted so it can animate both open and close. While closed it
+          is `invisible` + `inert` (removed from tab order and a11y tree) and
+          absolutely positioned, so it never shifts the page content. */}
+      <div
+        id="mobile-navigation"
+        role="region"
+        aria-label="Menú de navegación para dispositivos móviles"
+        data-state={mobileOpen ? "open" : "closed"}
+        inert={!mobileOpen}
+        className={[
+          "md:hidden absolute inset-x-0 top-full border-b border-border bg-background-elevated/95 px-6 py-4 backdrop-blur-xl shadow-xl",
+          "origin-top transition-[opacity,transform,visibility] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+          mobileOpen
+            ? "visible opacity-100 translate-y-0"
+            : "invisible opacity-0 -translate-y-2 pointer-events-none",
+        ].join(" ")}
+      >
+        <nav className="flex flex-col space-y-1">
+          {navItems.map(({ href, label, id }) => {
             const isActive = active === id
             return (
               <Link
                 key={href}
                 href={href}
+                onClick={() => setMobileOpen(false)}
                 className={[
-                  "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm transition",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
+                  "flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm transition-colors duration-150",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
                   isActive
-                    ? "bg-muted/60 text-foreground"
-                    : "text-muted-foreground hover:bg-muted/40 hover:text-foreground",
+                    ? "bg-primary/15 text-primary font-semibold"
+                    : "text-text-secondary hover:bg-surface hover:text-foreground active:bg-surface",
                 ].join(" ")}
                 aria-current={isActive ? "page" : undefined}
               >
-                <Icon className="h-4 w-4" />
-                <span className="hidden sm:inline">{label}</span>
+                <span>{label}</span>
+                <span
+                  className={[
+                    "h-1.5 w-1.5 rounded-full bg-primary transition-[opacity,transform] duration-200",
+                    isActive ? "opacity-100 scale-100" : "opacity-0 scale-50",
+                  ].join(" ")}
+                  aria-hidden="true"
+                />
               </Link>
             )
           })}
-        </div>
-      </nav>
+        </nav>
+      </div>
     </header>
   )
 }
